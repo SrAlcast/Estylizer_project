@@ -7,8 +7,7 @@ Estylizer es una aplicación inteligente diseñada para revolucionar la forma en
 ## 🗂️ Estructura del Proyecto
 
 ```
-├── data/                # Datos crudos y procesados
-├── notebooks/           # Notebooks de Jupyter con el análisis
+├── python/              # Notebooks de Jupyter con el análisis
 ├── src/                 # Scripts de procesamiento y modelado
 ├── results/             # Gráficos y archivos de resultados
 ├── README.md            # Descripción del proyecto
