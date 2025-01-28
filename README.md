@@ -1,4 +1,4 @@
-![Logo del Proyecto](https://raw.githubusercontent.com/SrAlcast/Estylizer_project/refs/heads/main/src/Logo%20Estylizer.png?token=GHSAT0AAAAAAC5XO57JNL4JZGNNQ6UXYZNYZ4Y75KA)
+![Logo del Proyecto](https://github.com/SrAlcast/Estylizer_project/blob/main/src/Logo%20Estylizer.png)
 
 ## 📖 Descripción del Proyecto
 
