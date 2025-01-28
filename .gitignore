@@ -1,0 +1,15 @@
+# Ignorar archivos de configuración
+.env
+
+# Ignorar directorios específicos
+/node_modules/
+/dist/
+/venv/
+
+# Ignorar archivos temporales del sistema
+*.log
+*.tmp
+
+# Ignorar archivos de IDEs
+.idea/
+.vscode/
