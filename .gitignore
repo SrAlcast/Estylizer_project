@@ -1,5 +1,6 @@
 # Ignorar archivos de configuración
 .env
+.gitattributes
 
 # Ignorar directorios específicos
 /node_modules/
