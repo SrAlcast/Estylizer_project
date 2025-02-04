@@ -490,9 +490,9 @@ if st.session_state.page == 5:
                 """, unsafe_allow_html=True)
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{superior['product_name']} - {superior['current_price']}€</p>", unsafe_allow_html=True)
                 # Botón similar a los de Streamlit
-                if st.button("Ver producto"):
-                    webbrowser.open(superior["url"])  # Abre el enlace en el navegador
-                
+                if st.link_button("Ver producto", superior["url"]):
+                    pass  # El botón de enlace no requiere acciones adicionales
+
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
                     if sup_idx < len(st.session_state.superiores) - 1:
@@ -530,9 +530,9 @@ if st.session_state.page == 5:
                 """, unsafe_allow_html=True)
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{inferior['product_name']} - {inferior['current_price']}€</p>", unsafe_allow_html=True)
                 # Botón similar a los de Streamlit
-                if st.button("Ver producto"):
-                    webbrowser.open(inferior["url"])  # Abre el enlace en el navegador
-                
+                if st.link_button("Ver producto", inferior["url"]):
+                    pass  # El botón de enlace no requiere acciones adicionales
+
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
                     if inf_idx < len(st.session_state.inferiores) - 1:
