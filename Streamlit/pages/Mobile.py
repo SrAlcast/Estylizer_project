@@ -137,6 +137,8 @@ st.markdown(
     <style>
     .block-container {
         padding-top: 2rem !important;
+        margin:auto;
+
     }
     .stButton > button {
         width: 100%;
@@ -144,10 +146,9 @@ st.markdown(
         font-size: 16px;
     }
     .stImage img {
-        margin:auto
+        margin:auto;
         max-width: 80%;
         border-radius: 10px;
-        ali
     }
     .title-text {
         text-align: center;
@@ -162,7 +163,7 @@ st.markdown(
 
 # Mostrar logo
 
-st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center;margin:0 auto'>", unsafe_allow_html=True)
+st.markdown("<div style='display: flex;margin:0 auto'>", unsafe_allow_html=True)
 st.image("./src/Logo Estylizer 2.png", width=250)
 st.markdown('</div>', unsafe_allow_html=True)
 
