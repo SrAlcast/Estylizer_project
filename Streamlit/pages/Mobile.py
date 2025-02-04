@@ -241,34 +241,30 @@ if st.session_state.page == 2:
     if "select_all" not in st.session_state:
         st.session_state.select_all = False
 
+    if "tipos_superior" not in st.session_state:
+        st.session_state.tipos_superior = []
+
     def toggle_select_all():
         if st.session_state.select_all:
             st.session_state.tipos_superior = tipos.copy()
         else:
             st.session_state.tipos_superior = []
 
-    col_select_all = st.columns([1.5])[0]
-    if col_select_all.button("Seleccionar Todo" if not st.session_state.select_all else "Deseleccionar Todo"):
+    # Botón "Seleccionar Todo"
+    if st.button("Seleccionar Todo" if not st.session_state.select_all else "Deseleccionar Todo"):
         st.session_state.select_all = not st.session_state.select_all
         toggle_select_all()
         st.rerun()
 
-    # Crear dos filas de botones con más espacio
-    col1, col2, col3 = st.columns([1.5, 1.5, 1.5])
-    col4, col5, col6 = st.columns([1.5, 1.5, 1.5])
+    # Crear un desplegable multiselección
+    seleccionados = st.multiselect(
+        "Elige los tipos de prenda:",
+        opciones=tipos,
+        default=st.session_state.tipos_superior
+    )
 
-    cols = [col1, col2, col3, col4, col5, col6]
-
-    for i, tipo in enumerate(tipos):
-        col = cols[i]
-        if tipo in st.session_state.tipos_superior:
-            if col.button(f"✅ {tipo}", key=f"tipo_{tipo}"):
-                st.session_state.tipos_superior.remove(tipo)
-                st.rerun()
-        else:
-            if col.button(tipo, key=f"tipo_{tipo}"):
-                st.session_state.tipos_superior.append(tipo)
-                st.rerun()
+    # Guardar la selección en session_state
+    st.session_state.tipos_superior = seleccionados
 
     # Botones de navegación
     nav_col1, nav_col2 = st.columns([1.5, 1.5])
@@ -287,7 +283,7 @@ if st.session_state.page == 2:
 
 
 # Página 3: Selección de colores
-elif st.session_state.page == 3:
+if st.session_state.page == 3:
     st.subheader("Selecciona los colores para tu outfit")
 
     colores_superior = productos_tageados[productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)]['color_homogeneizado'].unique()
@@ -295,53 +291,47 @@ elif st.session_state.page == 3:
 
     # Para la parte superior
     st.write("Colores para la parte superior:")
-    col_select_sup = st.columns([1.5])[0]
-    if col_select_sup.button(
-        "Todos los Colores", 
-        key="toggle_colores_superior"
-    ):
-        if len(st.session_state.colores_superior) == len(colores_superior):
-            st.session_state.colores_superior = []
-        else:
+
+    # Botón "Seleccionar Todo" para los colores superiores
+    if st.button("Seleccionar Todo" if not st.session_state.select_all_colores_superior else "Deseleccionar Todo", key="toggle_colores_superior"):
+        st.session_state.select_all_colores_superior = not st.session_state.select_all_colores_superior
+        if st.session_state.select_all_colores_superior:
             st.session_state.colores_superior = list(colores_superior)
+        else:
+            st.session_state.colores_superior = []
         st.rerun()
 
-    cols_sup = st.columns(5)
-    for i, color in enumerate(colores_superior):
-        col = cols_sup[i % 5]
-        if color in st.session_state.colores_superior:
-            if col.button(f"✅ {color}", key=f"color_sup_selected_{color}"):
-                st.session_state.colores_superior.remove(color)
-                st.rerun()
-        else:
-            if col.button(color, key=f"color_sup_{color}"):
-                st.session_state.colores_superior.append(color)
-                st.rerun()
+    # Crear un desplegable multiselección para los colores superiores
+    seleccionados_superior = st.multiselect(
+        "Selecciona los colores para la parte superior:",
+        opciones=colores_superior,
+        default=st.session_state.colores_superior
+    )
+
+    # Guardar la selección en session_state
+    st.session_state.colores_superior = seleccionados_superior
 
     # Para la parte inferior
     st.write("Colores para la parte inferior:")
-    col_select_inf = st.columns([1.5])[0]
-    if col_select_inf.button(
-        "Todos los Colores", 
-        key="toggle_colores_inferior"
-    ):
-        if len(st.session_state.colores_inferior) == len(colores_inferior):
-            st.session_state.colores_inferior = []
-        else:
+
+    # Botón "Seleccionar Todo" para los colores inferiores
+    if st.button("Seleccionar Todo" if not st.session_state.select_all_colores_inferior else "Deseleccionar Todo", key="toggle_colores_inferior"):
+        st.session_state.select_all_colores_inferior = not st.session_state.select_all_colores_inferior
+        if st.session_state.select_all_colores_inferior:
             st.session_state.colores_inferior = list(colores_inferior)
+        else:
+            st.session_state.colores_inferior = []
         st.rerun()
 
-    cols_inf = st.columns(5)
-    for i, color in enumerate(colores_inferior):
-        col = cols_inf[i % 5]
-        if color in st.session_state.colores_inferior:
-            if col.button(f"✅ {color}", key=f"color_inf_selected_{color}"):
-                st.session_state.colores_inferior.remove(color)
-                st.rerun()
-        else:
-            if col.button(color, key=f"color_inf_{color}"):
-                st.session_state.colores_inferior.append(color)
-                st.rerun()
+    # Crear un desplegable multiselección para los colores inferiores
+    seleccionados_inferior = st.multiselect(
+        "Selecciona los colores para la parte inferior:",
+        opciones=colores_inferior,
+        default=st.session_state.colores_inferior
+    )
+
+    # Guardar la selección en session_state
+    st.session_state.colores_inferior = seleccionados_inferior
 
     # Navegación entre páginas
     col1, col2 = st.columns([1, 1])
