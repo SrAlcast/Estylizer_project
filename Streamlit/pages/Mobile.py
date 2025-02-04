@@ -505,7 +505,6 @@ elif st.session_state.page == 4:
 
 # Página 5: Mostrar recomendaciones
 elif st.session_state.page == 5:
-    st.markdown("---")
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
