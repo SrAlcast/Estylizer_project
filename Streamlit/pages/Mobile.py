@@ -505,7 +505,7 @@ elif st.session_state.page == 4:
 
 # Página 5: Mostrar recomendaciones
 elif st.session_state.page == 5:
-    st.subheader("Prendas recomendadas", divider="blue")
+    st.subheader( divider="blue")
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
@@ -526,22 +526,24 @@ elif st.session_state.page == 5:
         similitud_umbral = 0
         if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
             with col_center:
-                st.markdown(f"""<div class='image-container' style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
-                st.markdown(f"""<div style="text-align:center; margin-top:10px;">
-                                    <a href="{superior["url"]}" target="_blank">
-                                        <button style="background-color:#f0f0f0; color:black; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button>
-                                    </a>
-                                </div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
+                
+                # Botón "Ir a la tienda"
+                if st.button("Ir a la tienda", key=f"tienda_sup_{sup_idx}"):
+                    st.markdown(f'<meta http-equiv="refresh" content="0;url={superior["url"]}">', unsafe_allow_html=True)
 
-            nav1, nav2 = st.columns([1, 1])
-            with nav1:
-                if st.session_state.index_superior > 0 and st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
-                    st.session_state.index_superior -= 1
-                    st.rerun()
-            with nav2:
-                if st.session_state.index_superior < len(st.session_state.superiores) - 1 and st.button("Siguiente", key=f"siguiente_sup_{st.session_state.index_superior}"):
-                    st.session_state.index_superior += 1
-                    st.rerun()
+                # Botones de navegación debajo de la prenda
+                nav1, nav2 = st.columns([1, 1])
+                with nav1:
+                    if st.session_state.index_superior > 0:
+                        if st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
+                            st.session_state.index_superior -= 1
+                            st.rerun()
+                with nav2:
+                    if st.session_state.index_superior < len(st.session_state.superiores) - 1:
+                        if st.button("Siguiente", key=f"siguiente_sup_{st.session_state.index_superior}"):
+                            st.session_state.index_superior += 1
+                            st.rerun()
 
     # Mostrar parte inferior
     if 'inferiores' in st.session_state and not st.session_state.inferiores.empty:
@@ -551,22 +553,24 @@ elif st.session_state.page == 5:
 
         if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
             with col_center:
-                st.markdown(f"""<div class='image-container' style="text-align:center;"><img src="{inferior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
-                st.markdown(f"""<div style="text-align:center; margin-top:10px;">
-                                    <a href="{inferior["url"]}" target="_blank">
-                                        <button style="background-color:#f0f0f0; color:black; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button>
-                                    </a>
-                                </div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div style="text-align:center;"><img src="{inferior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
 
-            nav1, nav2 = st.columns([1, 1])
-            with nav1:
-                if st.session_state.index_inferior > 0 and st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
-                    st.session_state.index_inferior -= 1
-                    st.rerun()
-            with nav2:
-                if st.session_state.index_inferior < len(st.session_state.inferiores) - 1 and st.button("Siguiente", key=f"siguiente_inf_{st.session_state.index_inferior}"):
-                    st.session_state.index_inferior += 1
-                    st.rerun()
+                # Botón "Ir a la tienda"
+                if st.button("Ir a la tienda", key=f"tienda_inf_{inf_idx}"):
+                    st.markdown(f'<meta http-equiv="refresh" content="0;url={inferior["url"]}">', unsafe_allow_html=True)
+
+                # Botones de navegación debajo de la prenda
+                nav1, nav2 = st.columns([1, 1])
+                with nav1:
+                    if st.session_state.index_inferior > 0:
+                        if st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
+                            st.session_state.index_inferior -= 1
+                            st.rerun()
+                with nav2:
+                    if st.session_state.index_inferior < len(st.session_state.inferiores) - 1:
+                        if st.button("Siguiente", key=f"siguiente_inf_{st.session_state.index_inferior}"):
+                            st.session_state.index_inferior += 1
+                            st.rerun()
 
     # Botones de navegación
     st.markdown("---")
@@ -580,6 +584,7 @@ elif st.session_state.page == 5:
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
             st.rerun()
+
 
 
 
