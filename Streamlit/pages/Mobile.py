@@ -131,7 +131,7 @@ st.markdown(
     <style>
     @media screen and (max-width: 768px) {
         .block-container {
-            padding: 0.5rem !important;
+            padding: 0.1rem !important;
         }
         .stButton > button {
             width: 100% !important;
