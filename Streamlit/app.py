@@ -7,13 +7,10 @@ import random
 from pandas import json_normalize
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-from dotenv import load_dotenv
-import certifi
-
-
-mongo_uri = st.secrets["MONGO_URI"]
-if not mongo_uri:
-    raise ValueError("uri no está definido en las variables de entorno")
+import sys
+# Añadimos la carpeta que contiene nuestro .py al path de Python
+sys.path.append("../src/")
+import support_mongo as sm
 
 def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_superior, tags_rechazados_general, tags_rechazados_superior, tipos_superior, colores_superior, presupuesto_superior_min, presupuesto_superior_max):
     
@@ -81,53 +78,13 @@ def recomendador_inferior(productos, tags_aceptados_general, tags_aceptados_infe
     inferiores = inferiores.sort_values(by=['similaridad', 'current_price'], ascending=[False, True])
     
     return inferiores
-def conectar_a_mongo(nombre_bd: str):
-    """
-    Conecta a una base de datos en MongoDB Atlas y devuelve el objeto de la base de datos.
-
-    Args:
-        nombre_bd (str): Nombre de la base de datos a la que se desea conectar.
-
-    Returns:
-        pymongo.database.Database: Objeto de la base de datos MongoDB.
-    """
-    cliente = MongoClient(mongo_uri, tlsCAFile=certifi.where())
-    return cliente[nombre_bd]
-
-def importar_a_dataframe(bd, nombre_coleccion):
-    """
-    Importa una colección de MongoDB a un DataFrame de pandas, manteniendo los nombres originales de las columnas 
-    y eliminando las columnas '_id', 'type', y 'id'.
-
-    Args:
-        bd (pymongo.database.Database): Objeto de la base de datos MongoDB.
-        nombre_coleccion (str): Nombre de la colección en MongoDB que se desea importar.
-
-    Returns:
-        pd.DataFrame: DataFrame con los datos de la colección, con las columnas específicas eliminadas.
-    """
-    coleccion = bd[nombre_coleccion]
-    documentos = list(coleccion.find())
-
-    if documentos:
-        # Convertir documentos a DataFrame
-        df = json_normalize(documentos, sep="_")
-        
-        # Eliminar las columnas '_id', 'type' y 'id' si existen
-        columnas_a_eliminar = ["_id", "type", "id"]
-        df = df.drop(columns=[col for col in columnas_a_eliminar if col in df.columns])
-        
-        return df
-    else:
-        print(f"La colección '{nombre_coleccion}' está vacía o no existe.")
-        return pd.DataFrame()
 
 # Importar datos bbdd
-bd=conectar_a_mongo("PullnBearData")
+bd=sm.conectar_a_mongo("PullnBearData")
 nombre_coleccion1="modelos_pull_hombre_pruebas"
 nombre_coleccion2="productos_pull_hombre_pruebas"
-modelos_tageados = importar_a_dataframe(bd, nombre_coleccion1)
-productos_tageados = importar_a_dataframe(bd, nombre_coleccion2)
+modelos_tageados = sm.importar_a_dataframe(bd, nombre_coleccion1)
+productos_tageados = sm.importar_a_dataframe(bd, nombre_coleccion2)
 
 # # # Cargar datos de modelo_tags con imágenes
 # modelos_tageados =pd.read_csv('./results/Streamlit/updated_Modelos_entero_sin_filtro_with_tags.csv',sep=";", encoding="utf-8")
@@ -210,7 +167,7 @@ st.markdown(
 # Verifica si la imagen existe antes de mostrarla
 
 # Ruta relativa desde el script de ejecución
-image_path = Path("./src/Logo Estylizer 2.png")
+image_path = Path("../src/Logo Estylizer 2.png")
 
 if image_path.exists():
     # Usar columnas para centrar la imagen
