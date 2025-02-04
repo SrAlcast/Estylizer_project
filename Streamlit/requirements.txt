@@ -1,3 +1,4 @@
+streamlit>=1.22.0
 user-agents
 streamlit
 pandas
