@@ -232,7 +232,7 @@ if st.session_state.page == 1:
         st.image(modelo_tags['image1_url'])
         st.markdown('</div>', unsafe_allow_html=True)
         # Centrar la imagen
-        col1, col2, col3 = st.columns([1, 1], gap="large")
+        col1, col2 = st.columns([1, 1], gap="large")
         with col1:
             st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
             dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
