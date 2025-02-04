@@ -528,8 +528,14 @@ elif st.session_state.page == 5:
                 st.markdown(f"""<div style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 350px;"></div>""", unsafe_allow_html=True)
                 
                 # Botón "Ir a la tienda"
-                if st.button("Ir a la tienda", key=f"tienda_sup_{sup_idx}"):
-                    st.markdown(f'<meta http-equiv="refresh" content="0;url={superior["url"]}">', unsafe_allow_html=True)
+                st.markdown(f"""
+                    <div style="text-align:center; margin-top:10px;">
+                        <a href="{superior['url']}" target="_blank">
+                            <button style="background-color:#e0e0e0; color:black; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">
+                                Ir a la tienda
+                            </button>
+                        </a>
+                    </div>""", unsafe_allow_html=True)
 
                 # Botones de navegación debajo de la prenda
                 nav1, nav2 = st.columns([1, 1])
@@ -554,9 +560,15 @@ elif st.session_state.page == 5:
             with col_center:
                 st.markdown(f"""<div style="text-align:center;"><img src="{inferior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
 
-                # Botón "Ir a la tienda"
-                if st.button("Ir a la tienda", key=f"tienda_inf_{inf_idx}"):
-                    st.markdown(f'<meta http-equiv="refresh" content="0;url={inferior["url"]}">', unsafe_allow_html=True)
+                # Botón "Ir a la tienda" con redirección
+                st.markdown(f"""
+                    <div style="text-align:center; margin-top:10px;">
+                        <a href="{inferior['url']}" target="_blank">
+                            <button style="background-color:#e0e0e0; color:black; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">
+                                Ir a la tienda
+                            </button>
+                        </a>
+                    </div>""", unsafe_allow_html=True)
 
                 # Botones de navegación debajo de la prenda
                 nav1, nav2 = st.columns([1, 1])
