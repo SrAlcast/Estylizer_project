@@ -12,7 +12,7 @@ import os
 import certifi
 load_dotenv(dotenv_path="../src/.env")
 
-mongo_uri = os.getenv("uri")
+mongo_uri = os.getenv("MONGO_URI")
 if not mongo_uri:
     raise ValueError("uri no está definido en las variables de entorno")
 
