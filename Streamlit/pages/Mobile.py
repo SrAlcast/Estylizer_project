@@ -138,7 +138,6 @@ st.markdown(
     .block-container {
         padding-top: 2rem !important;
         margin:auto;
-
     }
     .stButton > button {
         width: 100%;
@@ -156,31 +155,29 @@ st.markdown(
         font-weight: bold;
         color: #ff5733;
     }
+    .centered-container {
+        display: flex;
+        justify-content: center;
+    }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-# Mostrar logo
-
-# Crear tres columnas y centrar la imagen
-col1, col2, col3 = st.columns([1, 2, 1])  # La columna del centro es la más ancha
-with col2:  # Mostrar la imagen en la columna del centro
+# Mostrar logo centrado
+col1, col2, col3 = st.columns([1, 2, 1])  # Centrar imagen en la columna central
+with col2:
     st.image("./src/Logo Estylizer 2.png", width=250)
 
-
-# st.markdown("<div style='display: flex; justify-content: center;'><img src='./src/Logo Estylizer 2.png' width='250'></div>", unsafe_allow_html=True)
-# st.image("./src/Logo Estylizer 2.png", width=250, use_container_width=False)
-
-# Página 1: Selección de modelo_tagss
+# Página 1: Selección de modelo_tags
 if st.session_state.page == 1:
     if st.session_state.modelo_tags_index < 8:
         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
-        st.image(modelo_tags['image1_url'])
-        st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>", unsafe_allow_html=True)
+        st.image(modelo_tags['image1_url'], width=200)  # Reducir tamaño de la imagen
+        st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
         dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
-        st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>", unsafe_allow_html=True)
         like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
+        st.markdown("</div>", unsafe_allow_html=True)
 
         # Acciones de los botones con animación
         if dislike_pressed or like_pressed:
