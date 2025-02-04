@@ -504,6 +504,7 @@ elif st.session_state.page == 4:
             st.rerun()
 
 # Página 5: Mostrar recomendaciones
+# Página 5: Mostrar recomendaciones
 elif st.session_state.page == 5:
     st.subheader("Prendas recomendadas", divider="blue")
 
@@ -520,13 +521,13 @@ elif st.session_state.page == 5:
     # Función para verificar si hay más prendas que cumplan los filtros
     def hay_siguiente_prenda(lista, idx, presupuesto, similitud_umbral):
         for i in range(idx + 1, len(lista)):
-            if lista.iloc[i]['similaridad'] >= similitud_umbral and presupuesto[0] <= lista.iloc[i]['current_price'] <= presupuesto[1]:
+            if all(col in lista.columns for col in ['similaridad', 'current_price']) and lista.iloc[i]['similaridad'] >= similitud_umbral and presupuesto[0] <= lista.iloc[i]['current_price'] <= presupuesto[1]:
                 return True
         return False
 
     def hay_anterior_prenda(lista, idx, presupuesto, similitud_umbral):
         for i in range(idx - 1, -1, -1):
-            if lista.iloc[i]['similaridad'] >= similitud_umbral and presupuesto[0] <= lista.iloc[i]['current_price'] <= presupuesto[1]:
+            if all(col in lista.columns for col in ['similaridad', 'current_price']) and lista.iloc[i]['similaridad'] >= similitud_umbral and presupuesto[0] <= lista.iloc[i]['current_price'] <= presupuesto[1]:
                 return True
         return False
 
@@ -540,7 +541,7 @@ elif st.session_state.page == 5:
             superior = st.session_state.superiores.iloc[sup_idx]
             similitud_umbral = 0
             
-            if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
+            if all(col in superior.index for col in ['product_name', 'current_price', 'similaridad', 'image_url', 'url']) and superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
                 with col_center:
                     st.markdown(f"**{superior['product_name']} - {superior['current_price']}€**")
                     st.markdown(f"""
@@ -574,7 +575,7 @@ elif st.session_state.page == 5:
             inf_idx = max(0, min(inf_idx, total_inf - 1))
             inferior = st.session_state.inferiores.iloc[inf_idx]
             
-            if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
+            if all(col in inferior.index for col in ['product_name', 'current_price', 'similaridad', 'image_url', 'url']) and inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
                 with col_center:
                     st.markdown(f"**{inferior['product_name']} - {inferior['current_price']}€**")
                     st.markdown(f"""
@@ -599,4 +600,16 @@ elif st.session_state.page == 5:
     else:
         st.warning("No se encontraron prendas recomendadas para la parte inferior.")
 
+    # Botones de navegación
+    st.markdown("---")
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        if st.button("Volver a la página anterior"):
+            st.session_state.page = 4
+            st.rerun()
+    with col2:
+        if st.button("Reiniciar recomendador"):
+            for key in list(st.session_state.keys()):
+                del st.session_state[key]
+            st.rerun()
 
