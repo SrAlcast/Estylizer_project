@@ -163,9 +163,6 @@ st.markdown(
 
 # Mostrar logo
 
-# Centrar el título
-st.markdown("<h3 style='text-align: center;'>Estylizer</h3>", unsafe_allow_html=True)
-
 # Crear tres columnas y centrar la imagen
 col1, col2, col3 = st.columns([1, 2, 1])  # La columna del centro es la más ancha
 with col2:  # Mostrar la imagen en la columna del centro
