@@ -201,8 +201,15 @@ st.markdown(
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
         width: 100%;
+        flex-direction: column;
+    }
+    .centered-image {
+        display: block;
+        margin: auto;
+        width: 100%;
+        max-width: 260px; /* Ajuste de tamaño */
+        border-radius: 10px;
     }
     </style>
     """,
@@ -210,25 +217,28 @@ st.markdown(
 )
 
 # Mostrar logo centrado
-col1, col2, col3 = st.columns([1, 2, 1])  # La imagen se centra en la columna central
-with col2:
-    st.image("./src/Logo Estylizer 2.png", width=200)
+st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
+st.image("./src/Logo Estylizer 2.png", width=200)
+st.markdown("</div>", unsafe_allow_html=True)
 
 # Página 1: Selección de modelo_tags
 if st.session_state.page == 1:
     if st.session_state.modelo_tags_index < 8:
         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
 
-        # Centrar la imagen correctamente usando columnas
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            st.image(modelo_tags['image1_url'], width=260)
+        # Centrar imagen con markdown
+        st.markdown(f"""
+        <div class='centered-container'>
+            <img class='centered-image' src="{modelo_tags['image1_url']}" />
+        </div>
+        """, unsafe_allow_html=True)
 
-        # Centrar los botones debajo de la imagen
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
-            like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
+        # Centrar los botones
+        st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
+        dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
+        like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
+        st.markdown("</div>", unsafe_allow_html=True)
+
 
         # Acciones de los botones con animación
         if dislike_pressed or like_pressed:
