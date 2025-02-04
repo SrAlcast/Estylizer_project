@@ -10,8 +10,8 @@ ua = parse(user_agent)
 # Detectar si es móvil o escritorio
 is_mobile = ua.is_mobile
 
-# Redirigir a la página correspondiente
+# Redirigir a la página correspondiente dentro de `pages/`
 if is_mobile:
-    st.switch_page("Mobile")  # Redirige a Mobile.py
+    st.switch_page("pages/Mobile")  # Redirige a Mobile.py dentro de /pages
 else:
-    st.switch_page("Desktop")  # Redirige a Desktop.py
+    st.switch_page("pages/Desktop")  # Redirige a Desktop.py dentro de /pages
