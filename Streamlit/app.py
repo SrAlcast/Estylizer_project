@@ -131,8 +131,8 @@ def importar_a_dataframe(bd, nombre_coleccion):
 # productos_tageados = importar_a_dataframe(bd, nombre_coleccion2)
 
 # # Cargar datos de modelo_tags con imágenes
-modelos_tageados =pd.read_csv('../results/Nueva carpeta/updated_Modelos_entero_sin_filtro_with_tags.csv',sep=";", encoding="utf-8")
-productos_tageados = pd.read_csv("../results/Nueva carpeta/updated_all_products_info_with_text.csv")
+modelos_tageados =pd.read_csv('../results/Streamlit/updated_Modelos_entero_sin_filtro_with_tags.csv',sep=";", encoding="utf-8")
+productos_tageados = pd.read_csv("../results/Streamlit/updated_all_products_info_with_text.csv")
 
 productos_tageados['current_price'] = pd.to_numeric(productos_tageados['current_price'], errors='coerce')
 
