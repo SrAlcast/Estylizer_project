@@ -148,21 +148,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
-# Verifica si la imagen existe antes de mostrarla
-
 # Ruta relativa desde el script de ejecución
-image_path = Path("./src/Logo Estylizer 2.png")
-
-if image_path.exists():
     # Usar columnas para centrar la imagen
-    col1, col2, col3 = st.columns([1, 2, 1], gap="large")  # Centra la imagen
-    with col2:
-        st.markdown('<div class="stColumn">', unsafe_allow_html=True)
-        st.image(str(image_path), width=300)  # Convertir a str y reducir tamaño
-        st.markdown('</div>', unsafe_allow_html=True)
-else:
-    st.error("La imagen no se encontró.")
+col1, col2, col3 = st.columns([1, 2, 1], gap="large")  # Centra la imagen
+with col2:
+    st.markdown('<div class="stColumn">', unsafe_allow_html=True)
+    st.image(str("./src/Logo Estylizer 2.png"), width=300)  # Convertir a str y reducir tamaño
+    st.markdown('</div>', unsafe_allow_html=True)
     
 # Página 1: Selección de modelo_tagss
 if st.session_state.page == 1:
