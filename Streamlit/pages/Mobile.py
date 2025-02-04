@@ -285,8 +285,8 @@ if st.session_state.page == 2:
 if st.session_state.page == 3:
     st.subheader("Selecciona los colores para tu outfit")
 
-    colores_superior = productos_tageados[productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)]['color_homogeneizado'].unique()
-    colores_inferior = productos_tageados[productos_tageados['Categoria'].str.contains('Pantalón', case=False)]['color_homogeneizado'].unique()
+    colores_superior = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)]['color_homogeneizado'].unique())
+    colores_inferior = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('Pantalón', case=False)]['color_homogeneizado'].unique())
 
     # Para la parte superior
     st.write("Colores para la parte superior:")
