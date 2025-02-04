@@ -515,7 +515,6 @@ elif st.session_state.page == 5:
     if isinstance(presupuesto_inferior, (int, float)):
         presupuesto_inferior = [0, presupuesto_inferior]
 
-    # Centrar contenido con st.columns
     col_center = st.columns([1, 2, 1])[1]
 
     # Mostrar parte superior
@@ -527,8 +526,12 @@ elif st.session_state.page == 5:
         similitud_umbral = 0
         if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
             with col_center:
-                st.markdown(f"""<div class='image-container'><img src="{superior['image_url']}" style="max-width: 200px;"></div>""", unsafe_allow_html=True)
-                st.markdown(f'<a href="{superior["url"]}" target="_blank"><button style="background-color:#007bff; color:white; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button></a>', unsafe_allow_html=True)
+                st.markdown(f"""<div class='image-container' style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div style="text-align:center; margin-top:10px;">
+                                    <a href="{superior["url"]}" target="_blank">
+                                        <button style="background-color:#f0f0f0; color:black; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button>
+                                    </a>
+                                </div>""", unsafe_allow_html=True)
 
             nav1, nav2 = st.columns([1, 1])
             with nav1:
@@ -548,8 +551,12 @@ elif st.session_state.page == 5:
 
         if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
             with col_center:
-                st.image(inferior['image_url'] if isinstance(inferior['image_url'], str) else 'No tiene foto', width=250)
-                st.markdown(f'<a href="{inferior["url"]}" target="_blank"><button style="background-color:#007bff; color:white; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button></a>', unsafe_allow_html=True)
+                st.markdown(f"""<div class='image-container' style="text-align:center;"><img src="{inferior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div style="text-align:center; margin-top:10px;">
+                                    <a href="{inferior["url"]}" target="_blank">
+                                        <button style="background-color:#f0f0f0; color:black; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button>
+                                    </a>
+                                </div>""", unsafe_allow_html=True)
 
             nav1, nav2 = st.columns([1, 1])
             with nav1:
@@ -573,7 +580,6 @@ elif st.session_state.page == 5:
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
             st.rerun()
-
 
 
 
