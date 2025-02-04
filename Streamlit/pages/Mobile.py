@@ -542,7 +542,7 @@ elif st.session_state.page == 5:
             
             if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
                 with col_center:
-                    st.markdown(f"**{superior['name']} - {superior['current_price']}€**")
+                    st.markdown(f"**{superior['product_name']} - {superior['current_price']}€**")
                     st.markdown(f"""
                         <div style="text-align:center;">
                             <img src="{superior['image_url']}" style="width:250px; height:250px; object-fit:cover; border-radius:5px;">
@@ -576,7 +576,7 @@ elif st.session_state.page == 5:
             
             if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
                 with col_center:
-                    st.markdown(f"**{inferior['name']} - {inferior['current_price']}€**")
+                    st.markdown(f"**{inferior['product_name']} - {inferior['current_price']}€**")
                     st.markdown(f"""
                         <div style="text-align:center;">
                             <img src="{inferior['image_url']}" style="width:250px; height:250px; object-fit:cover; border-radius:5px;">
