@@ -549,15 +549,15 @@ elif st.session_state.page == 5:
                     # Botones de navegación debajo de la prenda
                     nav1, nav2 = st.columns([1, 1])
                     with nav1:
-                        if sup_idx > 0 and st.button("Anterior", key=f"anterior_sup_{sup_idx}"):
-                            st.session_state.index_superior -= 1
-                            st.rerun()
-                    with nav2:
-                        if sup_idx < total_sup - 1 and st.button("Siguiente", key=f"siguiente_sup_{sup_idx}"):
+                        if sup_idx < total_sup - 1 and st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}"):
                             st.session_state.index_superior += 1
                             st.rerun()
                         elif sup_idx == total_sup - 1:
                             st.warning("No hay más prendas superiores disponibles.")
+                    with nav2:
+                        if sup_idx > 0 and st.button("Prenda anterior", key=f"anterior_sup_{sup_idx}"):
+                            st.session_state.index_superior -= 1
+                            st.rerun()
 
     else:
         st.warning("No se encontraron prendas recomendadas para la parte superior.")
@@ -593,15 +593,15 @@ elif st.session_state.page == 5:
                     # Botones de navegación debajo de la prenda
                     nav1, nav2 = st.columns([1, 1])
                     with nav1:
-                        if inf_idx > 0 and st.button("Anterior", key=f"anterior_inf_{inf_idx}"):
-                            st.session_state.index_inferior -= 1
-                            st.rerun()
-                    with nav2:
-                        if inf_idx < total_inf - 1 and st.button("Siguiente", key=f"siguiente_inf_{inf_idx}"):
+                        if inf_idx < total_inf - 1 and st.button("Siguiente prenda", key=f"siguiente_inf_{inf_idx}"):
                             st.session_state.index_inferior += 1
                             st.rerun()
                         elif inf_idx == total_inf - 1:
                             st.warning("No hay más prendas inferiores disponibles.")
+                    with nav2:
+                        if inf_idx > 0 and st.button("Prenda anterior", key=f"anterior_inf_{inf_idx}"):
+                            st.session_state.index_inferior -= 1
+                            st.rerun()
 
     else:
         st.warning("No se encontraron prendas recomendadas para la parte inferior.")
