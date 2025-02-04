@@ -268,17 +268,18 @@ if st.session_state.page == 2:
     # Botones de navegación
     nav_col1, nav_col2 = st.columns([1.5, 1.5])
     with nav_col1:
-        if st.button("Volver"):
-            resetear_estado()
-            st.session_state.page = 1
-            st.rerun()
-    with nav_col2:
         if st.button("Siguiente"):
             if st.session_state.tipos_superior:
                 st.session_state.page = 3
                 st.rerun()
             else:
                 st.warning("Por favor, selecciona al menos un tipo de prenda.")
+
+    with nav_col2:
+        if st.button("Volver"):
+            resetear_estado()
+            st.session_state.page = 1
+            st.rerun()
 
 
 # Página 3: Selección de colores
@@ -335,16 +336,17 @@ if st.session_state.page == 3:
     # Navegación entre páginas
     col1, col2 = st.columns([1, 1])
     with col1:
-        if st.button("Volver", key="volver"):
-            st.session_state.page = 2
-            st.rerun()
-    with col2:
         if st.button("Siguiente", key="siguiente"):
             if st.session_state.colores_superior and st.session_state.colores_inferior:
                 st.session_state.page = 4
                 st.rerun()
             else:
                 st.warning("Por favor, selecciona al menos un color para cada parte.")
+    with col2:
+        if st.button("Volver", key="volver"):
+            st.session_state.page = 2
+            st.rerun()
+
 
 # Página 4: Selección de presupuesto
 elif st.session_state.page == 4:
@@ -390,10 +392,6 @@ elif st.session_state.page == 4:
 
     col1, col2 = st.columns([1, 1])
     with col1:
-        if st.button("Volver"):
-            st.session_state.page = 3
-            st.rerun()
-    with col2:
         if st.button("Recomendar"):
             tags_aceptados_usuario_general = list(tag for sublist in st.session_state.aceptados_general for tag in sublist)
             tags_aceptados_usuario_superior= list(tag for sublist in st.session_state.aceptados_superior for tag in sublist)
@@ -427,6 +425,10 @@ elif st.session_state.page == 4:
             st.session_state.index_superior = 0  # Reiniciar índice superior
             st.session_state.index_inferior = 0  # Reiniciar índice inferior
             st.session_state.page = 5
+            st.rerun()
+    with col2:
+        if st.button("Volver"):
+            st.session_state.page = 3
             st.rerun()
 
 # Página 5: Mostrar recomendaciones
