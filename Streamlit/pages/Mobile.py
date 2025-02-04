@@ -162,7 +162,7 @@ st.markdown(
 
 # Mostrar logo
 
-st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>", unsafe_allow_html=True)
+st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center;margin:0 auto'>", unsafe_allow_html=True)
 st.image("./src/Logo Estylizer 2.png", width=250)
 st.markdown('</div>', unsafe_allow_html=True)
 
