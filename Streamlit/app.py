@@ -8,13 +8,12 @@ from pandas import json_normalize
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
-import os
 import certifi
-# # load_dotenv(dotenv_path="../src/.env")
 
-# mongo_uri = os.getenv("MONGO_URI")
-# if not mongo_uri:
-#     raise ValueError("uri no está definido en las variables de entorno")
+
+mongo_uri = st.secrets["MONGO_URI"]
+if not mongo_uri:
+    raise ValueError("uri no está definido en las variables de entorno")
 
 def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_superior, tags_rechazados_general, tags_rechazados_superior, tipos_superior, colores_superior, presupuesto_superior_min, presupuesto_superior_max):
     
@@ -123,23 +122,18 @@ def importar_a_dataframe(bd, nombre_coleccion):
         print(f"La colección '{nombre_coleccion}' está vacía o no existe.")
         return pd.DataFrame()
 
-# # Importar datos bbdd
-# bd=conectar_a_mongo("PullnBearData")
-# nombre_coleccion1="modelos_pull_hombre_pruebas"
-# nombre_coleccion2="productos_pull_hombre_pruebas"
-# modelos_tageados = importar_a_dataframe(bd, nombre_coleccion1)
-# productos_tageados = importar_a_dataframe(bd, nombre_coleccion2)
+# Importar datos bbdd
+bd=conectar_a_mongo("PullnBearData")
+nombre_coleccion1="modelos_pull_hombre_pruebas"
+nombre_coleccion2="productos_pull_hombre_pruebas"
+modelos_tageados = importar_a_dataframe(bd, nombre_coleccion1)
+productos_tageados = importar_a_dataframe(bd, nombre_coleccion2)
 
-# # Cargar datos de modelo_tags con imágenes
-modelos_tageados =pd.read_csv('./results/Streamlit/updated_Modelos_entero_sin_filtro_with_tags.csv',sep=";", encoding="utf-8")
-productos_tageados = pd.read_csv("./results/Streamlit/updated_all_products_info_with_text.csv")
+# # # Cargar datos de modelo_tags con imágenes
+# modelos_tageados =pd.read_csv('./results/Streamlit/updated_Modelos_entero_sin_filtro_with_tags.csv',sep=";", encoding="utf-8")
+# productos_tageados = pd.read_csv("./results/Streamlit/updated_all_products_info_with_text.csv")
 
 productos_tageados['current_price'] = pd.to_numeric(productos_tageados['current_price'], errors='coerce')
-
-# Ruta relativa desde el script de ejecución
-image_path = Path("./src/Logo Estylizer 2.png")
-
-
 
 # Variables para el estado
 if 'aceptados_general' not in st.session_state:
@@ -212,7 +206,12 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 # Verifica si la imagen existe antes de mostrarla
+
+# Ruta relativa desde el script de ejecución
+image_path = Path("./src/Logo Estylizer 2.png")
+
 if image_path.exists():
     # Usar columnas para centrar la imagen
     col1, col2, col3 = st.columns([1, 2, 1], gap="large")  # Centra la imagen
@@ -220,7 +219,6 @@ if image_path.exists():
         st.markdown('<div class="stColumn">', unsafe_allow_html=True)
         st.image(str(image_path), width=300)  # Convertir a str y reducir tamaño
         st.markdown('</div>', unsafe_allow_html=True)
-
 else:
     st.error("La imagen no se encontró.")
     
