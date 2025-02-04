@@ -505,99 +505,63 @@ elif st.session_state.page == 4:
 
 # Página 5: Mostrar recomendaciones
 elif st.session_state.page == 5:
-    st.subheader("Prendas recomendadas")
+    st.subheader("Prendas recomendadas", divider="blue")
 
-    # Asegurar que el presupuesto es un rango
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
 
     if isinstance(presupuesto_superior, (int, float)):
-        presupuesto_superior = [0, presupuesto_superior]  # Establecer un mínimo de 0
+        presupuesto_superior = [0, presupuesto_superior]
     if isinstance(presupuesto_inferior, (int, float)):
         presupuesto_inferior = [0, presupuesto_inferior]
+
+    # Centrar contenido con st.columns
+    col_center = st.columns([1, 2, 1])[1]
 
     # Mostrar parte superior
     if 'superiores' in st.session_state and not st.session_state.superiores.empty:
         sup_idx = st.session_state.index_superior
-        if sup_idx >= len(st.session_state.superiores):
-            sup_idx = len(st.session_state.superiores) - 1  # Ajustar al último índice válido
-        elif sup_idx < 0:
-            sup_idx = 0  # Evitar valores negativos
+        sup_idx = max(0, min(sup_idx, len(st.session_state.superiores) - 1))
+        superior = st.session_state.superiores.iloc[sup_idx]
 
-        if len(st.session_state.superiores) > 0:
-            superior = st.session_state.superiores.iloc[sup_idx]
-            similitud_umbral=0
-            if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
-                col1, col2 = st.columns([1, 2])
-                with col1:
-                    st.image(superior['image_url'] if isinstance(superior['image_url'], str) else 'No tiene foto', width=200)
-                with col2:
-                    st.write("Parte Superior")
-                    st.write(f"**Nombre:** {superior['product_name']}")
-                    st.write(f"**Match:** {superior['similaridad']}")
-                    st.write(f"**Precio:** {superior['current_price']}€")
-                    st.write(f"**Color:** {superior['color_homogeneizado']}")
-                    st.write(f"[Ver producto]({superior['url']})")
+        similitud_umbral = 0
+        if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
+            with col_center:
+                st.image(superior['image_url'] if isinstance(superior['image_url'], str) else 'No tiene foto', width=250)
+                st.markdown(f'<a href="{superior["url"]}" target="_blank"><button style="background-color:#007bff; color:white; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button></a>', unsafe_allow_html=True)
 
-                    navigation_col1, navigation_col2 = st.columns([1, 1])
-                    with navigation_col1:
-                        if st.session_state.index_superior > 0:
-                            if st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
-                                st.session_state.index_superior -= 1
-                                st.rerun()
-                    with navigation_col2:
-                        if st.session_state.index_superior < len(st.session_state.superiores) - 1:
-                            if st.button("Siguiente", key=f"siguiente_sup_{st.session_state.index_superior}"):
-                                st.session_state.index_superior += 1
-                                st.rerun()
-            else:
-                st.warning("No hay opciones de parte superior dentro del presupuesto.")
-        else:
-            st.warning("No se encontraron prendas recomendadas para la parte superior.")
-    else:
-        st.warning("No se encontraron prendas recomendadas para la parte superior.")
+            nav1, nav2 = st.columns([1, 1])
+            with nav1:
+                if st.session_state.index_superior > 0 and st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
+                    st.session_state.index_superior -= 1
+                    st.rerun()
+            with nav2:
+                if st.session_state.index_superior < len(st.session_state.superiores) - 1 and st.button("Siguiente", key=f"siguiente_sup_{st.session_state.index_superior}"):
+                    st.session_state.index_superior += 1
+                    st.rerun()
 
     # Mostrar parte inferior
     if 'inferiores' in st.session_state and not st.session_state.inferiores.empty:
         inf_idx = st.session_state.index_inferior
-        if inf_idx >= len(st.session_state.inferiores):
-            inf_idx = len(st.session_state.inferiores) - 1
-        elif inf_idx < 0:
-            inf_idx = 0
+        inf_idx = max(0, min(inf_idx, len(st.session_state.inferiores) - 1))
+        inferior = st.session_state.inferiores.iloc[inf_idx]
 
-        if len(st.session_state.inferiores) > 0:
-            inferior = st.session_state.inferiores.iloc[inf_idx]
-            if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
-                col1, col2 = st.columns([1, 2])
-                with col1:
-                    st.image(inferior['image_url'] if isinstance(inferior['image_url'], str) else 'No tiene foto', width=200)
-                with col2:
-                    st.write("Parte Inferior")
-                    st.write(f"**Nombre:** {inferior['product_name']}")
-                    st.write(f"**Match:** {inferior['similaridad']}")
-                    st.write(f"**Precio:** {inferior['current_price']}€")
-                    st.write(f"**Color:** {inferior['color_homogeneizado']}")
-                    st.write(f"[Ver producto]({inferior['url']})")
+        if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
+            with col_center:
+                st.image(inferior['image_url'] if isinstance(inferior['image_url'], str) else 'No tiene foto', width=250)
+                st.markdown(f'<a href="{inferior["url"]}" target="_blank"><button style="background-color:#007bff; color:white; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button></a>', unsafe_allow_html=True)
 
-                    navigation_col1, navigation_col2 = st.columns([1, 1])
-                    with navigation_col1:
-                        if st.session_state.index_inferior > 0:
-                            if st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
-                                st.session_state.index_inferior -= 1
-                                st.rerun()
-                    with navigation_col2:
-                        if st.session_state.index_inferior < len(st.session_state.inferiores) - 1:
-                            if st.button("Siguiente", key=f"siguiente_inf_{st.session_state.index_inferior}"):
-                                st.session_state.index_inferior += 1
-                                st.rerun()
-            else:
-                st.warning("No hay opciones de parte inferior dentro del presupuesto.")
-        else:
-            st.warning("No se encontraron prendas recomendadas para la parte inferior.")
-    else:
-        st.warning("No se encontraron prendas recomendadas para la parte inferior.")
+            nav1, nav2 = st.columns([1, 1])
+            with nav1:
+                if st.session_state.index_inferior > 0 and st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
+                    st.session_state.index_inferior -= 1
+                    st.rerun()
+            with nav2:
+                if st.session_state.index_inferior < len(st.session_state.inferiores) - 1 and st.button("Siguiente", key=f"siguiente_inf_{st.session_state.index_inferior}"):
+                    st.session_state.index_inferior += 1
+                    st.rerun()
 
-    # Botones de navegación adicional
+    # Botones de navegación
     st.markdown("---")
     col1, col2 = st.columns([1, 1])
     with col1:
@@ -609,3 +573,113 @@ elif st.session_state.page == 5:
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
             st.rerun()
+
+
+
+
+
+# elif st.session_state.page == 5:
+#     st.subheader("Prendas recomendadas")
+
+#     # Asegurar que el presupuesto es un rango
+#     presupuesto_superior = st.session_state.presupuesto_superior
+#     presupuesto_inferior = st.session_state.presupuesto_inferior
+
+#     if isinstance(presupuesto_superior, (int, float)):
+#         presupuesto_superior = [0, presupuesto_superior]  # Establecer un mínimo de 0
+#     if isinstance(presupuesto_inferior, (int, float)):
+#         presupuesto_inferior = [0, presupuesto_inferior]
+
+#     # Mostrar parte superior
+#     if 'superiores' in st.session_state and not st.session_state.superiores.empty:
+#         sup_idx = st.session_state.index_superior
+#         if sup_idx >= len(st.session_state.superiores):
+#             sup_idx = len(st.session_state.superiores) - 1  # Ajustar al último índice válido
+#         elif sup_idx < 0:
+#             sup_idx = 0  # Evitar valores negativos
+
+#         if len(st.session_state.superiores) > 0:
+#             superior = st.session_state.superiores.iloc[sup_idx]
+#             similitud_umbral=0
+#             if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
+#                 col1, col2 = st.columns([1, 2])
+#                 with col1:
+#                     st.image(superior['image_url'] if isinstance(superior['image_url'], str) else 'No tiene foto', width=200)
+#                 with col2:
+#                     st.write("Parte Superior")
+#                     st.write(f"**Nombre:** {superior['product_name']}")
+#                     st.write(f"**Match:** {superior['similaridad']}")
+#                     st.write(f"**Precio:** {superior['current_price']}€")
+#                     st.write(f"**Color:** {superior['color_homogeneizado']}")
+#                     st.write(f"[Ver producto]({superior['url']})")
+
+#                     navigation_col1, navigation_col2 = st.columns([1, 1])
+#                     with navigation_col1:
+#                         if st.session_state.index_superior > 0:
+#                             if st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
+#                                 st.session_state.index_superior -= 1
+#                                 st.rerun()
+#                     with navigation_col2:
+#                         if st.session_state.index_superior < len(st.session_state.superiores) - 1:
+#                             if st.button("Siguiente", key=f"siguiente_sup_{st.session_state.index_superior}"):
+#                                 st.session_state.index_superior += 1
+#                                 st.rerun()
+#             else:
+#                 st.warning("No hay opciones de parte superior dentro del presupuesto.")
+#         else:
+#             st.warning("No se encontraron prendas recomendadas para la parte superior.")
+#     else:
+#         st.warning("No se encontraron prendas recomendadas para la parte superior.")
+
+#     # Mostrar parte inferior
+#     if 'inferiores' in st.session_state and not st.session_state.inferiores.empty:
+#         inf_idx = st.session_state.index_inferior
+#         if inf_idx >= len(st.session_state.inferiores):
+#             inf_idx = len(st.session_state.inferiores) - 1
+#         elif inf_idx < 0:
+#             inf_idx = 0
+
+#         if len(st.session_state.inferiores) > 0:
+#             inferior = st.session_state.inferiores.iloc[inf_idx]
+#             if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
+#                 col1, col2 = st.columns([1, 2])
+#                 with col1:
+#                     st.image(inferior['image_url'] if isinstance(inferior['image_url'], str) else 'No tiene foto', width=200)
+#                 with col2:
+#                     st.write("Parte Inferior")
+#                     st.write(f"**Nombre:** {inferior['product_name']}")
+#                     st.write(f"**Match:** {inferior['similaridad']}")
+#                     st.write(f"**Precio:** {inferior['current_price']}€")
+#                     st.write(f"**Color:** {inferior['color_homogeneizado']}")
+#                     st.write(f"[Ver producto]({inferior['url']})")
+
+#                     navigation_col1, navigation_col2 = st.columns([1, 1])
+#                     with navigation_col1:
+#                         if st.session_state.index_inferior > 0:
+#                             if st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
+#                                 st.session_state.index_inferior -= 1
+#                                 st.rerun()
+#                     with navigation_col2:
+#                         if st.session_state.index_inferior < len(st.session_state.inferiores) - 1:
+#                             if st.button("Siguiente", key=f"siguiente_inf_{st.session_state.index_inferior}"):
+#                                 st.session_state.index_inferior += 1
+#                                 st.rerun()
+#             else:
+#                 st.warning("No hay opciones de parte inferior dentro del presupuesto.")
+#         else:
+#             st.warning("No se encontraron prendas recomendadas para la parte inferior.")
+#     else:
+#         st.warning("No se encontraron prendas recomendadas para la parte inferior.")
+
+#     # Botones de navegación adicional
+#     st.markdown("---")
+#     col1, col2 = st.columns([1, 1])
+#     with col1:
+#         if st.button("Volver a la página anterior"):
+#             st.session_state.page = 4
+#             st.rerun()
+#     with col2:
+#         if st.button("Reiniciar recomendador"):
+#             for key in list(st.session_state.keys()):
+#                 del st.session_state[key]
+#             st.rerun()
