@@ -299,7 +299,7 @@ if st.session_state.page == 3:
     # Crear un desplegable multiselección para los colores superiores
     seleccionados_superior = st.multiselect(
         "Selecciona los colores para la parte superior:",
-        opciones=colores_superior,
+        options=colores_superior,
         default=st.session_state.colores_superior
     )
 
