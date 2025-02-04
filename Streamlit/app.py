@@ -10,7 +10,7 @@ from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
 import os
 import certifi
-load_dotenv(dotenv_path="../src/.env")
+# load_dotenv(dotenv_path="../src/.env")
 
 mongo_uri = os.getenv("MONGO_URI")
 if not mongo_uri:
