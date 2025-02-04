@@ -163,15 +163,14 @@ st.markdown(
 
 # Mostrar logo
 
+# Centrar el título
+st.markdown("<h3 style='text-align: center;'>Estylizer</h3>", unsafe_allow_html=True)
 
-st.markdown(
-    """
-    <div style="display: flex; justify-content: center;">
-        <img src="./src/Logo Estylizer 2.png" width="250">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# Crear tres columnas y centrar la imagen
+col1, col2, col3 = st.columns([1, 2, 1])  # La columna del centro es la más ancha
+with col2:  # Mostrar la imagen en la columna del centro
+    st.image("./src/Logo Estylizer 2.png", width=250)
+
 
 # st.markdown("<div style='display: flex; justify-content: center;'><img src='./src/Logo Estylizer 2.png' width='250'></div>", unsafe_allow_html=True)
 # st.image("./src/Logo Estylizer 2.png", width=250, use_container_width=False)
