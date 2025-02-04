@@ -4,9 +4,6 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import random
-from pandas import json_normalize
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 import sys
 # Añadimos la carpeta que contiene nuestro .py al path de Python
 sys.path.append("./src/")
@@ -85,11 +82,6 @@ nombre_coleccion1="modelos_pull_hombre_pruebas"
 nombre_coleccion2="productos_pull_hombre_pruebas"
 modelos_tageados = sm.importar_a_dataframe(bd, nombre_coleccion1)
 productos_tageados = sm.importar_a_dataframe(bd, nombre_coleccion2)
-
-# # # Cargar datos de modelo_tags con imágenes
-# modelos_tageados =pd.read_csv('./results/Streamlit/updated_Modelos_entero_sin_filtro_with_tags.csv',sep=";", encoding="utf-8")
-# productos_tageados = pd.read_csv("./results/Streamlit/updated_all_products_info_with_text.csv")
-
 productos_tageados['current_price'] = pd.to_numeric(productos_tageados['current_price'], errors='coerce')
 
 # Variables para el estado

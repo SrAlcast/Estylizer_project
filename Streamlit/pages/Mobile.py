@@ -4,17 +4,10 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import random
-from pandas import json_normalize
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-from dotenv import load_dotenv
-import os
-import certifi
-# # load_dotenv(dotenv_path="../src/.env")
-
-# mongo_uri = os.getenv("MONGO_URI")
-# if not mongo_uri:
-#     raise ValueError("uri no está definido en las variables de entorno")
+import sys
+# Añadimos la carpeta que contiene nuestro .py al path de Python
+sys.path.append("./src/")
+import support_mongo as sm
 
 def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_superior, tags_rechazados_general, tags_rechazados_superior, tipos_superior, colores_superior, presupuesto_superior_min, presupuesto_superior_max):
     
@@ -82,64 +75,14 @@ def recomendador_inferior(productos, tags_aceptados_general, tags_aceptados_infe
     inferiores = inferiores.sort_values(by=['similaridad', 'current_price'], ascending=[False, True])
     
     return inferiores
-def conectar_a_mongo(nombre_bd: str):
-    """
-    Conecta a una base de datos en MongoDB Atlas y devuelve el objeto de la base de datos.
 
-    Args:
-        nombre_bd (str): Nombre de la base de datos a la que se desea conectar.
-
-    Returns:
-        pymongo.database.Database: Objeto de la base de datos MongoDB.
-    """
-    cliente = MongoClient(mongo_uri, tlsCAFile=certifi.where())
-    return cliente[nombre_bd]
-
-def importar_a_dataframe(bd, nombre_coleccion):
-    """
-    Importa una colección de MongoDB a un DataFrame de pandas, manteniendo los nombres originales de las columnas 
-    y eliminando las columnas '_id', 'type', y 'id'.
-
-    Args:
-        bd (pymongo.database.Database): Objeto de la base de datos MongoDB.
-        nombre_coleccion (str): Nombre de la colección en MongoDB que se desea importar.
-
-    Returns:
-        pd.DataFrame: DataFrame con los datos de la colección, con las columnas específicas eliminadas.
-    """
-    coleccion = bd[nombre_coleccion]
-    documentos = list(coleccion.find())
-
-    if documentos:
-        # Convertir documentos a DataFrame
-        df = json_normalize(documentos, sep="_")
-        
-        # Eliminar las columnas '_id', 'type' y 'id' si existen
-        columnas_a_eliminar = ["_id", "type", "id"]
-        df = df.drop(columns=[col for col in columnas_a_eliminar if col in df.columns])
-        
-        return df
-    else:
-        print(f"La colección '{nombre_coleccion}' está vacía o no existe.")
-        return pd.DataFrame()
-
-# # Importar datos bbdd
-# bd=conectar_a_mongo("PullnBearData")
-# nombre_coleccion1="modelos_pull_hombre_pruebas"
-# nombre_coleccion2="productos_pull_hombre_pruebas"
-# modelos_tageados = importar_a_dataframe(bd, nombre_coleccion1)
-# productos_tageados = importar_a_dataframe(bd, nombre_coleccion2)
-
-# # Cargar datos de modelo_tags con imágenes
-modelos_tageados =pd.read_csv('./results/Streamlit/updated_Modelos_entero_sin_filtro_with_tags.csv',sep=";", encoding="utf-8")
-productos_tageados = pd.read_csv("./results/Streamlit/updated_all_products_info_with_text.csv")
-
+# Importar datos bbdd
+bd=sm.conectar_a_mongo("PullnBearData")
+nombre_coleccion1="modelos_pull_hombre_pruebas"
+nombre_coleccion2="productos_pull_hombre_pruebas"
+modelos_tageados = sm.importar_a_dataframe(bd, nombre_coleccion1)
+productos_tageados = sm.importar_a_dataframe(bd, nombre_coleccion2)
 productos_tageados['current_price'] = pd.to_numeric(productos_tageados['current_price'], errors='coerce')
-
-# Ruta relativa desde el script de ejecución
-image_path = Path("./src/Logo Estylizer 2.png")
-
-
 
 # Variables para el estado
 if 'aceptados_general' not in st.session_state:
@@ -212,7 +155,12 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 # Verifica si la imagen existe antes de mostrarla
+
+# Ruta relativa desde el script de ejecución
+image_path = Path("./src/Logo Estylizer 2.png")
+
 if image_path.exists():
     # Usar columnas para centrar la imagen
     col1, col2, col3 = st.columns([1, 2, 1], gap="large")  # Centra la imagen
@@ -220,7 +168,6 @@ if image_path.exists():
         st.markdown('<div class="stColumn">', unsafe_allow_html=True)
         st.image(str(image_path), width=300)  # Convertir a str y reducir tamaño
         st.markdown('</div>', unsafe_allow_html=True)
-
 else:
     st.error("La imagen no se encontró.")
     
@@ -228,16 +175,18 @@ else:
 if st.session_state.page == 1:
     if st.session_state.modelo_tags_index < 8:
         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
-        st.markdown('<div class="stColumn">', unsafe_allow_html=True)
-        st.image(modelo_tags['image1_url'])
-        st.markdown('</div>', unsafe_allow_html=True)
+
         # Centrar la imagen
-        col1, col2 = st.columns([1, 1], gap="large")
+        col1, col2, col3 = st.columns([1, 2, 1], gap="large")
         with col1:
             st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
             dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
             st.markdown('</div>', unsafe_allow_html=True)
         with col2:
+            st.markdown('<div class="stColumn">', unsafe_allow_html=True)
+            st.image(modelo_tags['image1_url'])
+            st.markdown('</div>', unsafe_allow_html=True)
+        with col3:
             st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
             like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
             st.markdown('</div>', unsafe_allow_html=True)
