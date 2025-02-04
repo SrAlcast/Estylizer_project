@@ -1,8 +1,10 @@
 import streamlit as st
 from user_agents import parse
 
-# Obtener el User-Agent del navegador
-user_agent = st.experimental_get_query_params().get("user-agent", [""])[0]
+# Obtener el User-Agent correctamente con la nueva API
+query_params = st.query_params
+user_agent = query_params.get("user-agent", [""])[0] if query_params else ""
+
 ua = parse(user_agent)
 
 # Detectar si es móvil o escritorio
