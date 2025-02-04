@@ -534,7 +534,7 @@ if st.session_state.page == 5:
         
         prenda_sup, sup_idx = obtener_prenda(st.session_state.superiores, st.session_state.index_superior, presupuesto_superior, 0)
         
-        if prenda_sup:
+        if prenda_sup is not None:
             with col_center:
                 st.markdown(f"""
                     <div style="text-align:center;">
@@ -570,7 +570,7 @@ if st.session_state.page == 5:
         
         prenda_inf, inf_idx = obtener_prenda(st.session_state.inferiores, st.session_state.index_inferior, presupuesto_inferior, 0)
         
-        if prenda_inf:
+        if prenda_inf is not None:
             with col_center:
                 st.markdown(f"""
                     <div style="text-align:center;">
