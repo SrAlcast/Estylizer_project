@@ -126,27 +126,27 @@ def resetear_estado():
         del st.session_state[key]
 
 # Centrar contenido y personalizar modelo_tagss
-# st.markdown(
-#     """
-#     <style>
-#     @media screen and (max-width: 768px) {
-#         .block-container {
-#             padding: 0.5rem !important;
-#         }
-#         .stButton > button {
-#             width: 100% !important;
-#             font-size: 16px !important;
-#             padding: 10px !important;
-#         }
-#         .stImage img {
-#             max-width: 100% !important;
-#             height: auto !important;
-#         }
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
+st.markdown(
+    """
+    <style>
+    @media screen and (max-width: 768px) {
+        .block-container {
+            padding: 0.5rem !important;
+        }
+        .stButton > button {
+            width: 100% !important;
+            font-size: 16px !important;
+            padding: 10px !important;
+        }
+        .stImage img {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Ruta relativa desde el script de ejecución
     # Usar columnas para centrar la imagen
