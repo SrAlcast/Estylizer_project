@@ -527,13 +527,8 @@ elif st.session_state.page == 5:
         similitud_umbral = 0
         if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
             with col_center:
-                        st.markdown(f"""
-        <div class='image-container'>
-            <img src="{superior['image_url']}" style="max-width: 200px;">
-        </div>
-        """, unsafe_allow_html=True)
-                # st.image(superior['image_url'] if isinstance(superior['image_url'], str) else 'No tiene foto', width=250)
-                # st.markdown(f'<a href="{superior["url"]}" target="_blank"><button style="background-color:#007bff; color:white; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button></a>', unsafe_allow_html=True)
+                st.markdown(f"""<div class='image-container'><img src="{superior['image_url']}" style="max-width: 200px;"></div>""", unsafe_allow_html=True)
+                st.markdown(f'<a href="{superior["url"]}" target="_blank"><button style="background-color:#007bff; color:white; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">Ir a la tienda</button></a>', unsafe_allow_html=True)
 
             nav1, nav2 = st.columns([1, 1])
             with nav1:
