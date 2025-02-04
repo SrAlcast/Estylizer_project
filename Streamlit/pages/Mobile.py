@@ -179,12 +179,14 @@ def resetear_estado():
 #         like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
 #         st.markdown("</div>", unsafe_allow_html=True)
 
+
+# CSS para centrar la imagen completamente
 st.markdown(
     """
     <style>
     .block-container {
         padding-top: 2rem !important;
-        margin:auto;
+        margin: auto;
     }
     .stButton > button {
         width: 100%;
@@ -204,11 +206,15 @@ st.markdown(
         width: 100%;
         flex-direction: column;
     }
-    .centered-image {
-        display: block;
-        margin: auto;
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
-        max-width: 260px; /* Ajuste de tamaño */
+    }
+    .image-container img {
+        max-width: 100%;
+        height: auto;
         border-radius: 10px;
     }
     </style>
@@ -226,18 +232,18 @@ if st.session_state.page == 1:
     if st.session_state.modelo_tags_index < 8:
         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
 
-        # Centrar imagen con markdown
+        # Forzar el centrado de la imagen con un contenedor flexbox
         st.markdown(f"""
-        <div class='centered-container'>
-            <img class='centered-image' src="{modelo_tags['image1_url']}" />
+        <div class='image-container'>
+            <img src="{modelo_tags['image1_url']}" style="max-width: 260px;">
         </div>
         """, unsafe_allow_html=True)
 
-        # Centrar los botones
-        st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
-        dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
-        like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
-        st.markdown("</div>", unsafe_allow_html=True)
+        # Centrar los botones usando columnas
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
+            like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
 
 
         # Acciones de los botones con animación
