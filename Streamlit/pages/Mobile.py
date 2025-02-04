@@ -144,8 +144,10 @@ st.markdown(
         font-size: 16px;
     }
     .stImage img {
+        margin:auto
         max-width: 80%;
         border-radius: 10px;
+        ali
     }
     .title-text {
         text-align: center;
