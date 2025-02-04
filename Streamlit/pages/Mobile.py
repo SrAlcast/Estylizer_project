@@ -485,7 +485,7 @@ if st.session_state.page == 5:
             with col_center:
                 st.markdown(f"""
                     <div style='display: flex; justify-content: center; align-items: center;'>
-                        <img src="{superior['image_url']}" style="width: 250px; height: 250px; object-fit: cover; border-radius: 10px;">
+                        <img src="{superior['image_url']}" style="width: 250px; height: 300px; object-fit: cover; border-radius: 10px;">
                     </div>
                 """, unsafe_allow_html=True)
 
@@ -526,7 +526,7 @@ if st.session_state.page == 5:
             with col_center:
                 st.markdown(f"""
                     <div style='display: flex; justify-content: center; align-items: center;'>
-                        <img src="{inferior['image_url']}" style="width: 250px; height: 250px; object-fit: cover; border-radius: 10px;">
+                        <img src="{inferior['image_url']}" style="width: 250px; height: 300px; object-fit: cover; border-radius: 10px;">
                     </div>
                 """, unsafe_allow_html=True)
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{inferior['product_name']} - {inferior['current_price']}€</p>", unsafe_allow_html=True)
