@@ -164,29 +164,10 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
-
-st.markdown(
-    """
-    <style>
-    .centered-image img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-st.markdown('<div class="centered-image">', unsafe_allow_html=True)
-st.image("./src/Logo Estylizer 2.png", width=200)
-st.markdown('</div>', unsafe_allow_html=True)
-
-# # Mostrar logo centrado
-# col1, col2, col3 = st.columns([1, 2, 1])  # Centrar imagen en la columna central
-# with col2:
-#     st.image("./src/Logo Estylizer 2.png", width=200)
+# Mostrar logo centrado
+col1, col2, col3 = st.columns([1, 2, 1])  # Centrar imagen en la columna central
+with col2:
+    st.image("./src/Logo Estylizer 2.png", width=200)
 
 # Página 1: Selección de modelo_tags
 if st.session_state.page == 1:
