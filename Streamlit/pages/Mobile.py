@@ -173,7 +173,9 @@ with col2:
 if st.session_state.page == 1:
     if st.session_state.modelo_tags_index < 8:
         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
-        st.image(modelo_tags['image1_url'], width=260) 
+        col1, col2, col3 = st.columns([1, 2, 1])  # Centrar imagen en la columna central
+        with col2:
+            st.image(modelo_tags['image1_url'], width=260) 
         st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
         dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
         like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
