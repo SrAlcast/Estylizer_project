@@ -137,7 +137,7 @@ productos_tageados = pd.read_csv("./results/Streamlit/updated_all_products_info_
 productos_tageados['current_price'] = pd.to_numeric(productos_tageados['current_price'], errors='coerce')
 
 # Ruta relativa desde el script de ejecución
-image_path = Path("../src/Logo Estylizer 2.png")
+image_path = Path("./src/Logo Estylizer 2.png")
 
 
 
@@ -265,7 +265,7 @@ if st.session_state.page == 1:
                 st.session_state.aceptados_inferior.append(tags_aceptados_inferior)
 
             st.session_state.modelo_tags_index += 1
-            st.experimental_rerun()
+            st.rerun()
 
         # Barra de progreso con numeración
         progreso = (st.session_state.modelo_tags_index + 1) / 8
@@ -290,7 +290,7 @@ if st.session_state.page == 1:
                 if st.button("✅ Sí, resetear"):
                     st.session_state.confirm_reset = False  # Resetear el estado de confirmación
                     resetear_estado()  # Llamar la función de reseteo
-                    st.experimental_rerun()
+                    st.rerun()
             
             with col2:
                 if st.button("❌ No, cancelar"):
@@ -298,7 +298,7 @@ if st.session_state.page == 1:
     else:
         st.success("¡Has terminado de seleccionar estilos!")
         st.session_state.page = 2
-        st.experimental_rerun()
+        st.rerun()
 
 
 # Página 2: Selección de tipo de parte superior
@@ -319,7 +319,7 @@ if st.session_state.page == 2:
     if col_select_all.button("Seleccionar Todo" if not st.session_state.select_all else "Deseleccionar Todo"):
         st.session_state.select_all = not st.session_state.select_all
         toggle_select_all()
-        st.experimental_rerun()
+        st.rerun()
 
     # Crear dos filas de botones con más espacio
     col1, col2, col3 = st.columns([1.5, 1.5, 1.5])
@@ -332,11 +332,11 @@ if st.session_state.page == 2:
         if tipo in st.session_state.tipos_superior:
             if col.button(f"✅ {tipo}", key=f"tipo_{tipo}"):
                 st.session_state.tipos_superior.remove(tipo)
-                st.experimental_rerun()
+                st.rerun()
         else:
             if col.button(tipo, key=f"tipo_{tipo}"):
                 st.session_state.tipos_superior.append(tipo)
-                st.experimental_rerun()
+                st.rerun()
 
     # Botones de navegación
     nav_col1, nav_col2 = st.columns([1.5, 1.5])
@@ -344,12 +344,12 @@ if st.session_state.page == 2:
         if st.button("Volver"):
             resetear_estado()
             st.session_state.page = 1
-            st.experimental_rerun()
+            st.rerun()
     with nav_col2:
         if st.button("Siguiente"):
             if st.session_state.tipos_superior:
                 st.session_state.page = 3
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.warning("Por favor, selecciona al menos un tipo de prenda.")
 
@@ -372,7 +372,7 @@ elif st.session_state.page == 3:
             st.session_state.colores_superior = []
         else:
             st.session_state.colores_superior = list(colores_superior)
-        st.experimental_rerun()
+        st.rerun()
 
     cols_sup = st.columns(5)
     for i, color in enumerate(colores_superior):
@@ -380,11 +380,11 @@ elif st.session_state.page == 3:
         if color in st.session_state.colores_superior:
             if col.button(f"✅ {color}", key=f"color_sup_selected_{color}"):
                 st.session_state.colores_superior.remove(color)
-                st.experimental_rerun()
+                st.rerun()
         else:
             if col.button(color, key=f"color_sup_{color}"):
                 st.session_state.colores_superior.append(color)
-                st.experimental_rerun()
+                st.rerun()
 
     # Para la parte inferior
     st.write("Colores para la parte inferior:")
@@ -397,7 +397,7 @@ elif st.session_state.page == 3:
             st.session_state.colores_inferior = []
         else:
             st.session_state.colores_inferior = list(colores_inferior)
-        st.experimental_rerun()
+        st.rerun()
 
     cols_inf = st.columns(5)
     for i, color in enumerate(colores_inferior):
@@ -405,23 +405,23 @@ elif st.session_state.page == 3:
         if color in st.session_state.colores_inferior:
             if col.button(f"✅ {color}", key=f"color_inf_selected_{color}"):
                 st.session_state.colores_inferior.remove(color)
-                st.experimental_rerun()
+                st.rerun()
         else:
             if col.button(color, key=f"color_inf_{color}"):
                 st.session_state.colores_inferior.append(color)
-                st.experimental_rerun()
+                st.rerun()
 
     # Navegación entre páginas
     col1, col2 = st.columns([1, 1])
     with col1:
         if st.button("Volver", key="volver"):
             st.session_state.page = 2
-            st.experimental_rerun()
+            st.rerun()
     with col2:
         if st.button("Siguiente", key="siguiente"):
             if st.session_state.colores_superior and st.session_state.colores_inferior:
                 st.session_state.page = 4
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.warning("Por favor, selecciona al menos un color para cada parte.")
 
@@ -471,7 +471,7 @@ elif st.session_state.page == 4:
     with col1:
         if st.button("Volver"):
             st.session_state.page = 3
-            st.experimental_rerun()
+            st.rerun()
     with col2:
         if st.button("Recomendar"):
             tags_aceptados_usuario_general = list(tag for sublist in st.session_state.aceptados_general for tag in sublist)
@@ -506,7 +506,7 @@ elif st.session_state.page == 4:
             st.session_state.index_superior = 0  # Reiniciar índice superior
             st.session_state.index_inferior = 0  # Reiniciar índice inferior
             st.session_state.page = 5
-            st.experimental_rerun()
+            st.rerun()
 
 # Página 5: Mostrar recomendaciones
 elif st.session_state.page == 5:
@@ -549,12 +549,12 @@ elif st.session_state.page == 5:
                         if st.session_state.index_superior > 0:
                             if st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
                                 st.session_state.index_superior -= 1
-                                st.experimental_rerun()
+                                st.rerun()
                     with navigation_col2:
                         if st.session_state.index_superior < len(st.session_state.superiores) - 1:
                             if st.button("Siguiente", key=f"siguiente_sup_{st.session_state.index_superior}"):
                                 st.session_state.index_superior += 1
-                                st.experimental_rerun()
+                                st.rerun()
             else:
                 st.warning("No hay opciones de parte superior dentro del presupuesto.")
         else:
@@ -589,12 +589,12 @@ elif st.session_state.page == 5:
                         if st.session_state.index_inferior > 0:
                             if st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
                                 st.session_state.index_inferior -= 1
-                                st.experimental_rerun()
+                                st.rerun()
                     with navigation_col2:
                         if st.session_state.index_inferior < len(st.session_state.inferiores) - 1:
                             if st.button("Siguiente", key=f"siguiente_inf_{st.session_state.index_inferior}"):
                                 st.session_state.index_inferior += 1
-                                st.experimental_rerun()
+                                st.rerun()
             else:
                 st.warning("No hay opciones de parte inferior dentro del presupuesto.")
         else:
@@ -608,9 +608,9 @@ elif st.session_state.page == 5:
     with col1:
         if st.button("Volver a la página anterior"):
             st.session_state.page = 4
-            st.experimental_rerun()
+            st.rerun()
     with col2:
         if st.button("Reiniciar recomendador"):
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
-            st.experimental_rerun()
+            st.rerun()
