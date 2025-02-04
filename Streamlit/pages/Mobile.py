@@ -9,6 +9,8 @@ import sys
 sys.path.append("./src/")
 import support_mongo as sm
 
+st.set_page_config(page_title="Estylizer - Recomendaciones", layout="centered")
+
 def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_superior, tags_rechazados_general, tags_rechazados_superior, tipos_superior, colores_superior, presupuesto_superior_min, presupuesto_superior_max):
     
     # Unir los tags en una sola columna para cada producto
@@ -125,44 +127,54 @@ def resetear_estado():
     for key in st.session_state.keys():
         del st.session_state[key]
 
-# Centrar contenido y personalizar modelo_tagss
+# Estilos CSS personalizados
 st.markdown(
     """
     <style>
-    @media screen and (max-width: 768px) {
-        .block-container {
-            padding: 0.1rem !important;
-        }
-        .stButton > button {
-            width: 100% !important;
-            font-size: 16px !important;
-            padding: 10px !important;
-        }
-        .stImage img {
-            max-width: 100% !important;
-            height: auto !important;
-        }
+    .block-container {
+        padding-top: 2rem !important;
+    }
+    .stButton > button {
+        width: 100%;
+        border-radius: 10px;
+        background-color: #ff5733;
+        color: white;
+        font-size: 16px;
+    }
+    .stButton > button:hover {
+        background-color: #c70039;
+    }
+    .stImage img {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+    .title-text {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #ff5733;
     }
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
-# Ruta relativa desde el script de ejecución
-    # Usar columnas para centrar la imagen
-col1, col2, col3 = st.columns([1, 2, 1], gap="large")  # Centra la imagen
-with col2:
-    st.markdown('<div class="stColumn">', unsafe_allow_html=True)
-    st.image(str("./src/Logo Estylizer 2.png"), width=300)  # Convertir a str y reducir tamaño
-    st.markdown('</div>', unsafe_allow_html=True)
+# Mostrar logo
+st.image("./src/Logo Estylizer 2.png", width=250)
     
 # Página 1: Selección de modelo_tagss
 if st.session_state.page == 1:
     if st.session_state.modelo_tags_index < 8:
         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
+        st.markdown('<div class="stColumn">', unsafe_allow_html=True)
         st.image(modelo_tags['image1_url'])
+        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
         dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
+        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
         like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
+        st.markdown('</div>', unsafe_allow_html=True)
 
         # Acciones de los botones con animación
         if dislike_pressed or like_pressed:
