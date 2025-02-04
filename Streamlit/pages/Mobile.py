@@ -542,12 +542,11 @@ elif st.session_state.page == 5:
             
             if all(col in superior.index for col in ['product_name', 'current_price', 'similaridad', 'image_url', 'url']) and superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
                 with col_center:
-                    st.markdown(f"**{superior['product_name']} - {superior['current_price']}€**")
                     st.markdown(f"""
                         <div style="text-align:center;">
                             <img src="{superior['image_url']}" style="width:250px; height:250px; object-fit:cover; border-radius:5px;">
                         </div>""", unsafe_allow_html=True)
-                    
+                    st.markdown(f"**{superior['product_name']} - {superior['current_price']}€**")
                     st.markdown(f"""
                         <div style="text-align:center; margin-top:10px;">
                             <a href="{superior['url']}" target="_blank">
@@ -578,12 +577,11 @@ elif st.session_state.page == 5:
             
             if all(col in inferior.index for col in ['product_name', 'current_price', 'similaridad', 'image_url', 'url']) and inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
                 with col_center:
-                    st.markdown(f"**{inferior['product_name']} - {inferior['current_price']}€**")
                     st.markdown(f"""
                         <div style="text-align:center;">
                             <img src="{inferior['image_url']}" style="width:250px; height:250px; object-fit:cover; border-radius:5px;">
                         </div>""", unsafe_allow_html=True)
-                    
+                    st.markdown(f"**{inferior['product_name']} - {inferior['current_price']}€**")
                     st.markdown(f"""
                         <div style="text-align:center; margin-top:10px;">
                             <a href="{inferior['url']}" target="_blank">
