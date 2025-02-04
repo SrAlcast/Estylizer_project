@@ -171,17 +171,12 @@ if st.session_state.page == 1:
         st.markdown('<div class="stColumn">', unsafe_allow_html=True)
         st.image(modelo_tags['image1_url'])
         st.markdown('</div>', unsafe_allow_html=True)
-        # Centrar la imagen
-        col1, col2 = st.columns([1, 1], gap="large")
-        with col1:
-            st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
-            dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
-            st.markdown('</div>', unsafe_allow_html=True)
-        with col2:
-            st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
-            like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
-            st.markdown('</div>', unsafe_allow_html=True)
-
+        st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
+        dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
+        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
+        like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
+        st.markdown('</div>', unsafe_allow_html=True)
 
         # Acciones de los botones con animación
         if dislike_pressed or like_pressed:
