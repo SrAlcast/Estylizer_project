@@ -147,7 +147,7 @@ st.markdown(
     }
     .stImage img {
         margin:auto;
-        max-width: 80%;
+        max-width: 40%;
         border-radius: 10px;
     }
     .title-text {
