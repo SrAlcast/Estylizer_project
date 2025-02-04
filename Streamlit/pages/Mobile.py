@@ -131,54 +131,6 @@ def resetear_estado():
     for key in st.session_state.keys():
         del st.session_state[key]
 
-# Estilos CSS personalizados
-# st.markdown(
-#     """
-#     <style>
-#     .block-container {
-#         padding-top: 2rem !important;
-#         margin:auto;
-#     }
-#     .stButton > button {
-#         width: 100%;
-#         border-radius: 10px;
-#         font-size: 16px;
-#     }
-#     .stImage img {
-#         margin:auto;
-#         max-width: 40%;
-#         border-radius: 10px;
-#     }
-#     .title-text {
-#         text-align: center;
-#         font-size: 28px;
-#         font-weight: bold;
-#         color: #ff5733;
-#     }
-#     .centered-container {
-#         display: flex;
-#         justify-content: center;
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True,
-# )
-
-# # Mostrar logo centrado
-# col1, col2, col3 = st.columns([1, 2, 1])  # Centrar imagen en la columna central
-# with col2:
-#     st.image("./src/Logo Estylizer 2.png", width=200)
-
-# # Página 1: Selección de modelo_tags
-# if st.session_state.page == 1:
-#     if st.session_state.modelo_tags_index < 8:
-#         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
-#         st.image(modelo_tags['image1_url'], width=260)
-#         st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
-#         dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
-#         like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
-#         st.markdown("</div>", unsafe_allow_html=True)
-
 
 # CSS para centrar la imagen completamente
 st.markdown(
@@ -530,21 +482,26 @@ if st.session_state.page == 5:
         superior = st.session_state.superiores.iloc[sup_idx]
         if superior['similaridad'] >= 0 and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
             with col_center:
-                st.image(superior['image_url'], width=250)
+                st.markdown(f"""
+                <div class='image-container'>
+                    <img src="{superior['image_url']}" style="max-width: 200px;">
+                </div>
+                """, unsafe_allow_html=True)
                 st.markdown(f"**{superior['product_name']} - {superior['current_price']}€**")
                 st.markdown(f"[Ver producto]({superior['url']})")
                 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
+                    if sup_idx < len(st.session_state.superiores) - 1:
+                        if st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}"):
+                            st.session_state.index_superior += 1
+                            st.rerun()
+                with nav2:
                     if sup_idx > 0:
                         if st.button("Prenda anterior", key=f"anterior_sup_{sup_idx}"):
                             st.session_state.index_superior -= 1
                             st.rerun()
-                with nav2:
-                    if sup_idx < len(st.session_state.superiores) - 1:
-                        if st.button("Siguiente", key=f"siguiente_sup_{sup_idx}"):
-                            st.session_state.index_superior += 1
-                            st.rerun()
+
         else:
             st.warning("No hay opciones de parte superior dentro del presupuesto.")
     else:
@@ -563,21 +520,26 @@ if st.session_state.page == 5:
         inferior = st.session_state.inferiores.iloc[inf_idx]
         if inferior['similaridad'] >= 0 and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
             with col_center:
-                st.image(inferior['image_url'], width=250)
+                st.markdown(f"""
+                <div class='image-container'>
+                    <img src="{inferior['image_url']}" style="max-width: 200px;">
+                </div>
+                """, unsafe_allow_html=True)
                 st.markdown(f"**{inferior['product_name']} - {inferior['current_price']}€**")
                 st.markdown(f"[Ver producto]({inferior['url']})")
                 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
+                    if inf_idx < len(st.session_state.inferiores) - 1:
+                        if st.button("Siguiente prenda", key=f"siguiente_inf_{inf_idx}"):
+                            st.session_state.index_inferior += 1
+                            st.rerun()
+                with nav2:
                     if inf_idx > 0:
                         if st.button("Prenda anterior", key=f"anterior_inf_{inf_idx}"):
                             st.session_state.index_inferior -= 1
                             st.rerun()
-                with nav2:
-                    if inf_idx < len(st.session_state.inferiores) - 1:
-                        if st.button("Siguiente", key=f"siguiente_inf_{inf_idx}"):
-                            st.session_state.index_inferior += 1
-                            st.rerun()
+
         else:
             st.warning("No hay opciones de parte inferior dentro del presupuesto.")
     else:
