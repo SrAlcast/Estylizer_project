@@ -535,14 +535,14 @@ elif st.session_state.page == 5:
                 # Botones de navegación debajo de la prenda
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
-                    if st.session_state.index_superior > 0:
-                        if st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
-                            st.session_state.index_superior -= 1
-                            st.rerun()
-                with nav2:
                     if st.session_state.index_superior < len(st.session_state.superiores) - 1:
                         if st.button("Siguiente", key=f"siguiente_sup_{st.session_state.index_superior}"):
                             st.session_state.index_superior += 1
+                            st.rerun()
+                with nav2:
+                    if st.session_state.index_superior > 0:
+                        if st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
+                            st.session_state.index_superior -= 1
                             st.rerun()
 
     # Mostrar parte inferior
@@ -562,14 +562,14 @@ elif st.session_state.page == 5:
                 # Botones de navegación debajo de la prenda
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
-                    if st.session_state.index_inferior > 0:
-                        if st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
-                            st.session_state.index_inferior -= 1
-                            st.rerun()
-                with nav2:
                     if st.session_state.index_inferior < len(st.session_state.inferiores) - 1:
                         if st.button("Siguiente", key=f"siguiente_inf_{st.session_state.index_inferior}"):
                             st.session_state.index_inferior += 1
+                            st.rerun()
+                with nav2:
+                    if st.session_state.index_inferior > 0:
+                        if st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
+                            st.session_state.index_inferior -= 1
                             st.rerun()
 
     # Botones de navegación
