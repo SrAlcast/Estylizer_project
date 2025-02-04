@@ -552,14 +552,14 @@ if st.session_state.page == 5:
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
-                    if sup_idx < len(st.session_state.superiores) - 1:
+                    if sup_idx is not None and sup_idx < len(st.session_state.superiores) - 1:
                         if st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}"):
-                            st.session_state.index_superior += 1
+                            st.session_state.index_superior = sup_idx + 1
                             st.rerun()
                 with nav2:
-                    if sup_idx > 0:
+                    if sup_idx is not None and sup_idx > 0:
                         if st.button("Prenda anterior", key=f"anterior_sup_{sup_idx}"):
-                            st.session_state.index_superior -= 1
+                            st.session_state.index_superior = sup_idx - 1
                             st.rerun()
         else:
             st.warning("No se encontraron prendas recomendadas para la parte superior.")
@@ -588,14 +588,14 @@ if st.session_state.page == 5:
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
-                    if inf_idx < len(st.session_state.inferiores) - 1:
+                    if inf_idx is not None and inf_idx < len(st.session_state.inferiores) - 1:
                         if st.button("Siguiente prenda", key=f"siguiente_inf_{inf_idx}"):
-                            st.session_state.index_inferior += 1
+                            st.session_state.index_inferior = inf_idx + 1
                             st.rerun()
                 with nav2:
-                    if inf_idx > 0:
+                    if inf_idx is not None and inf_idx > 0:
                         if st.button("Prenda anterior", key=f"anterior_inf_{inf_idx}"):
-                            st.session_state.index_inferior -= 1
+                            st.session_state.index_inferior = inf_idx - 1
                             st.rerun()
         else:
             st.warning("No se encontraron prendas recomendadas para la parte inferior.")
