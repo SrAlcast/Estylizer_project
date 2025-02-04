@@ -519,7 +519,7 @@ if st.session_state.page == 5:
 
     def obtener_prenda(lista, idx, presupuesto, similitud_umbral):
         if lista.empty:
-            return None
+            return None, None
         
         while 0 <= idx < len(lista):
             prenda = lista.iloc[idx]
@@ -552,7 +552,7 @@ if st.session_state.page == 5:
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
-                    if sup_idx is not None and sup_idx < len(st.session_state.superiores) - 1:
+                    if sup_idx is not None and sup_idx + 1 < len(st.session_state.superiores):
                         if st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}"):
                             st.session_state.index_superior = sup_idx + 1
                             st.rerun()
@@ -588,7 +588,7 @@ if st.session_state.page == 5:
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
-                    if inf_idx is not None and inf_idx < len(st.session_state.inferiores) - 1:
+                    if inf_idx is not None and inf_idx + 1 < len(st.session_state.inferiores):
                         if st.button("Siguiente prenda", key=f"siguiente_inf_{inf_idx}"):
                             st.session_state.index_inferior = inf_idx + 1
                             st.rerun()
