@@ -517,6 +517,19 @@ elif st.session_state.page == 5:
 
     col_center = st.columns([1, 2, 1])[1]
 
+    # Función para verificar si hay más prendas que cumplan los filtros
+    def hay_siguiente_prenda(lista, idx, presupuesto, similitud_umbral):
+        for i in range(idx + 1, len(lista)):
+            if lista.iloc[i]['similaridad'] >= similitud_umbral and presupuesto[0] <= lista.iloc[i]['current_price'] <= presupuesto[1]:
+                return True
+        return False
+
+    def hay_anterior_prenda(lista, idx, presupuesto, similitud_umbral):
+        for i in range(idx - 1, -1, -1):
+            if lista.iloc[i]['similaridad'] >= similitud_umbral and presupuesto[0] <= lista.iloc[i]['current_price'] <= presupuesto[1]:
+                return True
+        return False
+
     # Mostrar parte superior
     if 'superiores' in st.session_state and not st.session_state.superiores.empty:
         sup_idx = st.session_state.index_superior
@@ -529,6 +542,7 @@ elif st.session_state.page == 5:
             
             if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
                 with col_center:
+                    st.markdown(f"**{superior['name']} - {superior['current_price']}€**")
                     st.markdown(f"""
                         <div style="text-align:center;">
                             <img src="{superior['image_url']}" style="width:250px; height:250px; object-fit:cover; border-radius:5px;">
@@ -545,17 +559,9 @@ elif st.session_state.page == 5:
 
                     nav1, nav2 = st.columns([1, 1])
                     with nav1:
-                        if sup_idx < total_sup - 1:
-                            if st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}"):
-                                st.session_state.index_superior += 1
-                                st.rerun()
-                        else:
-                            st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}", disabled=True)
+                        st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}", disabled=not hay_siguiente_prenda(st.session_state.superiores, sup_idx, presupuesto_superior, similitud_umbral))
                     with nav2:
-                        if sup_idx > 0:
-                            if st.button("Prenda anterior", key=f"anterior_sup_{sup_idx}"):
-                                st.session_state.index_superior -= 1
-                                st.rerun()
+                        st.button("Prenda anterior", key=f"anterior_sup_{sup_idx}", disabled=not hay_anterior_prenda(st.session_state.superiores, sup_idx, presupuesto_superior, similitud_umbral))
     else:
         st.warning("No se encontraron prendas recomendadas para la parte superior.")
 
@@ -570,6 +576,7 @@ elif st.session_state.page == 5:
             
             if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
                 with col_center:
+                    st.markdown(f"**{inferior['name']} - {inferior['current_price']}€**")
                     st.markdown(f"""
                         <div style="text-align:center;">
                             <img src="{inferior['image_url']}" style="width:250px; height:250px; object-fit:cover; border-radius:5px;">
@@ -586,30 +593,10 @@ elif st.session_state.page == 5:
 
                     nav1, nav2 = st.columns([1, 1])
                     with nav1:
-                        if inf_idx < total_inf - 1:
-                            if st.button("Siguiente prenda", key=f"siguiente_inf_{inf_idx}"):
-                                st.session_state.index_inferior += 1
-                                st.rerun()
-                        else:
-                            st.button("Siguiente prenda", key=f"siguiente_inf_{inf_idx}", disabled=True)
+                        st.button("Siguiente prenda", key=f"siguiente_inf_{inf_idx}", disabled=not hay_siguiente_prenda(st.session_state.inferiores, inf_idx, presupuesto_inferior, similitud_umbral))
                     with nav2:
-                        if inf_idx > 0:
-                            if st.button("Prenda anterior", key=f"anterior_inf_{inf_idx}"):
-                                st.session_state.index_inferior -= 1
-                                st.rerun()
+                        st.button("Prenda anterior", key=f"anterior_inf_{inf_idx}", disabled=not hay_anterior_prenda(st.session_state.inferiores, inf_idx, presupuesto_inferior, similitud_umbral))
     else:
         st.warning("No se encontraron prendas recomendadas para la parte inferior.")
 
-    # Botones de navegación
-    st.markdown("---")
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        if st.button("Volver a la página anterior"):
-            st.session_state.page = 4
-            st.rerun()
-    with col2:
-        if st.button("Reiniciar recomendador"):
-            for key in list(st.session_state.keys()):
-                del st.session_state[key]
-            st.rerun()
 
