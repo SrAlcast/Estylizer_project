@@ -505,6 +505,7 @@ elif st.session_state.page == 4:
 
 # Página 5: Mostrar recomendaciones
 elif st.session_state.page == 5:
+    st.subheader("Prendas recomendadas", divider="blue")
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
@@ -519,69 +520,75 @@ elif st.session_state.page == 5:
     # Mostrar parte superior
     if 'superiores' in st.session_state and not st.session_state.superiores.empty:
         sup_idx = st.session_state.index_superior
-        sup_idx = max(0, min(sup_idx, len(st.session_state.superiores) - 1))
-        superior = st.session_state.superiores.iloc[sup_idx]
+        total_sup = len(st.session_state.superiores)
 
-        similitud_umbral = 0
-        if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
-            with col_center:
-                st.markdown(f"""<div style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 350px;"></div>""", unsafe_allow_html=True)
-                
-                # Botón "Ir a la tienda"
-                st.markdown(f"""
-                    <div style="text-align:center; margin-top:10px;">
-                        <a href="{superior['url']}" target="_blank">
-                            <button style="background-color:#e0e0e0; color:black; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">
-                                Ir a la tienda
-                            </button>
-                        </a>
-                    </div>""", unsafe_allow_html=True)
+        if total_sup == 0:
+            st.warning("No hay prendas superiores disponibles.")
+        else:
+            sup_idx = max(0, min(sup_idx, total_sup - 1))
+            superior = st.session_state.superiores.iloc[sup_idx]
 
-                # Botones de navegación debajo de la prenda
-                nav1, nav2 = st.columns([1, 1])
-                with nav1:
-                    if st.session_state.index_superior < len(st.session_state.superiores) - 1:
-                        if st.button("Siguiente", key=f"siguiente_sup_{st.session_state.index_superior}"):
-                            st.session_state.index_superior += 1
-                            st.rerun()
-                with nav2:
-                    if st.session_state.index_superior > 0:
-                        if st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
-                            st.session_state.index_superior -= 1
-                            st.rerun()
+            similitud_umbral = 0
+            if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
+                with col_center:
+                    st.markdown(f"""<div style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
+                    
+                    # Botón "Ir a la tienda"
+                    st.page_link(superior['url'], label="Ir a la tienda", icon="🛒")
+
+                    # Botones de navegación debajo de la prenda
+                    nav1, nav2 = st.columns([1, 1])
+                    with nav1:
+                        if sup_idx > 0:
+                            if st.button("Anterior", key=f"anterior_sup_{sup_idx}"):
+                                st.session_state.index_superior -= 1
+                                st.rerun()
+                    with nav2:
+                        if sup_idx < total_sup - 1:
+                            if st.button("Siguiente", key=f"siguiente_sup_{sup_idx}"):
+                                st.session_state.index_superior += 1
+                                st.rerun()
+                        else:
+                            st.warning("No hay más prendas superiores disponibles.")
+
+    else:
+        st.warning("No se encontraron prendas recomendadas para la parte superior.")
 
     # Mostrar parte inferior
     if 'inferiores' in st.session_state and not st.session_state.inferiores.empty:
         inf_idx = st.session_state.index_inferior
-        inf_idx = max(0, min(inf_idx, len(st.session_state.inferiores) - 1))
-        inferior = st.session_state.inferiores.iloc[inf_idx]
+        total_inf = len(st.session_state.inferiores)
 
-        if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
-            with col_center:
-                st.markdown(f"""<div style="text-align:center;"><img src="{inferior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
+        if total_inf == 0:
+            st.warning("No hay prendas inferiores disponibles.")
+        else:
+            inf_idx = max(0, min(inf_idx, total_inf - 1))
+            inferior = st.session_state.inferiores.iloc[inf_idx]
 
-                # Botón "Ir a la tienda" con redirección
-                st.markdown(f"""
-                    <div style="text-align:center; margin-top:10px;">
-                        <a href="{inferior['url']}" target="_blank">
-                            <button style="background-color:#e0e0e0; color:black; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer;">
-                                Ir a la tienda
-                            </button>
-                        </a>
-                    </div>""", unsafe_allow_html=True)
+            if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
+                with col_center:
+                    st.markdown(f"""<div style="text-align:center;"><img src="{inferior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
 
-                # Botones de navegación debajo de la prenda
-                nav1, nav2 = st.columns([1, 1])
-                with nav1:
-                    if st.session_state.index_inferior < len(st.session_state.inferiores) - 1:
-                        if st.button("Siguiente", key=f"siguiente_inf_{st.session_state.index_inferior}"):
-                            st.session_state.index_inferior += 1
-                            st.rerun()
-                with nav2:
-                    if st.session_state.index_inferior > 0:
-                        if st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
-                            st.session_state.index_inferior -= 1
-                            st.rerun()
+                    # Botón "Ir a la tienda"
+                    st.page_link(inferior['url'], label="Ir a la tienda", icon="🛒")
+
+                    # Botones de navegación debajo de la prenda
+                    nav1, nav2 = st.columns([1, 1])
+                    with nav1:
+                        if inf_idx > 0:
+                            if st.button("Anterior", key=f"anterior_inf_{inf_idx}"):
+                                st.session_state.index_inferior -= 1
+                                st.rerun()
+                    with nav2:
+                        if inf_idx < total_inf - 1:
+                            if st.button("Siguiente", key=f"siguiente_inf_{inf_idx}"):
+                                st.session_state.index_inferior += 1
+                                st.rerun()
+                        else:
+                            st.warning("No hay más prendas inferiores disponibles.")
+
+    else:
+        st.warning("No se encontraron prendas recomendadas para la parte inferior.")
 
     # Botones de navegación
     st.markdown("---")
