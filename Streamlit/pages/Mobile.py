@@ -76,13 +76,17 @@ def recomendador_inferior(productos, tags_aceptados_general, tags_aceptados_infe
     
     return inferiores
 
-# Importar datos bbdd
-bd=sm.conectar_a_mongo("PullnBearData")
-nombre_coleccion1="modelos_pull_hombre_pruebas"
-nombre_coleccion2="productos_pull_hombre_pruebas"
-modelos_tageados = sm.importar_a_dataframe(bd, nombre_coleccion1)
-productos_tageados = sm.importar_a_dataframe(bd, nombre_coleccion2)
-productos_tageados['current_price'] = pd.to_numeric(productos_tageados['current_price'], errors='coerce')
+@st.cache_data
+def cargar_datos():
+    bd = sm.conectar_a_mongo("PullnBearData")
+    nombre_coleccion1 = "modelos_pull_hombre_pruebas"
+    nombre_coleccion2 = "productos_pull_hombre_pruebas"
+    modelos = sm.importar_a_dataframe(bd, nombre_coleccion1)
+    productos = sm.importar_a_dataframe(bd, nombre_coleccion2)
+    productos['current_price'] = pd.to_numeric(productos['current_price'], errors='coerce')
+    return modelos, productos
+
+modelos_tageados, productos_tageados = cargar_datos()
 
 # Variables para el estado
 if 'aceptados_general' not in st.session_state:
