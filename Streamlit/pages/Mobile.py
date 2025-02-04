@@ -484,7 +484,7 @@ if st.session_state.page == 5:
             with col_center:
                 st.markdown(f"""
                 <div class='image-container'>
-                    <img src="{superior['image_url']}" style="max-width: 200px;">
+                    <img src="{superior['image_url']}" style="max-width: 250px;">
                 </div>
                 """, unsafe_allow_html=True)
                 st.markdown(f"**{superior['product_name']} - {superior['current_price']}€**")
@@ -522,7 +522,7 @@ if st.session_state.page == 5:
             with col_center:
                 st.markdown(f"""
                 <div class='image-container'>
-                    <img src="{inferior['image_url']}" style="max-width: 200px;">
+                    <img src="{inferior['image_url']}" style="max-width: 250px;">
                 </div>
                 """, unsafe_allow_html=True)
                 st.markdown(f"**{inferior['product_name']} - {inferior['current_price']}€**")
