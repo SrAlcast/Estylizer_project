@@ -487,8 +487,8 @@ if st.session_state.page == 5:
                     <img src="{superior['image_url']}" style="max-width: 250px;">
                 </div>
                 """, unsafe_allow_html=True)
-                st.markdown(f"**{superior['product_name']} - {superior['current_price']}€**")
-                st.markdown(f"[Ver producto]({superior['url']})")
+                st.markdown(f"<h3 style='text-align: center;'>{superior['product_name']} - {superior['current_price']}€</h3>", unsafe_allow_html=True)
+                st.page_link(superior['url'], label="Ver producto", icon="🔗")
                 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
@@ -525,8 +525,8 @@ if st.session_state.page == 5:
                     <img src="{inferior['image_url']}" style="max-width: 250px;">
                 </div>
                 """, unsafe_allow_html=True)
-                st.markdown(f"**{inferior['product_name']} - {inferior['current_price']}€**")
-                st.markdown(f"[Ver producto]({inferior['url']})")
+                st.markdown(f"<h3 style='text-align: center;'>{inferior['product_name']} - {inferior['current_price']}€</h3>", unsafe_allow_html=True)
+                st.page_link(inferior['url'], label="Ver producto", icon="🔗")
                 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
