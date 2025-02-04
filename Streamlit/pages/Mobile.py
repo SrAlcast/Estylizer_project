@@ -132,6 +132,54 @@ def resetear_estado():
         del st.session_state[key]
 
 # Estilos CSS personalizados
+# st.markdown(
+#     """
+#     <style>
+#     .block-container {
+#         padding-top: 2rem !important;
+#         margin:auto;
+#     }
+#     .stButton > button {
+#         width: 100%;
+#         border-radius: 10px;
+#         font-size: 16px;
+#     }
+#     .stImage img {
+#         margin:auto;
+#         max-width: 40%;
+#         border-radius: 10px;
+#     }
+#     .title-text {
+#         text-align: center;
+#         font-size: 28px;
+#         font-weight: bold;
+#         color: #ff5733;
+#     }
+#     .centered-container {
+#         display: flex;
+#         justify-content: center;
+#     }
+#     </style>
+#     """,
+#     unsafe_allow_html=True,
+# )
+
+# # Mostrar logo centrado
+# col1, col2, col3 = st.columns([1, 2, 1])  # Centrar imagen en la columna central
+# with col2:
+#     st.image("./src/Logo Estylizer 2.png", width=200)
+
+# # Página 1: Selección de modelo_tags
+# if st.session_state.page == 1:
+#     if st.session_state.modelo_tags_index < 8:
+#         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
+#         st.image(modelo_tags['image1_url'], width=260)
+#         st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
+#         dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
+#         like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
+#         st.markdown("</div>", unsafe_allow_html=True)
+import streamlit as st
+
 st.markdown(
     """
     <style>
@@ -145,7 +193,8 @@ st.markdown(
         font-size: 16px;
     }
     .stImage img {
-        margin:auto;
+        display: block; 
+        margin: auto;  /* Centrar la imagen */
         max-width: 40%;
         border-radius: 10px;
     }
@@ -158,6 +207,8 @@ st.markdown(
     .centered-container {
         display: flex;
         justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
     </style>
     """,
@@ -173,14 +224,16 @@ with col2:
 if st.session_state.page == 1:
     if st.session_state.modelo_tags_index < 8:
         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
-        col1, col2, col3 = st.columns([1, 2, 1])  # Centrar imagen en la columna central
-        with col2:
-            st.image(modelo_tags['image1_url'], width=260) 
+
+        # Envolver la imagen en un div con clase centrada
         st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
+        st.image(modelo_tags['image1_url'], width=260)
+        
+        # Botones centrados
         dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
         like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
+        
         st.markdown("</div>", unsafe_allow_html=True)
-
         # Acciones de los botones con animación
         if dislike_pressed or like_pressed:
             if dislike_pressed:
