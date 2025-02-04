@@ -321,7 +321,7 @@ if st.session_state.page == 3:
     # Crear un desplegable multiselección para los colores inferiores
     seleccionados_inferior = st.multiselect(
         "Selecciona los colores para la parte inferior:",
-        opciones=colores_inferior,
+        options=colores_inferior,
         default=st.session_state.colores_inferior
     )
 
