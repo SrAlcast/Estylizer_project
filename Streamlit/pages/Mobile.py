@@ -504,7 +504,6 @@ elif st.session_state.page == 4:
             st.rerun()
 
 # Página 5: Mostrar recomendaciones
-# Página 5: Mostrar recomendaciones
 elif st.session_state.page == 5:
     st.subheader("Prendas recomendadas", divider="blue")
 
@@ -560,9 +559,11 @@ elif st.session_state.page == 5:
 
                     nav1, nav2 = st.columns([1, 1])
                     with nav1:
-                        st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}", disabled=not hay_siguiente_prenda(st.session_state.superiores, sup_idx, presupuesto_superior, similitud_umbral))
+                        if hay_siguiente_prenda(st.session_state.superiores, sup_idx, presupuesto_superior, similitud_umbral):
+                            st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}")
                     with nav2:
-                        st.button("Prenda anterior", key=f"anterior_sup_{sup_idx}", disabled=not hay_anterior_prenda(st.session_state.superiores, sup_idx, presupuesto_superior, similitud_umbral))
+                        if hay_anterior_prenda(st.session_state.superiores, sup_idx, presupuesto_superior, similitud_umbral):
+                            st.button("Prenda anterior", key=f"anterior_sup_{sup_idx}")
     else:
         st.warning("No se encontraron prendas recomendadas para la parte superior.")
 
@@ -594,11 +595,14 @@ elif st.session_state.page == 5:
 
                     nav1, nav2 = st.columns([1, 1])
                     with nav1:
-                        st.button("Siguiente prenda", key=f"siguiente_inf_{inf_idx}", disabled=not hay_siguiente_prenda(st.session_state.inferiores, inf_idx, presupuesto_inferior, similitud_umbral))
+                        if hay_siguiente_prenda(st.session_state.inferiores, inf_idx, presupuesto_inferior, similitud_umbral):
+                            st.button("Siguiente prenda", key=f"siguiente_inf_{inf_idx}")
                     with nav2:
-                        st.button("Prenda anterior", key=f"anterior_inf_{inf_idx}", disabled=not hay_anterior_prenda(st.session_state.inferiores, inf_idx, presupuesto_inferior, similitud_umbral))
+                        if hay_anterior_prenda(st.session_state.inferiores, inf_idx, presupuesto_inferior, similitud_umbral):
+                            st.button("Prenda anterior", key=f"anterior_inf_{inf_idx}")
     else:
         st.warning("No se encontraron prendas recomendadas para la parte inferior.")
+
 
     # Botones de navegación
     st.markdown("---")
