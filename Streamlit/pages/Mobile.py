@@ -534,7 +534,7 @@ elif st.session_state.page == 5:
                     st.markdown(f"""<div style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
                     
                     # Botón "Ir a la tienda"
-                    st.page_link(superior['url'], label="Shop", icon="🛒", page = "https://google.com")
+                    st.page_link(label="Shop", icon="🛒", page = "https://google.com")
 
                     # Botones de navegación debajo de la prenda
                     nav1, nav2 = st.columns([1, 1])
