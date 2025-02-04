@@ -10,11 +10,11 @@ from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
 import os
 import certifi
-# load_dotenv(dotenv_path="../src/.env")
+# # load_dotenv(dotenv_path="../src/.env")
 
-mongo_uri = os.getenv("MONGO_URI")
-if not mongo_uri:
-    raise ValueError("uri no está definido en las variables de entorno")
+# mongo_uri = os.getenv("MONGO_URI")
+# if not mongo_uri:
+#     raise ValueError("uri no está definido en las variables de entorno")
 
 def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_superior, tags_rechazados_general, tags_rechazados_superior, tipos_superior, colores_superior, presupuesto_superior_min, presupuesto_superior_max):
     
