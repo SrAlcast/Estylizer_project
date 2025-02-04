@@ -143,11 +143,8 @@ st.markdown(
         border-radius: 10px;
         font-size: 16px;
     }
-    .stButton > button:hover {
-        background-color: #c70039;
-    }
     .stImage img {
-        max-width: 100%;
+        max-width: 90%;
         border-radius: 10px;
     }
     .title-text {
@@ -162,7 +159,7 @@ st.markdown(
 )
 
 # Mostrar logo
-st.image("./src/Logo Estylizer 2.png", width=250)
+st.image("./src/Logo Estylizer 2.png", width=250,)
     
 # Página 1: Selección de modelo_tagss
 if st.session_state.page == 1:
