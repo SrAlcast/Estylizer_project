@@ -167,7 +167,7 @@ st.markdown(
 # Verifica si la imagen existe antes de mostrarla
 
 # Ruta relativa desde el script de ejecución
-image_path = Path("../src/Logo Estylizer 2.png")
+image_path = Path("./src/Logo Estylizer 2.png")
 
 if image_path.exists():
     # Usar columnas para centrar la imagen
