@@ -526,7 +526,7 @@ elif st.session_state.page == 5:
         similitud_umbral = 0
         if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
             with col_center:
-                st.markdown(f"""<div style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
+                st.markdown(f"""<div style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 350px;"></div>""", unsafe_allow_html=True)
                 
                 # Botón "Ir a la tienda"
                 if st.button("Ir a la tienda", key=f"tienda_sup_{sup_idx}"):
