@@ -129,36 +129,25 @@ def resetear_estado():
 st.markdown(
     """
     <style>
-    .block-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-    .stButton > button {
-        margin: 5px auto;
-        width: 130px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .stImage img {
-        display: block;
-        margin: 20px auto;
-        width: 300px;
-    }
-    .stColumn {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
+    @media screen and (max-width: 768px) {
+        .block-container {
+            padding: 0.5rem !important;
+        }
+        .stButton > button {
+            width: 100% !important;
+            font-size: 16px !important;
+            padding: 10px !important;
+        }
+        .stImage img {
+            max-width: 100% !important;
+            height: auto !important;
+        }
     }
     </style>
     """,
-    unsafe_allow_html=True,
+    unsafe_allow_html=True
 )
+
 
 # Verifica si la imagen existe antes de mostrarla
 
@@ -179,21 +168,20 @@ else:
 if st.session_state.page == 1:
     if st.session_state.modelo_tags_index < 8:
         modelo_tags = modelos_tageados.iloc[st.session_state.random_indices[st.session_state.modelo_tags_index]]
-
+        st.markdown('<div class="stColumn">', unsafe_allow_html=True)
+        st.image(modelo_tags['image1_url'])
+        st.markdown('</div>', unsafe_allow_html=True)
         # Centrar la imagen
-        col1, col2, col3 = st.columns([1, 2, 1], gap="large")
+        col1, col2 = st.columns([1, 1], gap="large")
         with col1:
             st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
             dislike_pressed = st.button("❌ No me gusta", key=f"dislike_{st.session_state.modelo_tags_index}")
             st.markdown('</div>', unsafe_allow_html=True)
         with col2:
-            st.markdown('<div class="stColumn">', unsafe_allow_html=True)
-            st.image(modelo_tags['image1_url'])
-            st.markdown('</div>', unsafe_allow_html=True)
-        with col3:
             st.markdown("<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px;'>", unsafe_allow_html=True)
             like_pressed = st.button("✅ Me gusta", key=f"like_{st.session_state.modelo_tags_index}")
             st.markdown('</div>', unsafe_allow_html=True)
+
 
         # Acciones de los botones con animación
         if dislike_pressed or like_pressed:
