@@ -113,6 +113,10 @@ if 'page' not in st.session_state:
     st.session_state.page = 1
 if 'tipos_superior' not in st.session_state:
     st.session_state.tipos_superior = []
+if "select_all_colores_superior" not in st.session_state:
+    st.session_state.select_all_colores_superior = False
+if "select_all_colores_inferior" not in st.session_state:
+    st.session_state.select_all_colores_inferior = False
 if 'colores_superior' not in st.session_state:
     st.session_state.colores_superior = []
 if 'colores_inferior' not in st.session_state:
