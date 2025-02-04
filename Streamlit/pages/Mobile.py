@@ -15,7 +15,7 @@ st.set_page_config(page_title="Estylizer - Recomendaciones", layout="centered")
 def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_superior, tags_rechazados_general, tags_rechazados_superior, tipos_superior, colores_superior, presupuesto_superior_min, presupuesto_superior_max):
     
     # Unir los tags en una sola columna para cada producto
-    productos['tags_combined'] = productos[['Tag_1','Tag_2','Tag_3']].fillna('').agg(' '.join, axis=1)
+    productos['tags_combined'] = productos[['Tag_1', 'Tag_2', 'Tag_3']].fillna('').agg(' '.join, axis=1)
     
     # Vectorizar los tags de los productos
     vectorizer = CountVectorizer()
@@ -32,12 +32,15 @@ def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_supe
     penalizacion = productos['tags_combined'].str.contains('|'.join(tags_rechazados_general + tags_rechazados_superior), case=False, na=False).astype(int) * -0.1
     productos['similaridad'] = similitudes + penalizacion
     
+    # Filtrar productos con similitud mayor a 0.1
+    productos = productos[productos['similaridad'] > 0.1]
+    
     # Filtrar superiores (todo lo que no sea pantalón)
     superiores = productos[
-        (~productos['Categoria'].str.contains('Pantalón', case=False, na=False)) &
-        (productos['Categoria'].str.contains('|'.join(tipos_superior), case=False, na=False)) &
-        (productos['color_homogeneizado'].isin(colores_superior)) &
-        (productos['current_price'] >= presupuesto_superior_min) &
+        (~productos['Categoria'].str.contains('Pantalón', case=False, na=False)) & 
+        (productos['Categoria'].str.contains('|'.join(tipos_superior), case=False, na=False)) & 
+        (productos['color_homogeneizado'].isin(colores_superior)) & 
+        (productos['current_price'] >= presupuesto_superior_min) & 
         (productos['current_price'] <= presupuesto_superior_max)
     ]
     
@@ -46,10 +49,11 @@ def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_supe
     
     return superiores
 
+
 def recomendador_inferior(productos, tags_aceptados_general, tags_aceptados_inferior, tags_rechazados_general, tags_rechazados_inferior, colores_inferior, presupuesto_inferior_min, presupuesto_inferior_max):
     
     # Unir los tags en una sola columna para cada producto
-    productos['tags_combined'] = productos[['Tag_1','Tag_2','Tag_3']].fillna('').agg(' '.join, axis=1)
+    productos['tags_combined'] = productos[['Tag_1', 'Tag_2', 'Tag_3']].fillna('').agg(' '.join, axis=1)
     
     # Vectorizar los tags de los productos
     vectorizer = CountVectorizer()
@@ -66,11 +70,14 @@ def recomendador_inferior(productos, tags_aceptados_general, tags_aceptados_infe
     penalizacion = productos['tags_combined'].str.contains('|'.join(tags_rechazados_general + tags_rechazados_inferior), case=False, na=False).astype(int) * -0.1
     productos['similaridad'] = similitudes + penalizacion
     
+    # Filtrar productos con similitud mayor a 0.1
+    productos = productos[productos['similaridad'] > 0.1]
+    
     # Filtrar inferiores (solo pantalones)
     inferiores = productos[
-        (productos['Categoria'].str.contains('Pantalón', case=False, na=False)) &
-        (productos['color_homogeneizado'].isin(colores_inferior)) &
-        (productos['current_price'] >= presupuesto_inferior_min) &
+        (productos['Categoria'].str.contains('Pantalón', case=False, na=False)) & 
+        (productos['color_homogeneizado'].isin(colores_inferior)) & 
+        (productos['current_price'] >= presupuesto_inferior_min) & 
         (productos['current_price'] <= presupuesto_inferior_max)
     ]
     
