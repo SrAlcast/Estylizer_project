@@ -534,18 +534,18 @@ elif st.session_state.page == 5:
                     st.markdown(f"""<div style="text-align:center;"><img src="{superior['image_url']}" style="max-width: 250px;"></div>""", unsafe_allow_html=True)
                     
                     # Botón "Ir a la tienda"
-                    st.page_link(superior['url'], label="Ir a la tienda", icon="🛒")
+                    st.page_link(superior['url'], label="Shop", icon="🛒")
 
                     # Botones de navegación debajo de la prenda
                     nav1, nav2 = st.columns([1, 1])
                     with nav1:
                         if sup_idx > 0:
-                            if st.button("Anterior", key=f"anterior_sup_{sup_idx}"):
+                            if st.button("Anterior prenda", key=f"anterior_sup_{sup_idx}"):
                                 st.session_state.index_superior -= 1
                                 st.rerun()
                     with nav2:
                         if sup_idx < total_sup - 1:
-                            if st.button("Siguiente", key=f"siguiente_sup_{sup_idx}"):
+                            if st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}"):
                                 st.session_state.index_superior += 1
                                 st.rerun()
                         else:
