@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import random
+import webbrowser
 import sys
 # Añadimos la carpeta que contiene nuestro .py al path de Python
 sys.path.append("./src/")
@@ -487,8 +488,10 @@ if st.session_state.page == 5:
                     <img src="{superior['image_url']}" style="max-width: 250px;">
                 </div>
                 """, unsafe_allow_html=True)
-                st.markdown(f"<h3 style='text-align: center;'>{superior['product_name']} - {superior['current_price']}€</h3>", unsafe_allow_html=True)
-                st.page_link(superior['url'], label="Ver producto", icon="🔗")
+                st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{superior['product_name']} - {superior['current_price']}€</p>", unsafe_allow_html=True)
+                # Botón similar a los de Streamlit
+                if st.button("Ver producto"):
+                    webbrowser.open(superior["url"])  # Abre el enlace en el navegador
                 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
@@ -525,8 +528,10 @@ if st.session_state.page == 5:
                     <img src="{inferior['image_url']}" style="max-width: 250px;">
                 </div>
                 """, unsafe_allow_html=True)
-                st.markdown(f"<h3 style='text-align: center;'>{inferior['product_name']} - {inferior['current_price']}€</h3>", unsafe_allow_html=True)
-                st.page_link(inferior['url'], label="Ver producto", icon="🔗")
+                st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{inferior['product_name']} - {inferior['current_price']}€</p>", unsafe_allow_html=True)
+                # Botón similar a los de Streamlit
+                if st.button("Ver producto"):
+                    webbrowser.open(inferior["url"])  # Abre el enlace en el navegador
                 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
