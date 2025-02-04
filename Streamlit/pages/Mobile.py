@@ -163,8 +163,18 @@ st.markdown(
 
 # Mostrar logo
 
-st.markdown("<div style='display: flex; justify-content: center;'><img src='./src/Logo Estylizer 2.png' width='250'></div>", unsafe_allow_html=True)
-st.image("./src/Logo Estylizer 2.png", width=250, use_container_width=False)
+
+st.markdown(
+    """
+    <div style="display: flex; justify-content: center;">
+        <img src="./src/Logo Estylizer 2.png" width="250">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# st.markdown("<div style='display: flex; justify-content: center;'><img src='./src/Logo Estylizer 2.png' width='250'></div>", unsafe_allow_html=True)
+# st.image("./src/Logo Estylizer 2.png", width=250, use_container_width=False)
 
 # Página 1: Selección de modelo_tagss
 if st.session_state.page == 1:
