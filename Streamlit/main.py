@@ -607,26 +607,7 @@ elif st.session_state.page == 5:
         """,
         unsafe_allow_html=True
     )
-
-    st.markdown(
-        f"""
-        <script>
-            function openLinks() {{
-                let firstWindow = window.open("{superior['url']}", '_blank'); // Abre la primera página
-                setTimeout(function() {{
-                    window.open("{inferior['url']}", '_blank'); // Abre la segunda después de un retraso
-                }}, 500); // Retraso de 500ms (medio segundo)
-            }}
-        </script>
-        <button onclick="openLinks()" style="padding:10px 20px; font-size:16px; background:#ff4b4b; color:white; border:none; border-radius:5px; cursor:pointer;">
-            🔗 Ver productos
-        </button>
-        """,
-        unsafe_allow_html=True
-    )
-
-
-
+    
     # Botones de navegación adicional
     st.markdown("---")
     col1, col2 = st.columns([1, 1])

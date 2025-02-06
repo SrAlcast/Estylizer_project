@@ -556,6 +556,19 @@ if st.session_state.page == 5:
     else:
         st.warning("No se encontraron prendas recomendadas para la parte inferior.")
 
+    # Calcular el costo total del outfit
+    coste_total = superior['current_price'] + inferior['current_price']
+
+    # Mostrar el costo total con margen
+    st.markdown(
+        f"""
+        <div style="margin-top: 20px;margin-bottom: 10px; font-size: 18px; font-weight: bold;">
+            💰 <strong>Coste Total del Outfit:</strong> {coste_total:.2f}€
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     # Botones de navegación
     st.markdown("---")
     col1, col2 = st.columns([1, 1])
