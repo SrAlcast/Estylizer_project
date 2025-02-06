@@ -1,10 +1,8 @@
 import streamlit as st
-from pathlib import Path
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import random
-import webbrowser
 import sys
 # Añadimos la carpeta que contiene nuestro .py al path de Python
 sys.path.append("./src/")
