@@ -157,8 +157,7 @@ st.markdown(
     }
     .stImage img {
         display: block;
-        margin: 10px auto;
-        width: 270px;
+        width: 260px;
     }
     .stColumn {
         display: flex;
