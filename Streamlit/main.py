@@ -256,7 +256,6 @@ if st.session_state.page == 1:
                 if st.button("❌ No, cancelar"):
                     st.session_state.confirm_reset = False  # Cancelar la acción
     else:
-        st.success("¡Has terminado de seleccionar estilos!")
         st.session_state.page = 2
         st.rerun()
 
@@ -516,7 +515,7 @@ elif st.session_state.page == 5:
                     st.write(f"**Color:** {superior['color_homogeneizado']}")
                     if st.link_button("Ver producto", superior["url"]):
                         pass  # El botón de enlace no requiere acciones adicionales
-                    navigation_col1, spacer, navigation_col2 = st.columns([1, 0.3, 1])  # Agrega una columna pequeña para espacio
+                    navigation_col1, spacer, navigation_col2 = st.columns([1, 0.5, 1])  # Agrega una columna pequeña para espacio
 
                     with navigation_col1:
                         if st.session_state.index_superior > 0:
@@ -571,7 +570,7 @@ elif st.session_state.page == 5:
                     st.write(f"**Color:** {inferior['color_homogeneizado']}")
                     if st.link_button("Ver producto", inferior["url"]):
                         pass  # El botón de enlace no requiere acciones adicionales
-                    navigation_col1, spacer, navigation_col2 = st.columns([1, 0.3, 1])  # Agrega una columna pequeña para espacio
+                    navigation_col1, spacer, navigation_col2 = st.columns([1, 0.5, 1])  # Agrega una columna pequeña para espacio
 
                     with navigation_col1:
                         if st.session_state.index_inferior > 0:
