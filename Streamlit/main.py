@@ -144,9 +144,9 @@ st.markdown(
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;  /* Alinea arriba */
+        justify-content: flex-start;
         text-align: center;
-        padding-top: 10px;  /* Margen superior opcional */
+        padding-top: 15px;
     }
     .stButton > button {
         margin: 5px auto;
