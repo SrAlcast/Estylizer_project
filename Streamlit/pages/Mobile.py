@@ -418,8 +418,8 @@ elif st.session_state.page == 4:
         """
         <style>
             .slider-container {
-                padding-left: 20px;
-                padding-right: 20px;
+                padding-left: 30px;
+                padding-right: 30px;
             }
         </style>
         """,
@@ -447,22 +447,6 @@ elif st.session_state.page == 4:
         value=st.session_state.presupuesto_inferior
     )
     st.markdown('</div>', unsafe_allow_html=True)
-
-    # Slider para rango de presupuesto superior
-    st.session_state.presupuesto_superior = st.slider(
-        "Rango de presupuesto para la parte superior (€):",
-        min_value=int(min_price_superior),
-        max_value=int(max_price_superior),
-        value=st.session_state.presupuesto_superior  # Mantener el valor previo si existe
-    )
-
-    # Slider para rango de presupuesto inferior
-    st.session_state.presupuesto_inferior = st.slider(
-        "Rango de presupuesto para la parte inferior (€):",
-        min_value=int(min_price_inferior),
-        max_value=int(max_price_inferior),
-        value=st.session_state.presupuesto_inferior  # Mantener el valor previo si existe
-    )
 
     col1, col2 = st.columns([1, 1])
     with col1:
