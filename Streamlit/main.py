@@ -146,7 +146,7 @@ st.markdown(
         align-items: center;
         justify-content: flex-start;
         text-align: center;
-        padding-top: 20px;
+        padding-top: 30px;
     }
     .stButton > button {
         margin: 5px auto;
