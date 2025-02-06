@@ -595,6 +595,25 @@ elif st.session_state.page == 5:
     else:
         st.warning("No se encontraron prendas recomendadas para la parte inferior.")
 
+    # Calcular el costo total del outfit
+    costo_total = superior['current_price'] + inferior['current_price']
+
+    # Mostrar el costo total con margen
+    st.markdown(
+        f"""
+        <div style="margin-top: 20px; font-size: 18px; font-weight: bold;">
+            💰 <strong>Coste Total del Outfit:</strong> {costo_total:.2f}€
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Crear un botón que abra los enlaces de ambos productos en nuevas pestañas
+    if isinstance(superior['url'], str) and isinstance(inferior['url'], str):
+        links = f"{superior['url']} {inferior['url']}"
+        st.link_button("🔗 Ver productos", links)
+
+
     # Botones de navegación adicional
     st.markdown("---")
     col1, col2 = st.columns([1, 1])
