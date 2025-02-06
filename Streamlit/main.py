@@ -236,75 +236,26 @@ if st.session_state.page == 1:
         # Inicializar estado si no existe
         if "confirm_reset" not in st.session_state:
             st.session_state.confirm_reset = False
-        st.markdown(
-            """
-            <style>
-            .stButton > button {
-                width: 200px !important; /* Ajusta el ancho según necesidad */
-                white-space: nowrap; /* Evita el salto de línea */
-            }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
 
+        # Botón para solicitar confirmación
         if st.button("🔄 Resetear todo"):
             st.session_state.confirm_reset = True
 
-
+        # Mostrar advertencia solo si el usuario ha presionado el botón
         if st.session_state.confirm_reset:
-            st.markdown(
-                """
-                <style>
-                .confirmation-box {
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background-color: white;
-                    padding: 20px;
-                    border-radius: 10px;
-                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-                    text-align: center;
-                    z-index: 100;
-                }
-                </style>
-                """,
-                unsafe_allow_html=True
-            )
-
-            st.markdown('<div class="confirmation-box">', unsafe_allow_html=True)
             st.warning("⚠️ ¿Seguro que quieres reiniciar el proceso?")
-
+            
             col1, col2 = st.columns(2)
             
             with col1:
                 if st.button("✅ Sí, resetear"):
-                    st.session_state.confirm_reset = False
-                    resetear_estado()
+                    st.session_state.confirm_reset = False  # Resetear el estado de confirmación
+                    resetear_estado()  # Llamar la función de reseteo
                     st.rerun()
             
             with col2:
                 if st.button("❌ No, cancelar"):
-                    st.session_state.confirm_reset = False
-
-            st.markdown('</div>', unsafe_allow_html=True)
-
-        # # Mostrar advertencia solo si el usuario ha presionado el botón
-        # if st.session_state.confirm_reset:
-        #     st.warning("⚠️ ¿Seguro que quieres reiniciar el proceso?")
-            
-        #     col1, col2 = st.columns(2)
-            
-        #     with col1:
-        #         if st.button("✅ Sí, resetear"):
-        #             st.session_state.confirm_reset = False  # Resetear el estado de confirmación
-        #             resetear_estado()  # Llamar la función de reseteo
-        #             st.rerun()
-            
-        #     with col2:
-        #         if st.button("❌ No, cancelar"):
-        #             st.session_state.confirm_reset = False  # Cancelar la acción
+                    st.session_state.confirm_reset = False  # Cancelar la acción
     else:
         st.success("¡Has terminado de seleccionar estilos!")
         st.session_state.page = 2
