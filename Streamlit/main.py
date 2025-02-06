@@ -512,18 +512,20 @@ elif st.session_state.page == 5:
                     st.write(f"**Precio:** {superior['current_price']}€")
                     st.write(f"**Color:** {superior['color_homogeneizado']}")
                     st.write(f"[Ver producto]({superior['url']})")
+                    navigation_col1, spacer, navigation_col2 = st.columns([1, 0.3, 1])  # Agrega una columna pequeña para espacio
 
-                    navigation_col1, navigation_col2 = st.columns([1, 1])
                     with navigation_col1:
                         if st.session_state.index_superior > 0:
                             if st.button("Anterior", key=f"anterior_sup_{st.session_state.index_superior}"):
                                 st.session_state.index_superior -= 1
                                 st.rerun()
+
                     with navigation_col2:
                         if st.session_state.index_superior < len(st.session_state.superiores) - 1:
                             if st.button("Siguiente", key=f"siguiente_sup_{st.session_state.index_superior}"):
                                 st.session_state.index_superior += 1
                                 st.rerun()
+
             else:
                 st.warning("No hay opciones de parte superior dentro del presupuesto.")
         else:
@@ -559,17 +561,20 @@ elif st.session_state.page == 5:
                     st.write(f"**Color:** {inferior['color_homogeneizado']}")
                     st.write(f"[Ver producto]({inferior['url']})")
 
-                    navigation_col1, navigation_col2 = st.columns([1, 1])
+                    navigation_col1, spacer, navigation_col2 = st.columns([1, 0.3, 1])  # Agrega una columna pequeña para espacio
+
                     with navigation_col1:
                         if st.session_state.index_inferior > 0:
                             if st.button("Anterior", key=f"anterior_inf_{st.session_state.index_inferior}"):
                                 st.session_state.index_inferior -= 1
                                 st.rerun()
+
                     with navigation_col2:
                         if st.session_state.index_inferior < len(st.session_state.inferiores) - 1:
                             if st.button("Siguiente", key=f"siguiente_inf_{st.session_state.index_inferior}"):
                                 st.session_state.index_inferior += 1
                                 st.rerun()
+
             else:
                 st.warning("No hay opciones de parte inferior dentro del presupuesto.")
         else:
