@@ -498,7 +498,13 @@ elif st.session_state.page == 5:
             if superior['similaridad'] >= similitud_umbral and presupuesto_superior[0] <= superior['current_price'] <= presupuesto_superior[1]:
                 col1, col2 = st.columns([1, 2])
                 with col1:
-                    st.image(superior['image_url'] if isinstance(superior['image_url'], str) else 'No tiene foto', width=200)
+                    if isinstance(superior['image_url'], str) and superior['image_url'].startswith("http"):
+                        try:
+                            st.image(superior['image_url'], width=200)
+                        except Exception as e:
+                            st.warning("No se pudo cargar la imagen.")
+                    else:
+                        st.warning("Imagen no disponible.")
                 with col2:
                     st.write("Parte Superior")
                     st.write(f"**Nombre:** {superior['product_name']}")
@@ -538,7 +544,13 @@ elif st.session_state.page == 5:
             if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
                 col1, col2 = st.columns([1, 2])
                 with col1:
-                    st.image(inferior['image_url'] if isinstance(inferior['image_url'], str) else 'No tiene foto', width=200)
+                    if isinstance(superior['image_url'], str) and inferior['image_url'].startswith("http"):
+                        try:
+                            st.image(superior['image_url'], width=200)
+                        except Exception as e:
+                            st.warning("No se pudo cargar la imagen.")
+                    else:
+                        st.warning("Imagen no disponible.")
                 with col2:
                     st.write("Parte Inferior")
                     st.write(f"**Nombre:** {inferior['product_name']}")
