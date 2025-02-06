@@ -508,11 +508,12 @@ elif st.session_state.page == 5:
                 with col2:
                     st.markdown(
                         f"""
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        <div style="margin-top: 10px; white-space: nowrap;">
                             <strong>Nombre:</strong> {superior['product_name']}
                         </div>
                         """,
-                        unsafe_allow_html=True)
+                        unsafe_allow_html=True
+                    )
                     st.write(f"**Match:** {superior['similaridad'] * 100:.2f}%")
                     st.write(f"**Precio:** {superior['current_price']}€")
                     st.write(f"**Color:** {superior['color_homogeneizado']}")
@@ -562,11 +563,12 @@ elif st.session_state.page == 5:
                 with col2:
                     st.markdown(
                         f"""
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        <div style="margin-top: 10px; white-space: nowrap;">
                             <strong>Nombre:</strong> {inferior['product_name']}
                         </div>
                         """,
-                        unsafe_allow_html=True)
+                        unsafe_allow_html=True
+                    )
                     st.write(f"**Match:** {inferior['similaridad'] * 100:.2f}%")
                     st.write(f"**Precio:** {inferior['current_price']}€")
                     st.write(f"**Color:** {inferior['color_homogeneizado']}")
