@@ -506,9 +506,14 @@ elif st.session_state.page == 5:
                     else:
                         st.warning("Imagen no disponible.")
                 with col2:
-                    st.write("Parte Superior")
-                    st.write(f"**Nombre:** {superior['product_name']}")
-                    st.write(f"**Match:** {superior['similaridad']}")
+                    st.markdown(
+                        f"""
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <strong>Nombre:</strong> {superior['product_name']}
+                        </div>
+                        """,
+                        unsafe_allow_html=True)
+                    st.write(f"**Match:** {superior['similaridad'] * 100:.2f}%")
                     st.write(f"**Precio:** {superior['current_price']}€")
                     st.write(f"**Color:** {superior['color_homogeneizado']}")
                     if st.link_button("Ver producto", superior["url"]):
@@ -555,9 +560,14 @@ elif st.session_state.page == 5:
                     else:
                         st.warning("Imagen no disponible.")
                 with col2:
-                    st.write("Parte Inferior")
-                    st.write(f"**Nombre:** {inferior['product_name']}")
-                    st.write(f"**Match:** {inferior['similaridad']}")
+                    st.markdown(
+                        f"""
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <strong>Nombre:</strong> {inferior['product_name']}
+                        </div>
+                        """,
+                        unsafe_allow_html=True)
+                    st.write(f"**Match:** {inferior['similaridad'] * 100:.2f}%")
                     st.write(f"**Precio:** {inferior['current_price']}€")
                     st.write(f"**Color:** {inferior['color_homogeneizado']}")
                     if st.link_button("Ver producto", inferior["url"]):
