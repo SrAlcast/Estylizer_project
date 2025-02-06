@@ -232,7 +232,6 @@ if st.session_state.page == 1:
         # Barra de progreso con numeración
         progreso = (st.session_state.modelo_tags_index + 1) / 8
         st.progress(progreso)
-        st.write(f"Progreso: {st.session_state.modelo_tags_index + 1} de 8")
 
         # Inicializar estado si no existe
         if "confirm_reset" not in st.session_state:
