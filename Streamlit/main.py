@@ -508,7 +508,7 @@ elif st.session_state.page == 5:
                 with col2:
                     st.markdown(
                         f"""
-                        <div style="margin-top: 10px; white-space: nowrap;">
+                        <div style="margin-top: 30px;margin-bottom: 10px; white-space: nowrap;">
                             <strong>Nombre:</strong> {superior['product_name']}
                         </div>
                         """,
@@ -563,7 +563,7 @@ elif st.session_state.page == 5:
                 with col2:
                     st.markdown(
                         f"""
-                        <div style="margin-top: 10px; white-space: nowrap;">
+                        <div style="margin-top: 30px;margin-bottom: 10px; white-space: nowrap;">
                             <strong>Nombre:</strong> {inferior['product_name']}
                         </div>
                         """,
