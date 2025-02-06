@@ -544,9 +544,9 @@ elif st.session_state.page == 5:
             if inferior['similaridad'] >= similitud_umbral and presupuesto_inferior[0] <= inferior['current_price'] <= presupuesto_inferior[1]:
                 col1, col2 = st.columns([1, 2])
                 with col1:
-                    if isinstance(superior['image_url'], str) and inferior['image_url'].startswith("http"):
+                    if isinstance(inferior['image_url'], str) and inferior['image_url'].startswith("http"):
                         try:
-                            st.image(superior['image_url'], width=200)
+                            st.image(inferior['image_url'], width=200)
                         except Exception as e:
                             st.warning("No se pudo cargar la imagen.")
                     else:
