@@ -389,8 +389,6 @@ if st.session_state.page == 3:
 
 # Página 4: Selección de presupuesto
 elif st.session_state.page == 4:
-    st.subheader("Selecciona tu rango de presupuesto")
-
     # Obtener rangos dinámicos para las barras de presupuesto
     max_price_superior = productos_tageados[(productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)) &
                               (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_superior))]['current_price'].max() + 1
@@ -418,8 +416,8 @@ elif st.session_state.page == 4:
         """
         <style>
             .slider-container {
-                padding-left: 30px;
-                padding-right: 30px;
+                padding-left: 100px;
+                padding-right: 100px;
             }
         </style>
         """,
