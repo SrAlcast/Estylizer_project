@@ -146,7 +146,7 @@ st.markdown(
         align-items: center;
         justify-content: flex-start;  /* Alinea arriba */
         text-align: center;
-        padding-top: 5px;  /* Margen superior opcional */
+        padding-top: 10px;  /* Margen superior opcional */
     }
     .stButton > button {
         margin: 5px auto;
@@ -158,7 +158,7 @@ st.markdown(
     .stImage img {
         display: block;
         margin: 10px auto;
-        width: 300px;
+        width: 270px;
     }
     .stColumn {
         display: flex;
