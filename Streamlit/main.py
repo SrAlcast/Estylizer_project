@@ -610,17 +610,21 @@ elif st.session_state.page == 5:
 
     st.markdown(
         f"""
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="{superior['url']}" target="_blank" style="padding:10px 20px; font-size:16px; background:#ff4b4b; color:white; text-decoration: none; border-radius:5px; margin-right: 10px;">
-                🔗 Ver prenda superior
-            </a>
-            <a href="{inferior['url']}" target="_blank" style="padding:10px 20px; font-size:16px; background:#4b79ff; color:white; text-decoration: none; border-radius:5px;">
-                🔗 Ver prenda inferior
-            </a>
-        </div>
+        <script>
+            function openLinks() {{
+                let firstWindow = window.open("{superior['url']}", '_blank'); // Abre la primera página
+                setTimeout(function() {{
+                    window.open("{inferior['url']}", '_blank'); // Abre la segunda después de un retraso
+                }}, 500); // Retraso de 500ms (medio segundo)
+            }}
+        </script>
+        <button onclick="openLinks()" style="padding:10px 20px; font-size:16px; background:#ff4b4b; color:white; border:none; border-radius:5px; cursor:pointer;">
+            🔗 Ver productos
+        </button>
         """,
         unsafe_allow_html=True
     )
+
 
 
     # Botones de navegación adicional
