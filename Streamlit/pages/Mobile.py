@@ -284,6 +284,21 @@ if st.session_state.page == 2:
         st.session_state.select_all = not st.session_state.select_all
         toggle_select_all()
         st.rerun()
+        
+    tipos_superior_validos = ["Camiseta", "Camisa", "Sudadera", "Jersey", "Polo", "Sobrecamisa"]
+
+    # Filtrar los valores inválidos en session_state
+    st.session_state.tipos_superior = [t for t in st.session_state.tipos_superior if t in tipos_superior_validos]
+
+    # Crear el multiselect con los valores filtrados
+    seleccionados_tipos_superior = st.multiselect(
+        "Selecciona los tipos de prenda:",
+        options=tipos_superior_validos,
+        default=st.session_state.tipos_superior
+    )
+
+    # Guardar la selección en session_state
+    st.session_state.tipos_superior = seleccionados_tipos_superior
 
     # Crear un desplegable multiselección
     seleccionados = st.multiselect(
@@ -318,6 +333,35 @@ if st.session_state.page == 3:
 
     colores_superior = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)]['color_homogeneizado'].unique())
     colores_inferior = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('Pantalón', case=False)]['color_homogeneizado'].unique())
+
+        # Obtener listas de colores válidos actualizados
+    colores_superior_validos = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)]['color_homogeneizado'].unique())
+    colores_inferior_validos = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('Pantalón', case=False)]['color_homogeneizado'].unique())
+
+    # Filtrar los valores inválidos en session_state para evitar errores
+    st.session_state.colores_superior = [c for c in st.session_state.colores_superior if c in colores_superior_validos]
+    st.session_state.colores_inferior = [c for c in st.session_state.colores_inferior if c in colores_inferior_validos]
+
+    # Multiselect para colores de la parte superior
+    seleccionados_superior = st.multiselect(
+        "Selecciona los colores para la parte superior:",
+        options=colores_superior_validos,
+        default=st.session_state.colores_superior
+    )
+
+    # Guardar selección en session_state
+    st.session_state.colores_superior = seleccionados_superior
+
+    # Multiselect para colores de la parte inferior
+    seleccionados_inferior = st.multiselect(
+        "Selecciona los colores para la parte inferior:",
+        options=colores_inferior_validos,
+        default=st.session_state.colores_inferior
+    )
+
+    # Guardar selección en session_state
+    st.session_state.colores_inferior = seleccionados_inferior
+
 
     # Para la parte superior
     st.write("Colores para la parte superior:")
