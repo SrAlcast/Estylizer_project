@@ -332,7 +332,7 @@ if st.session_state.page == 3:
     if "select_all_colores_superior" not in st.session_state:
         st.session_state.select_all_colores_superior = False
 
-    if st.button("Seleccionar Todo" if not st.session_state.select_all_colores_superior else "Deseleccionar Todo", key="toggle_colores_superior"):
+    if st.button("Todos los colores" if not st.session_state.select_all_colores_superior else "Quitar colores", key="toggle_colores_superior"):
         st.session_state.select_all_colores_superior = not st.session_state.select_all_colores_superior
         if st.session_state.select_all_colores_superior:
             st.session_state.colores_superior = list(colores_superior_validos)
@@ -354,7 +354,7 @@ if st.session_state.page == 3:
     if "select_all_colores_inferior" not in st.session_state:
         st.session_state.select_all_colores_inferior = False
 
-    if st.button("Seleccionar Todo" if not st.session_state.select_all_colores_inferior else "Deseleccionar Todo", key="toggle_colores_inferior"):
+    if st.button("Todos los colores" if not st.session_state.select_all_colores_inferior else "Quitar colores", key="toggle_colores_inferior"):
         st.session_state.select_all_colores_inferior = not st.session_state.select_all_colores_inferior
         if st.session_state.select_all_colores_inferior:
             st.session_state.colores_inferior = list(colores_inferior_validos)
@@ -371,79 +371,6 @@ if st.session_state.page == 3:
 
     # Guardar selección en session_state
     st.session_state.colores_inferior = seleccionados_inferior
-
-    #     # Obtener listas de colores válidos actualizados
-    # colores_superior_validos = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)]['color_homogeneizado'].unique())
-    # colores_inferior_validos = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('Pantalón', case=False)]['color_homogeneizado'].unique())
-
-    # # Filtrar los valores inválidos en session_state para evitar errores
-    # st.session_state.colores_superior = [c for c in st.session_state.colores_superior if c in colores_superior_validos]
-    # st.session_state.colores_inferior = [c for c in st.session_state.colores_inferior if c in colores_inferior_validos]
-
-    # # Multiselect para colores de la parte superior
-    # seleccionados_superior = st.multiselect(
-    #     "Selecciona los colores para la parte superior:",
-    #     options=colores_superior_validos,
-    #     default=st.session_state.colores_superior
-    # )
-
-    # # Guardar selección en session_state
-    # st.session_state.colores_superior = seleccionados_superior
-
-    # # Multiselect para colores de la parte inferior
-    # seleccionados_inferior = st.multiselect(
-    #     "Selecciona los colores para la parte inferior:",
-    #     options=colores_inferior_validos,
-    #     default=st.session_state.colores_inferior
-    # )
-
-    # # Guardar selección en session_state
-    # st.session_state.colores_inferior = seleccionados_inferior
-
-
-    # # Para la parte superior
-    # st.write("Colores para la parte superior:")
-
-    # # Botón "Seleccionar Todo" para los colores superiores
-    # if st.button("Seleccionar Todo" if not st.session_state.select_all_colores_superior else "Deseleccionar Todo", key="toggle_colores_superior"):
-    #     st.session_state.select_all_colores_superior = not st.session_state.select_all_colores_superior
-    #     if st.session_state.select_all_colores_superior:
-    #         st.session_state.colores_superior = list(colores_superior)
-    #     else:
-    #         st.session_state.colores_superior = []
-    #     st.rerun()
-
-    # # Crear un desplegable multiselección para los colores superiores
-    # seleccionados_superior = st.multiselect(
-    #     "Selecciona los colores para la parte superior:",
-    #     options=colores_superior,
-    #     default=st.session_state.colores_superior
-    # )
-
-    # # Guardar la selección en session_state
-    # st.session_state.colores_superior = seleccionados_superior
-
-    # # Para la parte inferior
-    # st.write("Colores para la parte inferior:")
-
-    # # Botón "Seleccionar Todo" para los colores inferiores
-    # if st.button("Seleccionar Todo" if not st.session_state.select_all_colores_inferior else "Deseleccionar Todo", key="toggle_colores_inferior"):
-    #     st.session_state.select_all_colores_inferior = not st.session_state.select_all_colores_inferior
-    #     if st.session_state.select_all_colores_inferior:
-    #         st.session_state.colores_inferior = list(colores_inferior)
-    #     else:
-    #         st.session_state.colores_inferior = []
-    #     st.rerun()
-
-    # # Crear un desplegable multiselección para los colores inferiores
-    # seleccionados_inferior = st.multiselect(
-    #     "Selecciona los colores para la parte inferior:",
-    #     options=colores_inferior,
-    #     default=st.session_state.colores_inferior
-    # )
-
-    # # Guardar la selección en session_state
-    # st.session_state.colores_inferior = seleccionados_inferior
 
     # Navegación entre páginas
     col1, col2 = st.columns([1, 1])
@@ -485,6 +412,41 @@ elif st.session_state.page == 4:
 
     if 'presupuesto_inferior' not in st.session_state:
         st.session_state.presupuesto_inferior = (int(min_price_inferior), int(promedio_inferior))
+
+    # CSS para agregar márgenes a los sliders
+    st.markdown(
+        """
+        <style>
+            .slider-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.subheader("Selecciona tu rango de presupuesto")
+
+    # Contenedor con margen para la barra de presupuesto superior
+    st.markdown('<div class="slider-container">', unsafe_allow_html=True)
+    st.session_state.presupuesto_superior = st.slider(
+        "Rango de presupuesto para la parte superior (€):",
+        min_value=int(min_price_superior),
+        max_value=int(max_price_superior),
+        value=st.session_state.presupuesto_superior
+    )
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Contenedor con margen para la barra de presupuesto inferior
+    st.markdown('<div class="slider-container">', unsafe_allow_html=True)
+    st.session_state.presupuesto_inferior = st.slider(
+        "Rango de presupuesto para la parte inferior (€):",
+        min_value=int(min_price_inferior),
+        max_value=int(max_price_inferior),
+        value=st.session_state.presupuesto_inferior
+    )
+    st.markdown('</div>', unsafe_allow_html=True)
 
     # Slider para rango de presupuesto superior
     st.session_state.presupuesto_superior = st.slider(
