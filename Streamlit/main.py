@@ -167,18 +167,10 @@ st.markdown(
         align-items: center;
         height: 100%;
     }
-    #reset-button button {
-        width: 200px !important;
-        background-color: red !important;
-        color: white !important;
-    }
     </style>
     """,
     unsafe_allow_html=True,
 )
-
-
-
 
 # Ruta relativa desde el script de ejecución
 image_path = Path("./src/Logo Estylizer 2.png")
@@ -244,12 +236,10 @@ if st.session_state.page == 1:
         if "confirm_reset" not in st.session_state:
             st.session_state.confirm_reset = False
 
-        # Usar un div con ID único para envolver el botón
-        st.markdown('<div id="reset-button">', unsafe_allow_html=True)
+        # Botón para solicitar confirmación
         if st.button("🔄 Resetear todo"):
             st.session_state.confirm_reset = True
-        st.markdown('</div>', unsafe_allow_html=True)
-        
+
         # Mostrar advertencia solo si el usuario ha presionado el botón
         if st.session_state.confirm_reset:
             st.warning("⚠️ ¿Seguro que quieres reiniciar el proceso?")
