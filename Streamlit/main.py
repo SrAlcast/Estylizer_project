@@ -511,7 +511,8 @@ elif st.session_state.page == 5:
                     st.write(f"**Match:** {superior['similaridad']}")
                     st.write(f"**Precio:** {superior['current_price']}€")
                     st.write(f"**Color:** {superior['color_homogeneizado']}")
-                    st.write(f"[Ver producto]({superior['url']})")
+                    if st.link_button("Ver producto", superior["url"]):
+                        pass  # El botón de enlace no requiere acciones adicionales
                     navigation_col1, spacer, navigation_col2 = st.columns([1, 0.3, 1])  # Agrega una columna pequeña para espacio
 
                     with navigation_col1:
@@ -559,8 +560,8 @@ elif st.session_state.page == 5:
                     st.write(f"**Match:** {inferior['similaridad']}")
                     st.write(f"**Precio:** {inferior['current_price']}€")
                     st.write(f"**Color:** {inferior['color_homogeneizado']}")
-                    st.write(f"[Ver producto]({inferior['url']})")
-
+                    if st.link_button("Ver producto", inferior["url"]):
+                        pass  # El botón de enlace no requiere acciones adicionales
                     navigation_col1, spacer, navigation_col2 = st.columns([1, 0.3, 1])  # Agrega una columna pequeña para espacio
 
                     with navigation_col1:
