@@ -584,6 +584,8 @@ if st.session_state.page == 5:
     # Mostrar el título centrado
     # Aplicando la clase al título y al divisor
     st.markdown('<div class="centered-title">Prendas recomendadas</div>', unsafe_allow_html=True)
+    st.write("Presupuesto superior:",                 st.session_state.presupuesto_superior[0],                 st.session_state.presupuesto_superior[1])
+    st.write("Presupuesto inferior:",                 st.session_state.presupuesto_inferior[0],                 st.session_state.presupuesto_inferior[1])
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
