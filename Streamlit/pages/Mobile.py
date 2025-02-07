@@ -628,7 +628,7 @@ if st.session_state.page == 5:
                             padding: 12px;
                             border-radius: 10px;
                             text-align: center;
-                            margin-bottom: 10px;
+                            margin-bottom: 15px;
                             font-size: 16px;
                             font-weight: 600;
                             text-decoration: none; /* Elimina el subrayado */
@@ -699,7 +699,7 @@ if st.session_state.page == 5:
                             padding: 12px;
                             border-radius: 10px;
                             text-align: center;
-                            margin-bottom: 10px;
+                            margin-bottom: 15px;
                             font-size: 16px;
                             font-weight: 600;
                             text-decoration: none; /* Elimina el subrayado */
