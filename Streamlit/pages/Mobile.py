@@ -197,7 +197,7 @@ st.markdown(
 # Centrar el logo en la pantalla con columnas de Streamlit
 col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
 with col2:
-    st.image("./src/Logo Estylizer 2.png", width=160)
+    st.image("./src/Logo Estylizer 2.png", width=150)
 
 
 
@@ -209,7 +209,7 @@ if st.session_state.page == 1:
         # Forzar el centrado de la imagen con un contenedor flexbox
         st.markdown(f"""
         <div class='image-container'>
-            <img src="{modelo_tags['image1_url']}" style="max-width: 250px;">
+            <img src="{modelo_tags['image1_url']}" style="max-width: 260px;">
         </div>
         """, unsafe_allow_html=True)
 
