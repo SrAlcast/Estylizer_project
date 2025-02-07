@@ -49,10 +49,7 @@ st.markdown(f"""
 # Contenedor para centrar los botones
 st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
 
-st.markdown("""<a href="pages/desktop.py" target="_self">
-<button class="stButton">Versión Desktop</button></a>""", unsafe_allow_html=True)
-
-st.markdown("""<a href="pages/Mobile.py" target="_self">
-<button class="stButton">Versión Mobile</button></a>""", unsafe_allow_html=True)
+st.page_link("pages/desktop.py", label="Versión Desktop")
+st.page_link("pages/Mobile.py", label="Versión Mobile")
 
 st.markdown("</div>", unsafe_allow_html=True)
