@@ -572,17 +572,45 @@ if st.session_state.page == 5:
                 st.markdown(f"<p style='text-align: center; font-size: 14px; margin-top: -15px;font-weight: bold;'>Match: {superior['similaridad'] * 100:.2f}%</p>", unsafe_allow_html=True)
 
                 # Botón similar a los de Streamlit
+                st.markdown(f"""
+                    <style>
+                        .full-width-button {{
+                            display: block;
+                            width: 100%;
+                            background-color: #0E0F11; /* Fondo oscuro */
+                            color: white;
+                            padding: 12px;
+                            border-radius: 10px; /* Bordes más redondeados */
+                            text-align: center;
+                            margin-bottom: 10px;
+                            font-size: 16px;
+                            font-weight: 600;
+                            text-decoration: none;
+                            border: 1px solid rgba(255, 255, 255, 0.2); /* Borde tenue */
+                            cursor: pointer;
+                            transition: all 0.2s ease-in-out;
+                        }}
+                        .full-width-button:hover {{
+                            background-color: rgba(255, 255, 255, 0.1); /* Efecto hover más claro */
+                            border: 1px solid rgba(255, 255, 255, 0.4);
+                        }}
+                        .full-width-button:active {{
+                            background-color: #D32F2F; /* Color rojo al presionar */
+                            border: 1px solid #D32F2F;
+                        }}
+                    </style>
+                    <a href="{superior['url']}" target="_blank" class="full-width-button">
+                        Ver producto
+                    </a>
+                """, unsafe_allow_html=True)
 
-                nav1, nav2,nav3 = st.columns([1, 1,1])
+                nav1, nav2 = st.columns([1, 1])
                 with nav1:
-                    st.link_button("Ver producto", superior["url"])
-
-                with nav2:
                     if sup_idx < len(st.session_state.superiores) - 1:
                         if st.button("Siguiente prenda", key=f"siguiente_sup_{sup_idx}"):
                             st.session_state.index_superior += 1
                             st.rerun()
-                with nav3:
+                with nav2:
                     if sup_idx > 0:
                         if st.button("Prenda anterior", key=f"anterior_sup_{sup_idx}"):
                             st.session_state.index_superior -= 1
@@ -619,31 +647,33 @@ if st.session_state.page == 5:
                         .full-width-button {{
                             display: block;
                             width: 100%;
-                            background-color: #F0F2F6; /* Color de fondo similar a los botones de Streamlit */
-                            color: black;
-                            padding: 10px;
-                            border-radius: 8px; /* Bordes más redondeados */
+                            background-color: #0E0F11; /* Fondo oscuro */
+                            color: white;
+                            padding: 12px;
+                            border-radius: 10px; /* Bordes más redondeados */
                             text-align: center;
                             margin-bottom: 10px;
                             font-size: 16px;
                             font-weight: 600;
                             text-decoration: none;
-                            border: 1px solid rgba(49, 51, 63, 0.2); /* Borde sutil */
+                            border: 1px solid rgba(255, 255, 255, 0.2); /* Borde tenue */
                             cursor: pointer;
                             transition: all 0.2s ease-in-out;
                         }}
                         .full-width-button:hover {{
-                            background-color: rgba(49, 51, 63, 0.1); /* Efecto hover más suave */
-                            border: 1px solid rgba(49, 51, 63, 0.4);
+                            background-color: rgba(255, 255, 255, 0.1); /* Efecto hover más claro */
+                            border: 1px solid rgba(255, 255, 255, 0.4);
                         }}
                         .full-width-button:active {{
-                            background-color: rgba(49, 51, 63, 0.2); /* Efecto de clic */
+                            background-color: #D32F2F; /* Color rojo al presionar */
+                            border: 1px solid #D32F2F;
                         }}
                     </style>
                     <a href="{inferior['url']}" target="_blank" class="full-width-button">
                         Ver producto
                     </a>
                 """, unsafe_allow_html=True)
+
 
 
                 nav1, nav2 = st.columns([1, 1])
