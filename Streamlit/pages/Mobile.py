@@ -199,25 +199,26 @@ st.markdown(
 # with col2:
 #     st.image("./src/Logo Estylizer 2.png", width=150)
 
+# Cargar imagen de manera segura con Streamlit
+logo_path = "./src/Logo Estylizer 2.png"  # Asegúrate de que esta ruta sea correcta
+
 # CSS para fijar el logo en la pantalla sin moverse
 st.markdown(
-    """
+    f"""
     <style>
-        .fixed-logo {
+        .fixed-logo {{
             position: fixed;
-            top: 10%;
+            top: 10px;
             left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000; /* Se mantiene arriba de otros elementos */
-        }
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: 150px;
+        }}
     </style>
+    <img src="{logo_path}" class="fixed-logo">
     """,
     unsafe_allow_html=True
 )
-
-# Mostrar el logo fijado en la pantalla
-st.markdown('<img src="https://github.com/SrAlcast/Estylizer_project/blob/main/src/Logo%20Estylizer%202.png" class="fixed-logo" width="150">', unsafe_allow_html=True)
-
 
 
 # Página 1: Selección de modelo_tags
