@@ -421,76 +421,89 @@ if st.session_state.page == 3:
 # Página 4: Selección de presupuesto
 elif st.session_state.page == 4:
     # Obtener rangos dinámicos para los presupuestos
-    max_price_superior = productos_tageados[
+    max_price_superior = int(productos_tageados[
         (productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)) &
         (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_superior))
-    ]['current_price'].max() + 1
+    ]['current_price'].max() + 1)
 
-    min_price_superior = productos_tageados[
+    min_price_superior = int(productos_tageados[
         (productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)) &
         (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_superior))
-    ]['current_price'].min()
+    ]['current_price'].min())
 
-    max_price_inferior = productos_tageados[
+    max_price_inferior = int(productos_tageados[
         (productos_tageados['Categoria'].str.contains('Pantalón', case=False)) &
         (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_inferior))
-    ]['current_price'].max() + 1
+    ]['current_price'].max() + 1)
 
-    min_price_inferior = productos_tageados[
+    min_price_inferior = int(productos_tageados[
         (productos_tageados['Categoria'].str.contains('Pantalón', case=False)) &
         (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_inferior))
-    ]['current_price'].min()
+    ]['current_price'].min())
 
-    # Verificar si los valores ya existen en session_state, si no, inicializarlos
+    # Inicializar valores en session_state solo si no existen
     if 'min_presupuesto_superior' not in st.session_state:
-        st.session_state.min_presupuesto_superior = int(min_price_superior)
+        st.session_state.min_presupuesto_superior = min_price_superior
     if 'max_presupuesto_superior' not in st.session_state:
-        st.session_state.max_presupuesto_superior = int(max_price_superior)
+        st.session_state.max_presupuesto_superior = max_price_superior
 
     if 'min_presupuesto_inferior' not in st.session_state:
-        st.session_state.min_presupuesto_inferior = int(min_price_inferior)
+        st.session_state.min_presupuesto_inferior = min_price_inferior
     if 'max_presupuesto_inferior' not in st.session_state:
-        st.session_state.max_presupuesto_inferior = int(max_price_inferior)
+        st.session_state.max_presupuesto_inferior = max_price_inferior
 
     st.subheader("Selecciona tu rango de presupuesto")
 
     # Entrada manual para presupuesto superior
     col1, col2 = st.columns(2)
     with col1:
-        st.session_state.min_presupuesto_superior = st.number_input(
+        nuevo_min_sup = st.number_input(
             "Presupuesto mínimo (parte superior) (€):",
-            min_value=int(min_price_superior),
-            max_value=int(max_price_superior),
+            min_value=min_price_superior,
+            max_value=st.session_state.max_presupuesto_superior,  # Evitar valores inconsistentes
             value=st.session_state.min_presupuesto_superior,
             step=1
         )
     with col2:
-        st.session_state.max_presupuesto_superior = st.number_input(
+        nuevo_max_sup = st.number_input(
             "Presupuesto máximo (parte superior) (€):",
-            min_value=int(min_price_superior),
-            max_value=int(max_price_superior),
+            min_value=nuevo_min_sup,  # Se asegura de que el máximo no sea menor al mínimo
+            max_value=max_price_superior,
             value=st.session_state.max_presupuesto_superior,
             step=1
         )
 
+    # Actualizar valores en session_state solo si cambian
+    if nuevo_min_sup != st.session_state.min_presupuesto_superior:
+        st.session_state.min_presupuesto_superior = nuevo_min_sup
+    if nuevo_max_sup != st.session_state.max_presupuesto_superior:
+        st.session_state.max_presupuesto_superior = nuevo_max_sup
+
     # Entrada manual para presupuesto inferior
     col3, col4 = st.columns(2)
     with col3:
-        st.session_state.min_presupuesto_inferior = st.number_input(
+        nuevo_min_inf = st.number_input(
             "Presupuesto mínimo (parte inferior) (€):",
-            min_value=int(min_price_inferior),
-            max_value=int(max_price_inferior),
+            min_value=min_price_inferior,
+            max_value=st.session_state.max_presupuesto_inferior,  # Evitar valores inconsistentes
             value=st.session_state.min_presupuesto_inferior,
             step=1
         )
     with col4:
-        st.session_state.max_presupuesto_inferior = st.number_input(
+        nuevo_max_inf = st.number_input(
             "Presupuesto máximo (parte inferior) (€):",
-            min_value=int(min_price_inferior),
-            max_value=int(max_price_inferior),
+            min_value=nuevo_min_inf,  # Se asegura de que el máximo no sea menor al mínimo
+            max_value=max_price_inferior,
             value=st.session_state.max_presupuesto_inferior,
             step=1
         )
+
+    # Actualizar valores en session_state solo si cambian
+    if nuevo_min_inf != st.session_state.min_presupuesto_inferior:
+        st.session_state.min_presupuesto_inferior = nuevo_min_inf
+    if nuevo_max_inf != st.session_state.max_presupuesto_inferior:
+        st.session_state.max_presupuesto_inferior = nuevo_max_inf
+
 
     st.markdown("---")
 
