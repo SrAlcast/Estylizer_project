@@ -180,26 +180,8 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# # CSS para evitar problemas de alineación con otros elementos de Streamlit
-# st.markdown(
-#     """
-#     <style>
-#         .st-emotion-cache-15in7te {
-#             display: flex;
-#             justify-content: center;
-#             align-items: center;
-#         }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
 
-# # Centrar el logo en la pantalla con columnas de Streamlit
-# col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
-# with col2:
-#     st.image("./src/Logo_Estylizer_2.png", width=150)
-
-# Forzar el centrado de la imagen con un contenedor flexbox
+# Imagen logo superior
 st.markdown(f"""
 <div class='image-container' style="margin-top: 15px; margin-bottom: 20px;">
     <img src="https://raw.githubusercontent.com/SrAlcast/Estylizer_project/refs/heads/main/src/Logo_Estylizer_2.png" style="max-width: 200px;">
@@ -555,7 +537,7 @@ elif st.session_state.page == 4:
 
 # Página 5: Mostrar recomendaciones
 if st.session_state.page == 5:
-    st.subheader("Prendas recomendadas", divider="blue")
+    st.subheader("Prendas recomendadas", divider="red")
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
@@ -589,7 +571,7 @@ if st.session_state.page == 5:
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{superior['product_name']} - {superior['current_price']}€</p>", unsafe_allow_html=True)
                 # Botón similar a los de Streamlit
                 st.markdown(f"""
-                    <a href="{superior['url']}" target="_blank" style="display: block; width: 100%; text-align: center; background-color: #007BFF; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">
+                    <a href="{superior['url']}" target="_blank" style="display: block; width: 100%;margin-bottom: 20px;text-align: center; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">
                         Ver producto
                     </a>
                 """, unsafe_allow_html=True)
@@ -632,7 +614,7 @@ if st.session_state.page == 5:
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{inferior['product_name']} - {inferior['current_price']}€</p>", unsafe_allow_html=True)
                 # Botón similar a los de Streamlit
                 st.markdown(f"""
-                    <a href="{inferior['url']}" target="_blank" style="display: block; width: 100%; text-align: center; background-color: #007BFF; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">
+                    <a href="{inferior['url']}" target="_blank" style="display: block; width: 100%;margin-bottom: 20px; text-align: center; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">
                         Ver producto
                     </a>
                 """, unsafe_allow_html=True)
