@@ -180,24 +180,31 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# CSS para evitar problemas de alineación con otros elementos de Streamlit
-st.markdown(
-    """
-    <style>
-        .st-emotion-cache-15in7te {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# # CSS para evitar problemas de alineación con otros elementos de Streamlit
+# st.markdown(
+#     """
+#     <style>
+#         .st-emotion-cache-15in7te {
+#             display: flex;
+#             justify-content: center;
+#             align-items: center;
+#         }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 
-# Centrar el logo en la pantalla con columnas de Streamlit
-col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
-with col2:
-    st.image("./src/Logo_Estylizer_2.png", width=150)
+# # Centrar el logo en la pantalla con columnas de Streamlit
+# col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
+# with col2:
+#     st.image("./src/Logo_Estylizer_2.png", width=150)
+
+# Forzar el centrado de la imagen con un contenedor flexbox
+st.markdown(f"""
+<div class='image-container'>
+    <img src="./src/Logo_Estylizer_2.png" style="max-width: 260px;">
+</div>
+""", unsafe_allow_html=True)
 
 
 # Página 1: Selección de modelo_tags

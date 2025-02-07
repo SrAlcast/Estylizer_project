@@ -180,7 +180,7 @@ if image_path.exists():
     col1, col2, col3 = st.columns([1, 2, 1], gap="large")  # Centra la imagen
     with col2:
         st.markdown('<div class="stColumn">', unsafe_allow_html=True)
-        st.image(str(image_path), width=250)  # Convertir a str y reducir tamaño
+        st.image(str(image_path), width=300)  # Convertir a str y reducir tamaño
         st.markdown('</div>', unsafe_allow_html=True)
 else:
     st.error("La imagen no se encontró.")
