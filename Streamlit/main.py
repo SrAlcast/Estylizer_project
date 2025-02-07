@@ -9,8 +9,8 @@ col1, col2 = st.columns(2)
 
 with col1:
     if st.button("Versión Móvil 📱"):
-        st.switch_page("mobile")
+        st.page_link("pages/mobile.py")
 
 with col2:
     if st.button("Versión Escritorio 🖥️"):
-        st.switch_page("desktop")
+        st.page_link("pages/desktop.py")
