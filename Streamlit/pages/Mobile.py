@@ -185,14 +185,25 @@ st.markdown(
 # st.image("./src/Logo Estylizer 2.png", width=150)
 # st.markdown("</div>", unsafe_allow_html=True)
 
+# CSS para centrar solo la imagen del logo en la pantalla
+st.markdown(
+    """
+    <style>
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ocupa toda la pantalla */
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-
-
-col2= st.columns([2], gap="large")  # Centra la imagen
-with col2:
-    st.markdown('<div class="stColumn">', unsafe_allow_html=True)
-    st.image("./src/Logo Estylizer 2.png", width=150)  
-    st.markdown('</div>', unsafe_allow_html=True)
+# Mostrar el logo centrado
+st.markdown('<div class="logo-container">', unsafe_allow_html=True)
+st.image("./src/Logo Estylizer 2.png", width=150)
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # Página 1: Selección de modelo_tags
