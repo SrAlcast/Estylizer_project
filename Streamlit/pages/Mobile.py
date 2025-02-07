@@ -577,21 +577,21 @@ if st.session_state.page == 5:
                         .full-width-button {{
                             display: block;
                             width: 100%;
-                            background-color: #0E0F11; /* Fondo oscuro */
-                            color: white;
+                            background-color: rgb(19, 22, 30); /* Color exacto del botón */
+                            color: white; /* Texto en blanco */
                             padding: 12px;
-                            border-radius: 10px; /* Bordes más redondeados */
+                            border-radius: 10px;
                             text-align: center;
                             margin-bottom: 10px;
                             font-size: 16px;
                             font-weight: 600;
-                            text-decoration: none;
-                            border: 1px solid rgba(255, 255, 255, 0.2); /* Borde tenue */
+                            text-decoration: none; /* Elimina el subrayado */
+                            border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
                             cursor: pointer;
                             transition: all 0.2s ease-in-out;
                         }}
                         .full-width-button:hover {{
-                            background-color: rgba(255, 255, 255, 0.1); /* Efecto hover más claro */
+                            background-color: rgba(255, 255, 255, 0.1);
                             border: 1px solid rgba(255, 255, 255, 0.4);
                         }}
                         .full-width-button:active {{
@@ -603,6 +603,7 @@ if st.session_state.page == 5:
                         Ver producto
                     </a>
                 """, unsafe_allow_html=True)
+
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
@@ -647,21 +648,21 @@ if st.session_state.page == 5:
                         .full-width-button {{
                             display: block;
                             width: 100%;
-                            background-color: #0E0F11; /* Fondo oscuro */
-                            color: white;
+                            background-color: rgb(19, 22, 30); /* Color exacto del botón */
+                            color: white; /* Texto en blanco */
                             padding: 12px;
-                            border-radius: 10px; /* Bordes más redondeados */
+                            border-radius: 10px;
                             text-align: center;
                             margin-bottom: 10px;
                             font-size: 16px;
                             font-weight: 600;
-                            text-decoration: none;
-                            border: 1px solid rgba(255, 255, 255, 0.2); /* Borde tenue */
+                            text-decoration: none; /* Elimina el subrayado */
+                            border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
                             cursor: pointer;
                             transition: all 0.2s ease-in-out;
                         }}
                         .full-width-button:hover {{
-                            background-color: rgba(255, 255, 255, 0.1); /* Efecto hover más claro */
+                            background-color: rgba(255, 255, 255, 0.1);
                             border: 1px solid rgba(255, 255, 255, 0.4);
                         }}
                         .full-width-button:active {{
