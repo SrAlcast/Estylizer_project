@@ -180,24 +180,43 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# CSS para evitar problemas de alineación con otros elementos de Streamlit
+# # CSS para evitar problemas de alineación con otros elementos de Streamlit
+# st.markdown(
+#     """
+#     <style>
+#         .st-emotion-cache-15in7te {
+#             display: flex;
+#             justify-content: center;
+#             align-items: center;
+#         }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
+
+# # Centrar el logo en la pantalla con columnas de Streamlit
+# col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
+# with col2:
+#     st.image("./src/Logo Estylizer 2.png", width=150)
+
+# CSS para fijar el logo en la pantalla sin moverse
 st.markdown(
     """
     <style>
-        .st-emotion-cache-15in7te {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .fixed-logo {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000; /* Se mantiene arriba de otros elementos */
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Centrar el logo en la pantalla con columnas de Streamlit
-col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
-with col2:
-    st.image("./src/Logo Estylizer 2.png", width=150)
+# Mostrar el logo fijado en la pantalla
+st.markdown('<img src="./src/Logo Estylizer 2.png" class="fixed-logo" width="150">', unsafe_allow_html=True)
 
 
 
