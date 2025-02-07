@@ -173,7 +173,7 @@ st.markdown(
 )
 
 # Ruta relativa desde el script de ejecución
-image_path = Path("./src/Estylizer_white.png")
+image_path = Path("./src/Logo_Estylizer_2.png")
 
 if image_path.exists():
     # Usar columnas para centrar la imagen
