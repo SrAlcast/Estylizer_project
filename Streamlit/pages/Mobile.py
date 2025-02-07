@@ -548,7 +548,8 @@ elif st.session_state.page == 4:
 # Página 5: Mostrar recomendaciones
 if st.session_state.page == 5:
     # Mostrar el título centrado
-    st.markdown('<h3 class="centered" style="color: red;">Prendas recomendadas</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 class="centered";">Prendas recomendadas</h3>', unsafe_allow_html=True)
+    st.markdown('<hr style="border: 2px solid red;">', unsafe_allow_html=True)
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
