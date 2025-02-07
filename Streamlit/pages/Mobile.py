@@ -569,7 +569,7 @@ if st.session_state.page == 5:
                 """, unsafe_allow_html=True)
 
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{superior['product_name']} - {superior['current_price']}€</p>", unsafe_allow_html=True)
-                st.markdown(f"<p style='text-align: center; font-size: 14px; margin-top: -10px;font-weight: bold;'>Match: {superior['similaridad'] * 100:.2f}%</p>", unsafe_allow_html=True)
+                st.markdown(f"<p style='text-align: center; font-size: 14px; margin-top: -15px;font-weight: bold;'>Match: {superior['similaridad'] * 100:.2f}%</p>", unsafe_allow_html=True)
 
                 # Botón similar a los de Streamlit
 
@@ -612,18 +612,18 @@ if st.session_state.page == 5:
                     </div>
                 """, unsafe_allow_html=True)
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{inferior['product_name']} - {inferior['current_price']}€</p>", unsafe_allow_html=True)
-                st.markdown(f"<p style='text-align: center; font-size: 14px; margin-top: -10px;font-weight: bold;'>Match: {inferior['similaridad'] * 100:.2f}%</p>", unsafe_allow_html=True)
+                st.markdown(f"<p style='text-align: center; font-size: 14px; margin-top: -15px;font-weight: bold;'>Match: {inferior['similaridad'] * 100:.2f}%</p>", unsafe_allow_html=True)
                 # Botón similar a los de Streamlit
                 st.markdown(f"""
                     <style>
                         .full-width-button {{
                             display: block;
                             width: 100%;
-                            background-color: #007BFF;
                             color: white;
                             padding: 10px;
                             border-radius: 5px;
                             text-align: center;
+                            margin-botton: 10px;
                             font-size: 16px;
                             font-weight: bold;
                             text-decoration: none;
