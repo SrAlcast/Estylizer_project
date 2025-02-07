@@ -623,11 +623,11 @@ if st.session_state.page == 5:
                             padding: 10px;
                             border-radius: 5px;
                             text-align: center;
-                            margin-botton: 10px;
+                            margin-bottom: 10px;
                             font-size: 16px;
                             font-weight: bold;
                             text-decoration: none;
-                            border: none;
+                            border: grey;
                             cursor: pointer;
                         }}
                         .full-width-button:hover {{
