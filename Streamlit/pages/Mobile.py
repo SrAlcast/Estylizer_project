@@ -185,32 +185,24 @@ st.markdown(
 # st.image("./src/Logo Estylizer 2.png", width=150)
 # st.markdown("</div>", unsafe_allow_html=True)
 
-# CSS optimizado para móviles
-
-# CSS optimizado para centrar el logo en todas las pantallas, incluyendo móviles
+# CSS para evitar problemas de alineación con otros elementos de Streamlit
 st.markdown(
     """
     <style>
-        .logo-wrapper {
-            position: relative;
-            height: 100vh; /* Ocupa el alto completo del viewport */
+        .st-emotion-cache-15in7te {
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        .logo-container img {
-            max-width: 60%; /* Ajusta el tamaño del logo en móviles */
-            height: auto;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Contenedor del logo
-st.markdown('<div class="logo-wrapper"><div class="logo-container">', unsafe_allow_html=True)
-st.image("./src/Logo Estylizer 2.png", width=150)
-st.markdown('</div></div>', unsafe_allow_html=True)
+# Centrar el logo en la pantalla con columnas de Streamlit
+col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
+with col2:
+    st.image("./src/Logo Estylizer 2.png", width=150)
 
 
 
