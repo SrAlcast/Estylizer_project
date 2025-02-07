@@ -184,27 +184,16 @@ st.markdown(
 # st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
 # st.image("./src/Logo Estylizer 2.png", width=150)
 # st.markdown("</div>", unsafe_allow_html=True)
-import streamlit as st
 
-# CSS inline solo para este elemento
-st.markdown(
-    """
-    <style>
-        .image-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px; /* Ajusta la altura según sea necesario */
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
-# Usar st.image() dentro de un div con la clase específica
-st.markdown('<div class="image-container">', unsafe_allow_html=True)
-st.image("./src/Logo Estylizer 2.png", width=150)
-st.markdown('</div>', unsafe_allow_html=True)
+
+
+col1, col2, col3 = st.columns([1, 2, 1], gap="large")  # Centra la imagen
+with col2:
+    st.markdown('<div class="stColumn">', unsafe_allow_html=True)
+    st.image("./src/Logo Estylizer 2.png", width=300)  # Convertir a str y reducir tamaño
+    st.markdown('</div>', unsafe_allow_html=True)
+
 
 # Página 1: Selección de modelo_tags
 if st.session_state.page == 1:
