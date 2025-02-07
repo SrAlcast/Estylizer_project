@@ -6,10 +6,10 @@ st.markdown(
     """
     <style>
     .stButton > button {
-        width: 300px !important;
-        height: 60px !important;
+        width: 350px !important;
+        height: 70px !important;
         border-radius: 15px !important;
-        font-size: 20px !important;
+        font-size: 22px !important;
         font-weight: bold;
     }
     .centered-container {
@@ -18,6 +18,8 @@ st.markdown(
         align-items: center;
         width: 100%;
         flex-direction: column;
+        gap: 20px;
+        margin-top: 30px;
     }
     .image-container {
         display: flex;
