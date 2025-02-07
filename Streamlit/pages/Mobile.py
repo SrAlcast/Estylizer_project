@@ -504,6 +504,11 @@ elif st.session_state.page == 4:
     if nuevo_max_inf != st.session_state.max_presupuesto_inferior:
         st.session_state.max_presupuesto_inferior = nuevo_max_inf
 
+    if 'presupuesto_superior' not in st.session_state:
+        st.session_state.presupuesto_superior = [st.session_state.min_presupuesto_superior, st.session_state.max_presupuesto_superior]
+
+    if 'presupuesto_inferior' not in st.session_state:
+        st.session_state.presupuesto_inferior = [st.session_state.min_presupuesto_inferior, st.session_state.max_presupuesto_inferior]
 
     st.markdown("---")
 
