@@ -180,11 +180,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Mostrar logo centrado
-# st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
-# st.image("./src/Logo Estylizer 2.png", width=150)
-# st.markdown("</div>", unsafe_allow_html=True)
-
 # CSS para evitar problemas de alineación con otros elementos de Streamlit
 st.markdown(
     """
@@ -217,10 +212,6 @@ if st.session_state.page == 1:
             <img src="{modelo_tags['image1_url']}" style="max-width: 240px;">
         </div>
         """, unsafe_allow_html=True)
-
-        # Barra de progreso con numeración
-        progreso = (st.session_state.modelo_tags_index + 1) / 8
-        st.progress(progreso)
 
         # Centrar los botones usando columnas
         col1, col2, col3 = st.columns([1, 2, 1])
