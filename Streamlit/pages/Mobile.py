@@ -430,8 +430,7 @@ if st.session_state.page == 3:
 
 # Página 4: Selección de presupuesto
 elif st.session_state.page == 4:
-
-# Función para actualizar los valores en session_state y forzar la actualización
+    # Función para actualizar los valores en session_state y forzar la actualización
     def actualizar_presupuesto_sup():
         st.session_state.min_presupuesto_superior = st.session_state.nuevo_min_sup
         st.session_state.max_presupuesto_superior = st.session_state.nuevo_max_sup
@@ -444,7 +443,7 @@ elif st.session_state.page == 4:
         if 'inferiores' in st.session_state:
             del st.session_state.inferiores  # Elimina recomendaciones para forzar recalculo
 
-    # Obtener rangos dinámicos para los presupuestos
+    # Número mínimo y máximo de precio dinámico basado en los productos
     max_price_superior = int(productos_tageados[
         (productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)) &
         (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_superior))
@@ -478,26 +477,6 @@ elif st.session_state.page == 4:
 
     st.markdown('<div class="centered-title">Selecciona tu rango de precios</div>', unsafe_allow_html=True)
 
-    # Función para actualizar los valores en session_state
-    def actualizar_presupuesto_sup():
-        st.session_state.min_presupuesto_superior = st.session_state.nuevo_min_sup
-        st.session_state.max_presupuesto_superior = st.session_state.nuevo_max_sup
-
-    def actualizar_presupuesto_inf():
-        st.session_state.min_presupuesto_inferior = st.session_state.nuevo_min_inf
-        st.session_state.max_presupuesto_inferior = st.session_state.nuevo_max_inf
-
-    # Asegurar valores iniciales en session_state
-    if 'min_presupuesto_superior' not in st.session_state:
-        st.session_state.min_presupuesto_superior = min_price_superior
-    if 'max_presupuesto_superior' not in st.session_state:
-        st.session_state.max_presupuesto_superior = max_price_superior
-
-    if 'min_presupuesto_inferior' not in st.session_state:
-        st.session_state.min_presupuesto_inferior = min_price_inferior
-    if 'max_presupuesto_inferior' not in st.session_state:
-        st.session_state.max_presupuesto_inferior = max_price_inferior
-
     # Selectores de precio con actualización en tiempo real
     col1, col2 = st.columns(2)
     with col1:
@@ -508,7 +487,7 @@ elif st.session_state.page == 4:
             value=st.session_state.min_presupuesto_superior,
             step=1,
             key="nuevo_min_sup",
-            on_change=actualizar_presupuesto_sup
+            on_change=actualizar_presupuesto_sup  # Llama a la función al cambiar el valor
         )
     with col2:
         st.number_input(
@@ -518,7 +497,7 @@ elif st.session_state.page == 4:
             value=st.session_state.max_presupuesto_superior,
             step=1,
             key="nuevo_max_sup",
-            on_change=actualizar_presupuesto_sup
+            on_change=actualizar_presupuesto_sup  # Llama a la función al cambiar el valor
         )
 
     col3, col4 = st.columns(2)
@@ -530,7 +509,7 @@ elif st.session_state.page == 4:
             value=st.session_state.min_presupuesto_inferior,
             step=1,
             key="nuevo_min_inf",
-            on_change=actualizar_presupuesto_inf
+            on_change=actualizar_presupuesto_inf  # Llama a la función al cambiar el valor
         )
     with col4:
         st.number_input(
@@ -540,9 +519,8 @@ elif st.session_state.page == 4:
             value=st.session_state.max_presupuesto_inferior,
             step=1,
             key="nuevo_max_inf",
-            on_change=actualizar_presupuesto_inf
+            on_change=actualizar_presupuesto_inf  # Llama a la función al cambiar el valor
         )
-
 
     if 'presupuesto_superior' not in st.session_state:
         st.session_state.presupuesto_superior = [st.session_state.min_presupuesto_superior, st.session_state.max_presupuesto_superior]
