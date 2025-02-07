@@ -465,13 +465,13 @@ elif st.session_state.page == 4:
     if 'max_presupuesto_inferior' not in st.session_state:
         st.session_state.max_presupuesto_inferior = max_price_inferior
 
-    st.subheader("Selecciona tu rango de presupuesto")
+    st.markdown('<div class="centered-title">Selecciona tu rango de precios</div>', unsafe_allow_html=True)
 
     # Entrada manual para presupuesto superior
     col1, col2 = st.columns(2)
     with col1:
         nuevo_min_sup = st.number_input(
-            "Presupuesto mínimo (parte superior) (€):",
+            "Precio mínimo (parte superior) (€):",
             min_value=min_price_superior,
             max_value=st.session_state.max_presupuesto_superior,  # Evitar valores inconsistentes
             value=st.session_state.min_presupuesto_superior,
@@ -479,7 +479,7 @@ elif st.session_state.page == 4:
         )
     with col2:
         nuevo_max_sup = st.number_input(
-            "Presupuesto máximo (parte superior) (€):",
+            "Precio máximo (parte superior) (€):",
             min_value=nuevo_min_sup,  # Se asegura de que el máximo no sea menor al mínimo
             max_value=max_price_superior,
             value=st.session_state.max_presupuesto_superior,
@@ -496,7 +496,7 @@ elif st.session_state.page == 4:
     col3, col4 = st.columns(2)
     with col3:
         nuevo_min_inf = st.number_input(
-            "Presupuesto mínimo (parte inferior) (€):",
+            "Precio mínimo (parte inferior) (€):",
             min_value=min_price_inferior,
             max_value=st.session_state.max_presupuesto_inferior,  # Evitar valores inconsistentes
             value=st.session_state.min_presupuesto_inferior,
@@ -504,7 +504,7 @@ elif st.session_state.page == 4:
         )
     with col4:
         nuevo_max_inf = st.number_input(
-            "Presupuesto máximo (parte inferior) (€):",
+            "Precio máximo (parte inferior) (€):",
             min_value=nuevo_min_inf,  # Se asegura de que el máximo no sea menor al mínimo
             max_value=max_price_inferior,
             value=st.session_state.max_presupuesto_inferior,
