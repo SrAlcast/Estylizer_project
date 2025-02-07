@@ -5,20 +5,12 @@ st.set_page_config(page_title="Selector de versión", layout="centered")
 st.markdown(
     """
     <style>
-    .block-container {
-        padding-top: 2rem !important;
-        margin: auto;
-    }
     .stButton > button {
-        width: 100%;
-        border-radius: 10px;
-        font-size: 16px;
-    }
-    .title-text {
-        text-align: center;
-        font-size: 28px;
+        width: 300px !important;
+        height: 60px !important;
+        border-radius: 15px !important;
+        font-size: 20px !important;
         font-weight: bold;
-        color: #ff5733;
     }
     .centered-container {
         display: flex;
@@ -38,38 +30,11 @@ st.markdown(
         height: auto;
         border-radius: 10px;
     }
-    .centered-title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 22px;
-        font-weight: bold;
-        color: white;
-    }
-    .divider {
-        width: 50%;
-        margin: auto;
-        border: 1px solid red; /* Línea muy fina */
-    }
-    .centered {
-        text-align: center;
-    }
-    .coste-total {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
-        color: white;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        }
     </style>
     """,
     unsafe_allow_html=True,
 )
+
 # Imagen logo superior
 st.markdown(f"""
 <div class='image-container' style="margin-top: 15px; margin-bottom: 20px;">
@@ -77,10 +42,10 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-col1, col2 = st.columns(2)
+# Contenedor para centrar los botones
+st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
 
-with col1:
-    st.page_link("pages/desktop.py")
+st.page_link("pages/desktop.py", label="Versión Desktop")
+st.page_link("pages/Mobile.py", label="Versión Mobile")
 
-with col2:
-    st.page_link("pages/Mobile.py")
+st.markdown("</div>", unsafe_allow_html=True)
