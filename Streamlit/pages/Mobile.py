@@ -283,25 +283,12 @@ if st.session_state.page == 1:
 
 # Página 2: Selección de tipo de parte superior
 if st.session_state.page == 2:
-    st.subheader("¿Qué tipo de prenda quieres para la parte superior? (Selecciona múltiples opciones)")
-    tipos = ["Camiseta", "Camisa", "Sudadera", "Jersey", "Polo", "Sobrecamisa"]
-    
+    st.subheader("¿Qué tipo de prenda quieres para la parte superior? (Selecciona múltiples opciones)")    
     if "select_all" not in st.session_state:
         st.session_state.select_all = False
 
     if "tipos_superior" not in st.session_state:
         st.session_state.tipos_superior = []
-
-    def toggle_select_all():
-        if st.session_state.select_all:
-            st.session_state.tipos_superior = tipos_superior_validos.copy()
-        else:
-            st.session_state.tipos_superior = []
-
-    if st.button("Seleccionar Todo" if not st.session_state.select_all else "Deseleccionar Todo"):
-        st.session_state.select_all = not st.session_state.select_all
-        toggle_select_all()
-        st.rerun()
 
     tipos_superior_validos = ["Camiseta", "Camisa", "Sudadera", "Jersey", "Polo", "Sobrecamisa"]
 
@@ -319,6 +306,16 @@ if st.session_state.page == 2:
         on_change=update_tipos_superior
     )
 
+    def toggle_select_all():
+        if st.session_state.select_all:
+            st.session_state.tipos_superior = tipos_superior_validos.copy()
+        else:
+            st.session_state.tipos_superior = []
+
+    if st.button("Seleccionar Todo" if not st.session_state.select_all else "Deseleccionar Todo"):
+        st.session_state.select_all = not st.session_state.select_all
+        toggle_select_all()
+        st.rerun()
     # Guardar la selección en session_state
     st.session_state.tipos_superior = seleccionados_tipos_superior
 
