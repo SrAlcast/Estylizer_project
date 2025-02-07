@@ -571,10 +571,18 @@ if st.session_state.page == 5:
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{superior['product_name']} - {superior['current_price']}€</p>", unsafe_allow_html=True)
                 # Botón similar a los de Streamlit
                 st.markdown(f"""
-                    <a href="{superior['url']}" target="_blank" style="display: block; width: 100%;margin-bottom: 20px;text-align: center; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">
+                    <style>
+                        .custom-button {{display: block;width: 100%;background-color: #007BFF;color: white;padding: 10px;border-radius: 5px;text-align: center;font-size: 16px;font-weight: bold;text-decoration: none;border: none;cursor: pointer;
+                        }}
+                        .custom-button:hover {{
+                            background-color: #0056b3;
+                        }}
+                    </style>
+                    <a href="{superior['url']}" target="_blank" class="custom-button">
                         Ver producto
                     </a>
                 """, unsafe_allow_html=True)
+
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
