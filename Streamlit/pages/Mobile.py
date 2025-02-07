@@ -8,7 +8,7 @@ import sys
 sys.path.append("./src/")
 import support_mongo as sm
 
-st.set_page_config(page_title="Estylizer - Recomendaciones", layout="centered")
+st.set_page_config(page_title="Estylizer - Recomendador de ropa", layout="centered", page_icon="👕")
 
 def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_superior, tags_rechazados_general, tags_rechazados_superior, tipos_superior, colores_superior, presupuesto_superior_min, presupuesto_superior_max):
     
