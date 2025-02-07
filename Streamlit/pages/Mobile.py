@@ -350,15 +350,6 @@ if st.session_state.page == 3:
     def update_colores_inferior():
         st.session_state.colores_inferior = st.session_state["seleccionados_colores_inferior"]
 
-    # Botón para seleccionar todos los colores superiores
-    if st.button("Todos los colores" if not st.session_state.select_all_colores_superior else "Quitar colores", key="toggle_colores_superior"):
-        st.session_state.select_all_colores_superior = not st.session_state.select_all_colores_superior
-        if st.session_state.select_all_colores_superior:
-            st.session_state.colores_superior = list(colores_superior_validos)
-        else:
-            st.session_state.colores_superior = []
-        st.rerun()
-
     # Multiselect para colores superiores
     seleccionados_superior=st.multiselect(
         "Selecciona los colores para la parte superior:",
@@ -368,20 +359,20 @@ if st.session_state.page == 3:
         on_change=update_colores_superior
     )
 
+    # Botón para seleccionar todos los colores superiores
+    if st.button("Todos los colores" if not st.session_state.select_all_colores_superior else "Quitar colores", key="toggle_colores_superior"):
+        st.session_state.select_all_colores_superior = not st.session_state.select_all_colores_superior
+        if st.session_state.select_all_colores_superior:
+            st.session_state.colores_superior = list(colores_superior_validos)
+        else:
+            st.session_state.colores_superior = []
+        st.rerun()
     # Guardar selección en session_state
     st.session_state.colores_superior = seleccionados_superior
 
     # Manejo del botón "Seleccionar Todo" para colores inferiores
     if "select_all_colores_inferior" not in st.session_state:
         st.session_state.select_all_colores_inferior = False
-
-    if st.button("Todos los colores" if not st.session_state.select_all_colores_inferior else "Quitar colores", key="toggle_colores_inferior"):
-        st.session_state.select_all_colores_inferior = not st.session_state.select_all_colores_inferior
-        if st.session_state.select_all_colores_inferior:
-            st.session_state.colores_inferior = list(colores_inferior_validos)
-        else:
-            st.session_state.colores_inferior = []
-        st.rerun()
 
     # Multiselect para colores inferiores
     seleccionados_inferior = st.multiselect(
@@ -391,6 +382,14 @@ if st.session_state.page == 3:
         key="seleccionados_colores_inferior",
         on_change=update_colores_inferior
     )
+    
+    if st.button("Todos los colores" if not st.session_state.select_all_colores_inferior else "Quitar colores", key="toggle_colores_inferior"):
+        st.session_state.select_all_colores_inferior = not st.session_state.select_all_colores_inferior
+        if st.session_state.select_all_colores_inferior:
+            st.session_state.colores_inferior = list(colores_inferior_validos)
+        else:
+            st.session_state.colores_inferior = []
+        st.rerun()
 
     # Guardar selección en session_state
     st.session_state.colores_inferior = seleccionados_inferior
