@@ -197,7 +197,7 @@ st.markdown(
 # Centrar el logo en la pantalla con columnas de Streamlit
 col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
 with col2:
-    st.image("./src/Logo_Estylizer_2.png", width=150)
+    st.image("./src/Estylizer_white.png", width=150)
 
 
 # Página 1: Selección de modelo_tags
