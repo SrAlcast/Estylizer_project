@@ -186,25 +186,36 @@ st.markdown(
 # st.markdown("</div>", unsafe_allow_html=True)
 
 # CSS optimizado para móviles
+
+# CSS optimizado para centrar el logo en móviles y escritorio
 st.markdown(
     """
     <style>
         .logo-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;  /* Usa min-height para ocupar toda la pantalla incluso en móviles */
             width: 100%;
+            height: auto;
+        }
+        img {
+            max-width: 80%;
+            height: auto;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Mostrar el logo centrado
+# Mostrar el logo centrado en pantalla sin afectar otros elementos
 st.markdown('<div class="logo-container">', unsafe_allow_html=True)
 st.image("./src/Logo Estylizer 2.png", width=150)
 st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 # Página 1: Selección de modelo_tags
