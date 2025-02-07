@@ -619,25 +619,32 @@ if st.session_state.page == 5:
                         .full-width-button {{
                             display: block;
                             width: 100%;
-                            color: white;
+                            background-color: #F0F2F6; /* Color de fondo similar a los botones de Streamlit */
+                            color: black;
                             padding: 10px;
-                            border-radius: 5px;
+                            border-radius: 8px; /* Bordes más redondeados */
                             text-align: center;
                             margin-bottom: 10px;
                             font-size: 16px;
-                            font-weight: bold;
+                            font-weight: 600;
                             text-decoration: none;
-                            border: grey;
+                            border: 1px solid rgba(49, 51, 63, 0.2); /* Borde sutil */
                             cursor: pointer;
+                            transition: all 0.2s ease-in-out;
                         }}
                         .full-width-button:hover {{
-                            background-color: #0056b3;
+                            background-color: rgba(49, 51, 63, 0.1); /* Efecto hover más suave */
+                            border: 1px solid rgba(49, 51, 63, 0.4);
+                        }}
+                        .full-width-button:active {{
+                            background-color: rgba(49, 51, 63, 0.2); /* Efecto de clic */
                         }}
                     </style>
                     <a href="{inferior['url']}" target="_blank" class="full-width-button">
                         Ver producto
                     </a>
                 """, unsafe_allow_html=True)
+
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
