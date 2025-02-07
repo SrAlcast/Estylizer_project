@@ -582,18 +582,30 @@ if st.session_state.page == 5:
     else:
         st.warning("No se encontraron prendas recomendadas para la parte inferior.")
 
-    # Calcular el costo total del outfit
-    coste_total = superior['current_price'] + inferior['current_price']
+        # Verifica si hay productos recomendados
+    if 'superiores' in st.session_state and not st.session_state.superiores.empty:
+        superior = st.session_state.superiores.iloc[st.session_state.index_superior]
+    else:
+        superior = None
 
-    # Mostrar el costo total con margen
-    st.markdown(
-        f"""
-        <div style="margin-top: 20px;margin-bottom: 10px; font-size: 18px; font-weight: bold;">
-            💰 <strong>Coste Total del Outfit:</strong> {coste_total:.2f}€
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    if 'inferiores' in st.session_state and not st.session_state.inferiores.empty:
+        inferior = st.session_state.inferiores.iloc[st.session_state.index_inferior]
+    else:
+        inferior = None
+
+    # Calcular el costo total solo si hay recomendaciones
+    if superior is not None and inferior is not None:
+        coste_total = superior['current_price'] + inferior['current_price']
+        st.markdown(
+            f"""
+            <div style="margin-top: 20px;margin-bottom: 10px; font-size: 18px; font-weight: bold;">
+                💰 <strong>Coste Total del Outfit:</strong> {coste_total:.2f}€
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    else:
+        st.warning("No se encontraron suficientes prendas para recomendar un outfit completo.")
 
     # Botones de navegación
     st.markdown("---")
