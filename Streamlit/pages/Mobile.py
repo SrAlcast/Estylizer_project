@@ -179,6 +179,16 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+st.markdown(
+    """
+    <style>
+    .centered {
+        text-align: center;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # Imagen logo superior
@@ -537,7 +547,8 @@ elif st.session_state.page == 4:
 
 # Página 5: Mostrar recomendaciones
 if st.session_state.page == 5:
-    st.subheader("Prendas recomendadas", divider="red")
+    # Mostrar el título centrado
+    st.markdown('<h3 class="centered" style="color: red;">Prendas recomendadas</h3>', unsafe_allow_html=True)
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
@@ -674,8 +685,6 @@ if st.session_state.page == 5:
                         Ver producto
                     </a>
                 """, unsafe_allow_html=True)
-
-
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
