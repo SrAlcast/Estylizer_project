@@ -572,8 +572,6 @@ if st.session_state.page == 5:
 
     # Aplicando la clase al título y al divisor
     st.markdown('<div class="centered-title">Prendas recomendadas</div>', unsafe_allow_html=True)
-    st.markdown('<hr class="divider">', unsafe_allow_html=True)
-
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
@@ -740,11 +738,31 @@ if st.session_state.page == 5:
         inferior = None
 
     # Calcular el costo total solo si hay recomendaciones
+    st.markdown(
+        """
+        <style>
+        .coste-total {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Verificar si hay prendas y calcular el coste total
     if superior is not None and inferior is not None:
         coste_total = superior['current_price'] + inferior['current_price']
         st.markdown(
             f"""
-            <div style="margin-top: 20px;margin-bottom: 10px; font-size: 18px; font-weight: bold;">
+            <div class="coste-total">
                 💰 <strong>Coste Total del Outfit:</strong> {coste_total:.2f}€
             </div>
             """,
@@ -752,6 +770,7 @@ if st.session_state.page == 5:
         )
     else:
         st.warning("No se encontraron suficientes prendas para recomendar un outfit completo.")
+
 
     # Botones de navegación
     st.markdown("---")
