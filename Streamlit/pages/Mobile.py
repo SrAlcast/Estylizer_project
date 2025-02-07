@@ -216,7 +216,7 @@ st.markdown(
 )
 
 # Mostrar el logo fijado en la pantalla
-st.markdown('<img src="./src/Logo Estylizer 2.png" class="fixed-logo" width="150">', unsafe_allow_html=True)
+st.markdown('<img src="https://github.com/SrAlcast/Estylizer_project/blob/main/src/Logo%20Estylizer%202.png" class="fixed-logo" width="150">', unsafe_allow_html=True)
 
 
 
