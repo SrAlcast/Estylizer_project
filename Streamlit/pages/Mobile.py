@@ -192,7 +192,7 @@ st.markdown(
         justify-content: center;
         align-items: center;
         height: 200px;">
-        <img src='./src/Logo Estylizer 2.png' width='150'>
+        <img src='../src/Logo Estylizer 2.png' width='150'>
     </div>
     """,
     unsafe_allow_html=True
