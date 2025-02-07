@@ -295,8 +295,7 @@ if st.session_state.page == 1:
 
 # Página 2: Selección de tipo de parte superior
 if st.session_state.page == 2:
-    st.markdown('<div class="centered-title">¿Qué tipo de prenda quieres para la parte superior? (Selección múltiple)</div>', unsafe_allow_html=True)
-    st.subheader("¿Qué tipo de prenda quieres para la parte superior? (Selecciona múltiples opciones)")    
+    st.markdown('<div class="centered-title">¿Qué tipo de prenda quieres para la parte superior? \n (Selección múltiple)</div>', unsafe_allow_html=True)
     if "select_all" not in st.session_state:
         st.session_state.select_all = False
 
