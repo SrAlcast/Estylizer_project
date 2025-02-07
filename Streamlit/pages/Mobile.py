@@ -1,4 +1,5 @@
 import streamlit as st
+from pathlib import Path
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -180,25 +181,18 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# CSS para evitar problemas de alineación con otros elementos de Streamlit
-st.markdown(
-    """
-    <style>
-        .st-emotion-cache-15in7te {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Ruta relativa desde el script de ejecución
+image_path = Path("./src/Logo_Estylizer_2.png")
 
-# Centrar el logo en la pantalla con columnas de Streamlit
-col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
-with col2:
-    st.image("./src/Logo_Estylizer_2.png", width=150)
-
+if image_path.exists():
+    # Usar columnas para centrar la imagen
+    col1, col2, col3 = st.columns([1, 2, 1], gap="large")  # Centra la imagen
+    with col2:
+        st.markdown('<div class="stColumn">', unsafe_allow_html=True)
+        st.image(str(image_path), width=200)  # Convertir a str y reducir tamaño
+        st.markdown('</div>', unsafe_allow_html=True)
+else:
+    st.error("La imagen no se encontró.")
 
 # Página 1: Selección de modelo_tags
 if st.session_state.page == 1:
