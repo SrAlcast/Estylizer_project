@@ -181,9 +181,22 @@ st.markdown(
 )
 
 # Mostrar logo centrado
-st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
-st.image("./src/Logo Estylizer 2.png", width=150)
-st.markdown("</div>", unsafe_allow_html=True)
+# st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
+# st.image("./src/Logo Estylizer 2.png", width=150)
+# st.markdown("</div>", unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <div style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;">
+        <img src='./src/Logo Estylizer 2.png' width='150'>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # Página 1: Selección de modelo_tags
 if st.session_state.page == 1:
@@ -193,7 +206,7 @@ if st.session_state.page == 1:
         # Forzar el centrado de la imagen con un contenedor flexbox
         st.markdown(f"""
         <div class='image-container'>
-            <img src="{modelo_tags['image1_url']}" style="max-width: 250px;">
+            <img src="{modelo_tags['image1_url']}" style="max-width: 240px;">
         </div>
         """, unsafe_allow_html=True)
 
