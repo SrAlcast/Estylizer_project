@@ -242,8 +242,6 @@ if st.session_state.page == 1:
             st.session_state.modelo_tags_index += 1
             st.rerun()
 
-
-
         # Inicializar estado si no existe
         if "confirm_reset" not in st.session_state:
             st.session_state.confirm_reset = False
@@ -278,7 +276,6 @@ if st.session_state.page == 2:
     st.subheader("¿Qué tipo de prenda quieres para la parte superior? (Selecciona múltiples opciones)")
     tipos = ["Camiseta", "Camisa", "Sudadera", "Jersey", "Polo", "Sobrecamisa"]
     
-
     if "select_all" not in st.session_state:
         st.session_state.select_all = False
 
@@ -287,26 +284,29 @@ if st.session_state.page == 2:
 
     def toggle_select_all():
         if st.session_state.select_all:
-            st.session_state.tipos_superior = tipos.copy()
+            st.session_state.tipos_superior = tipos_superior_validos.copy()
         else:
             st.session_state.tipos_superior = []
 
-    # Botón "Seleccionar Todo"
     if st.button("Seleccionar Todo" if not st.session_state.select_all else "Deseleccionar Todo"):
         st.session_state.select_all = not st.session_state.select_all
         toggle_select_all()
         st.rerun()
-        
+
     tipos_superior_validos = ["Camiseta", "Camisa", "Sudadera", "Jersey", "Polo", "Sobrecamisa"]
 
     # Filtrar los valores inválidos en session_state
     st.session_state.tipos_superior = [t for t in st.session_state.tipos_superior if t in tipos_superior_validos]
 
-    # Crear el multiselect con los valores filtrados
+    def update_tipos_superior():
+        st.session_state.tipos_superior = st.session_state["seleccionados_tipos_superior"]
+
     seleccionados_tipos_superior = st.multiselect(
         "Selecciona los tipos de prenda:",
         options=tipos_superior_validos,
-        default=st.session_state.tipos_superior
+        default=st.session_state.tipos_superior,
+        key="seleccionados_tipos_superior",
+        on_change=update_tipos_superior
     )
 
     # Guardar la selección en session_state
