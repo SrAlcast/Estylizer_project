@@ -246,6 +246,8 @@ if st.session_state.page == 1:
         if "confirm_reset" not in st.session_state:
             st.session_state.confirm_reset = False
 
+        st.markdown("---")
+
         # Botón para solicitar confirmación
         if st.button("🔄 Resetear todo"):
             st.session_state.confirm_reset = True
@@ -313,6 +315,7 @@ if st.session_state.page == 2:
     st.session_state.tipos_superior = seleccionados_tipos_superior
 
     # Botones de navegación
+    st.markdown("---")
     nav_col1, nav_col2 = st.columns([1.5, 1.5])
     with nav_col1:
         if st.button("Siguiente"):
@@ -382,7 +385,7 @@ if st.session_state.page == 3:
         key="seleccionados_colores_inferior",
         on_change=update_colores_inferior
     )
-    
+
     if st.button("Todos los colores" if not st.session_state.select_all_colores_inferior else "Quitar colores", key="toggle_colores_inferior"):
         st.session_state.select_all_colores_inferior = not st.session_state.select_all_colores_inferior
         if st.session_state.select_all_colores_inferior:
@@ -395,6 +398,7 @@ if st.session_state.page == 3:
     st.session_state.colores_inferior = seleccionados_inferior
 
     # Navegación entre páginas
+    st.markdown("---")
     col1, col2 = st.columns([1, 1])
     with col1:
         if st.button("Siguiente", key="siguiente"):
