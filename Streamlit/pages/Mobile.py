@@ -343,7 +343,14 @@ if st.session_state.page == 3:
     # Manejo del botón "Seleccionar Todo" para colores superiores
     if "select_all_colores_superior" not in st.session_state:
         st.session_state.select_all_colores_superior = False
+    # Funciones para actualizar el estado correctamente
+    def update_colores_superior():
+        st.session_state.colores_superior = st.session_state["seleccionados_colores_superior"]
 
+    def update_colores_inferior():
+        st.session_state.colores_inferior = st.session_state["seleccionados_colores_inferior"]
+
+    # Botón para seleccionar todos los colores superiores
     if st.button("Todos los colores" if not st.session_state.select_all_colores_superior else "Quitar colores", key="toggle_colores_superior"):
         st.session_state.select_all_colores_superior = not st.session_state.select_all_colores_superior
         if st.session_state.select_all_colores_superior:
@@ -352,11 +359,13 @@ if st.session_state.page == 3:
             st.session_state.colores_superior = []
         st.rerun()
 
-    # Multiselect para colores de la parte superior
-    seleccionados_superior = st.multiselect(
+    # Multiselect para colores superiores
+    seleccionados_superior=st.multiselect(
         "Selecciona los colores para la parte superior:",
         options=colores_superior_validos,
-        default=st.session_state.colores_superior
+        default=st.session_state.colores_superior,
+        key="seleccionados_colores_superior",
+        on_change=update_colores_superior
     )
 
     # Guardar selección en session_state
@@ -374,11 +383,13 @@ if st.session_state.page == 3:
             st.session_state.colores_inferior = []
         st.rerun()
 
-    # Multiselect para colores de la parte inferior
+    # Multiselect para colores inferiores
     seleccionados_inferior = st.multiselect(
         "Selecciona los colores para la parte inferior:",
         options=colores_inferior_validos,
-        default=st.session_state.colores_inferior
+        default=st.session_state.colores_inferior,
+        key="seleccionados_colores_inferior",
+        on_change=update_colores_inferior
     )
 
     # Guardar selección en session_state
