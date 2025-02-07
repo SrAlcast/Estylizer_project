@@ -180,7 +180,7 @@ st.markdown(
         justify-content: center;
         align-items: center;
         text-align: center;
-        font-size: 24px;
+        font-size: 22px;
         font-weight: bold;
         color: white;
     }
@@ -631,7 +631,7 @@ if st.session_state.page == 5:
                             margin-bottom: 15px;
                             font-size: 16px;
                             font-weight: 600;
-                            text-decoration: none; /* Elimina el subrayado */
+                            text-decoration: none; 
                             border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
                             cursor: pointer;
                             transition: all 0.2s ease-in-out;
