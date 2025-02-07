@@ -636,10 +636,6 @@ if st.session_state.page == 5:
                             cursor: pointer;
                             transition: all 0.2s ease-in-out;
                         }}
-                        .full-width-button:hover {{
-                            background-color: rgba(255, 255, 255, 0.1);
-                            border: 1px solid rgba(255, 255, 255, 0.4);
-                        }}
                         .full-width-button:active {{
                             background-color: #D32F2F; /* Color rojo al presionar */
                             border: 1px solid #D32F2F;
@@ -706,10 +702,6 @@ if st.session_state.page == 5:
                             border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
                             cursor: pointer;
                             transition: all 0.2s ease-in-out;
-                        }}
-                        .full-width-button:hover {{
-                            background-color: rgba(255, 255, 255, 0.1);
-                            border: 1px solid rgba(255, 255, 255, 0.4);
                         }}
                         .full-width-button:active {{
                             background-color: #D32F2F; /* Color rojo al presionar */
