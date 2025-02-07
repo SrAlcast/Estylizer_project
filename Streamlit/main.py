@@ -47,8 +47,7 @@ def recomendador_superior(productos, tags_aceptados_general, tags_aceptados_supe
     # Ordenar los productos recomendados
     superiores = superiores.sort_values(by=['similaridad', 'current_price'], ascending=[False, True])
     
-    return superiores
-
+    return superiores.head(5)
 
 def recomendador_inferior(productos, tags_aceptados_general, tags_aceptados_inferior, tags_rechazados_general, tags_rechazados_inferior, colores_inferior, presupuesto_inferior_min, presupuesto_inferior_max):
     
@@ -84,8 +83,7 @@ def recomendador_inferior(productos, tags_aceptados_general, tags_aceptados_infe
     # Ordenar los productos recomendados
     inferiores = inferiores.sort_values(by=['similaridad', 'current_price'], ascending=[False, True])
     
-    return inferiores
-
+    return inferiores.head(5)
 
 @st.cache_data
 def cargar_datos():
