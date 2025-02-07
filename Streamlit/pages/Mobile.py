@@ -189,7 +189,27 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
+st.markdown(
+    """
+    <style>
+    .centered-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+    }
+    .divider {
+        width: 50%;
+        margin: auto;
+        border: 1px solid red; /* Línea muy fina */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Imagen logo superior
 st.markdown(f"""
@@ -275,6 +295,7 @@ if st.session_state.page == 1:
 
 # Página 2: Selección de tipo de parte superior
 if st.session_state.page == 2:
+    st.markdown('<div class="centered-title">¿Qué tipo de prenda quieres para la parte superior? (Selección múltiple)</div>', unsafe_allow_html=True)
     st.subheader("¿Qué tipo de prenda quieres para la parte superior? (Selecciona múltiples opciones)")    
     if "select_all" not in st.session_state:
         st.session_state.select_all = False
@@ -331,8 +352,9 @@ if st.session_state.page == 2:
 
 # Página 3: Selección de colores
 if st.session_state.page == 3:
-    st.subheader("Selecciona los colores para tu outfit")
-        # Obtener listas de colores válidos actualizados
+    st.markdown('<div class="centered-title">Selecciona los colores para tu outfit</div>', unsafe_allow_html=True)
+    
+    # Obtener listas de colores válidos actualizados
     colores_superior_validos = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)]['color_homogeneizado'].unique())
     colores_inferior_validos = sorted(productos_tageados[productos_tageados['Categoria'].str.contains('Pantalón', case=False)]['color_homogeneizado'].unique())
 
