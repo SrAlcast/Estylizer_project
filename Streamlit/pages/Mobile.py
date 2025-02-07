@@ -180,53 +180,24 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# # CSS para evitar problemas de alineación con otros elementos de Streamlit
-# st.markdown(
-#     """
-#     <style>
-#         .st-emotion-cache-15in7te {
-#             display: flex;
-#             justify-content: center;
-#             align-items: center;
-#         }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
-
-# # Centrar el logo en la pantalla con columnas de Streamlit
-# col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
-# with col2:
-#     st.image("./src/Logo Estylizer 2.png", width=150)
-
-# Ruta del logo
-logo_path = "./src/Logo_Estylizer_2.png"
-
-# CSS para fijar el logo en la parte superior y centrarlo
+# CSS para evitar problemas de alineación con otros elementos de Streamlit
 st.markdown(
     """
     <style>
-        .fixed-logo-container {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.0); /* Fondo transparente */
-            text-align: center;
-            padding: 10px 0;
-            z-index: 1000;
+        .st-emotion-cache-15in7te {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Columna centralizada con Streamlit para evitar problemas de renderizado
-col1, col2, col3 = st.columns([1, 2, 1])
+# Centrar el logo en la pantalla con columnas de Streamlit
+col1, col2, col3 = st.columns([1, 2, 1])  # La columna central es más grande para centrar el logo
 with col2:
-    st.image(logo_path, width=150)
-
+    st.image("./src/Logo_Estylizer_2.png", width=150)
 
 
 # Página 1: Selección de modelo_tags
