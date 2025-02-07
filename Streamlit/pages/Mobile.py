@@ -182,7 +182,7 @@ st.markdown(
 
 # Mostrar logo centrado
 st.markdown("<div class='centered-container'>", unsafe_allow_html=True)
-st.image("./src/Logo Estylizer 2.png", width=200)
+st.image("./src/Logo Estylizer 2.png", width=150)
 st.markdown("</div>", unsafe_allow_html=True)
 
 # Página 1: Selección de modelo_tags
@@ -193,9 +193,13 @@ if st.session_state.page == 1:
         # Forzar el centrado de la imagen con un contenedor flexbox
         st.markdown(f"""
         <div class='image-container'>
-            <img src="{modelo_tags['image1_url']}" style="max-width: 260px;">
+            <img src="{modelo_tags['image1_url']}" style="max-width: 250px;">
         </div>
         """, unsafe_allow_html=True)
+
+        # Barra de progreso con numeración
+        progreso = (st.session_state.modelo_tags_index + 1) / 8
+        st.progress(progreso)
 
         # Centrar los botones usando columnas
         col1, col2, col3 = st.columns([1, 2, 1])
@@ -227,10 +231,7 @@ if st.session_state.page == 1:
             st.session_state.modelo_tags_index += 1
             st.rerun()
 
-        # Barra de progreso con numeración
-        progreso = (st.session_state.modelo_tags_index + 1) / 8
-        st.progress(progreso)
-        st.write(f"Progreso: {st.session_state.modelo_tags_index + 1} de 8")
+
 
         # Inicializar estado si no existe
         if "confirm_reset" not in st.session_state:
