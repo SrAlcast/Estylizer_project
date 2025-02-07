@@ -420,62 +420,79 @@ if st.session_state.page == 3:
 
 # Página 4: Selección de presupuesto
 elif st.session_state.page == 4:
-    # Obtener rangos dinámicos para las barras de presupuesto
-    max_price_superior = productos_tageados[(productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)) &
-                              (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_superior))]['current_price'].max() + 1
-    min_price_superior = productos_tageados[(productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)) &
-                              (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_superior))]['current_price'].min()
+    # Obtener rangos dinámicos para los presupuestos
+    max_price_superior = productos_tageados[
+        (productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)) &
+        (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_superior))
+    ]['current_price'].max() + 1
 
-    max_price_inferior = productos_tageados[(productos_tageados['Categoria'].str.contains('Pantalón', case=False)) &
-                              (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_inferior))]['current_price'].max() + 1
-    min_price_inferior = productos_tageados[(productos_tageados['Categoria'].str.contains('Pantalón', case=False)) &
-                              (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_inferior))]['current_price'].min()
+    min_price_superior = productos_tageados[
+        (productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)) &
+        (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_superior))
+    ]['current_price'].min()
 
-    # Calcular el promedio dinámico para ambos rangos
-    promedio_superior = (min_price_superior + max_price_superior) / 2
-    promedio_inferior = (min_price_inferior + max_price_inferior) / 2
+    max_price_inferior = productos_tageados[
+        (productos_tageados['Categoria'].str.contains('Pantalón', case=False)) &
+        (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_inferior))
+    ]['current_price'].max() + 1
+
+    min_price_inferior = productos_tageados[
+        (productos_tageados['Categoria'].str.contains('Pantalón', case=False)) &
+        (productos_tageados['color_homogeneizado'].isin(st.session_state.colores_inferior))
+    ]['current_price'].min()
 
     # Verificar si los valores ya existen en session_state, si no, inicializarlos
-    if 'presupuesto_superior' not in st.session_state:
-        st.session_state.presupuesto_superior = (int(min_price_superior), int(promedio_superior))
+    if 'min_presupuesto_superior' not in st.session_state:
+        st.session_state.min_presupuesto_superior = int(min_price_superior)
+    if 'max_presupuesto_superior' not in st.session_state:
+        st.session_state.max_presupuesto_superior = int(max_price_superior)
 
-    if 'presupuesto_inferior' not in st.session_state:
-        st.session_state.presupuesto_inferior = (int(min_price_inferior), int(promedio_inferior))
-
-    # CSS para agregar márgenes a los sliders
-    st.markdown(
-        """
-        <style>
-            .slider-container {
-                padding-left: 100px;
-                padding-right: 100px;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    if 'min_presupuesto_inferior' not in st.session_state:
+        st.session_state.min_presupuesto_inferior = int(min_price_inferior)
+    if 'max_presupuesto_inferior' not in st.session_state:
+        st.session_state.max_presupuesto_inferior = int(max_price_inferior)
 
     st.subheader("Selecciona tu rango de presupuesto")
 
-    # Contenedor con margen para la barra de presupuesto superior
-    st.markdown('<div class="slider-container">', unsafe_allow_html=True)
-    st.session_state.presupuesto_superior = st.slider(
-        "Rango de presupuesto para la parte superior (€):",
-        min_value=int(min_price_superior),
-        max_value=int(max_price_superior),
-        value=st.session_state.presupuesto_superior
-    )
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Entrada manual para presupuesto superior
+    col1, col2 = st.columns(2)
+    with col1:
+        st.session_state.min_presupuesto_superior = st.number_input(
+            "Presupuesto mínimo (parte superior) (€):",
+            min_value=int(min_price_superior),
+            max_value=int(max_price_superior),
+            value=st.session_state.min_presupuesto_superior,
+            step=1
+        )
+    with col2:
+        st.session_state.max_presupuesto_superior = st.number_input(
+            "Presupuesto máximo (parte superior) (€):",
+            min_value=int(min_price_superior),
+            max_value=int(max_price_superior),
+            value=st.session_state.max_presupuesto_superior,
+            step=1
+        )
 
-    # Contenedor con margen para la barra de presupuesto inferior
-    st.markdown('<div class="slider-container">', unsafe_allow_html=True)
-    st.session_state.presupuesto_inferior = st.slider(
-        "Rango de presupuesto para la parte inferior (€):",
-        min_value=int(min_price_inferior),
-        max_value=int(max_price_inferior),
-        value=st.session_state.presupuesto_inferior
-    )
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Entrada manual para presupuesto inferior
+    col3, col4 = st.columns(2)
+    with col3:
+        st.session_state.min_presupuesto_inferior = st.number_input(
+            "Presupuesto mínimo (parte inferior) (€):",
+            min_value=int(min_price_inferior),
+            max_value=int(max_price_inferior),
+            value=st.session_state.min_presupuesto_inferior,
+            step=1
+        )
+    with col4:
+        st.session_state.max_presupuesto_inferior = st.number_input(
+            "Presupuesto máximo (parte inferior) (€):",
+            min_value=int(min_price_inferior),
+            max_value=int(max_price_inferior),
+            value=st.session_state.max_presupuesto_inferior,
+            step=1
+        )
+
+    st.markdown("---")
 
     col1, col2 = st.columns([1, 1])
     with col1:
@@ -553,8 +570,11 @@ if st.session_state.page == 5:
 
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{superior['product_name']} - {superior['current_price']}€</p>", unsafe_allow_html=True)
                 # Botón similar a los de Streamlit
-                if st.link_button("Ver producto", superior["url"]):
-                    pass  # El botón de enlace no requiere acciones adicionales
+                st.markdown(f"""
+                    <a href="{superior['url']}" target="_blank" style="display: block; width: 100%; text-align: center; background-color: #007BFF; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">
+                        Ver producto
+                    </a>
+                """, unsafe_allow_html=True)
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
@@ -593,8 +613,12 @@ if st.session_state.page == 5:
                 """, unsafe_allow_html=True)
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{inferior['product_name']} - {inferior['current_price']}€</p>", unsafe_allow_html=True)
                 # Botón similar a los de Streamlit
-                if st.link_button("Ver producto", inferior["url"]):
-                    pass  # El botón de enlace no requiere acciones adicionales
+                st.markdown(f"""
+                    <a href="{inferior['url']}" target="_blank" style="display: block; width: 100%; text-align: center; background-color: #007BFF; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">
+                        Ver producto
+                    </a>
+                """, unsafe_allow_html=True)
+
 
                 nav1, nav2 = st.columns([1, 1])
                 with nav1:
