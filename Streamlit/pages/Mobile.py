@@ -200,7 +200,7 @@ st.markdown(
         font-size: 18px;
         font-weight: bold;
         color: white;
-        margin-top: 10px;
+        margin-top: 5px;
         margin-bottom: 5px;
         }
     </style>
