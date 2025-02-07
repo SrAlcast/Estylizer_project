@@ -175,23 +175,6 @@ st.markdown(
         height: auto;
         border-radius: 10px;
     }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-st.markdown(
-    """
-    <style>
-    .centered {
-        text-align: center;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-st.markdown(
-    """
-    <style>
     .centered-title {
         display: flex;
         justify-content: center;
@@ -206,9 +189,23 @@ st.markdown(
         margin: auto;
         border: 1px solid red; /* Línea muy fina */
     }
+    .centered {
+        text-align: center;
+    }
+    .coste-total {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        }
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
 # Imagen logo superior
@@ -569,28 +566,6 @@ elif st.session_state.page == 4:
 # Página 5: Mostrar recomendaciones
 if st.session_state.page == 5:
     # Mostrar el título centrado
-    st.markdown(
-        """
-        <style>
-        .centered-title {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
-        .divider {
-            width: 50%;
-            margin: auto;
-            border: 1px solid red; /* Línea muy fina */
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
     # Aplicando la clase al título y al divisor
     st.markdown('<div class="centered-title">Prendas recomendadas</div>', unsafe_allow_html=True)
 
@@ -757,26 +732,6 @@ if st.session_state.page == 5:
         inferior = st.session_state.inferiores.iloc[st.session_state.index_inferior]
     else:
         inferior = None
-
-    # Calcular el costo total solo si hay recomendaciones
-    st.markdown(
-        """
-        <style>
-        .coste-total {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
 
     # Verificar si hay prendas y calcular el coste total
     if superior is not None and inferior is not None:
