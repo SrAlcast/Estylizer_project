@@ -574,10 +574,45 @@ elif st.session_state.page == 4:
 # Página 5: Mostrar recomendaciones
 if st.session_state.page == 5:
     # Mostrar el título centrado
-    # Aplicando la clase al título y al divisor
     st.markdown('<div class="centered-title">Prendas recomendadas</div>', unsafe_allow_html=True)
     st.write("Presupuesto superior:",                 st.session_state.presupuesto_superior[0],                 st.session_state.presupuesto_superior[1])
     st.write("Presupuesto inferior:",                 st.session_state.presupuesto_inferior[0],                 st.session_state.presupuesto_inferior[1])
+
+    # Recalcular recomendaciones SIEMPRE antes de mostrarlas
+    tags_aceptados_usuario_general = list(tag for sublist in st.session_state.aceptados_general for tag in sublist)
+    tags_aceptados_usuario_superior = list(tag for sublist in st.session_state.aceptados_superior for tag in sublist)
+    tags_aceptados_usuario_inferior = list(tag for sublist in st.session_state.aceptados_inferior for tag in sublist)
+    tags_rechazados_usuario_general = list(tag for sublist in st.session_state.rechazados_general for tag in sublist)
+    tags_rechazados_usuario_superior = list(tag for sublist in st.session_state.rechazados_superior for tag in sublist)
+    tags_rechazados_usuario_inferior = list(tag for sublist in st.session_state.rechazados_inferior for tag in sublist)
+
+    # Recalcular recomendaciones con el presupuesto actualizado
+    superiores = recomendador_superior(
+        productos_tageados,
+        tags_aceptados_usuario_general,
+        tags_aceptados_usuario_superior,
+        tags_rechazados_usuario_general,
+        tags_rechazados_usuario_superior,
+        st.session_state.tipos_superior,
+        st.session_state.colores_superior,
+        st.session_state.min_presupuesto_superior,  # Tomar nuevo presupuesto mínimo
+        st.session_state.max_presupuesto_superior   # Tomar nuevo presupuesto máximo
+    )
+
+    inferiores = recomendador_inferior(
+        productos_tageados,
+        tags_aceptados_usuario_general,
+        tags_aceptados_usuario_inferior,
+        tags_rechazados_usuario_general,
+        tags_rechazados_usuario_inferior,
+        st.session_state.colores_inferior,
+        st.session_state.min_presupuesto_inferior,  # Tomar nuevo presupuesto mínimo
+        st.session_state.max_presupuesto_inferior   # Tomar nuevo presupuesto máximo
+    )
+
+    # Actualizar las variables en session_state
+    st.session_state.superiores = superiores.reset_index()
+    st.session_state.inferiores = inferiores.reset_index()
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
