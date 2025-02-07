@@ -201,8 +201,8 @@ st.markdown(
 
 # Forzar el centrado de la imagen con un contenedor flexbox
 st.markdown(f"""
-<div class='image-container' style="margin-top: 20px; margin-bottom: 20px;">
-    <img src="https://raw.githubusercontent.com/SrAlcast/Estylizer_project/refs/heads/main/src/Logo_Estylizer_2.png" style="max-width: 260px;">
+<div class='image-container' style="margin-top: 15px; margin-bottom: 20px;">
+    <img src="https://raw.githubusercontent.com/SrAlcast/Estylizer_project/refs/heads/main/src/Logo_Estylizer_2.png" style="max-width: 200px;">
 </div>
 """, unsafe_allow_html=True)
 
