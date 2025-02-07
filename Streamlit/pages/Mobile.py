@@ -188,10 +188,10 @@ st.markdown(
 
 
 
-col1, col2, col3 = st.columns([1, 2, 1], gap="large")  # Centra la imagen
+col1, col2, col3 = st.columns([0.1, 2, 0.1], gap="large")  # Centra la imagen
 with col2:
     st.markdown('<div class="stColumn">', unsafe_allow_html=True)
-    st.image("./src/Logo Estylizer 2.png", width=300)  # Convertir a str y reducir tamaño
+    st.image("./src/Logo Estylizer 2.png", width=150)  
     st.markdown('</div>', unsafe_allow_html=True)
 
 
