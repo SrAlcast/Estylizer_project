@@ -548,8 +548,32 @@ elif st.session_state.page == 4:
 # Página 5: Mostrar recomendaciones
 if st.session_state.page == 5:
     # Mostrar el título centrado
-    st.markdown('<h3 class="centered";">Prendas recomendadas</h3>', unsafe_allow_html=True)
-    st.markdown('<hr style="border: 2px solid red;">', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <style>
+        .centered-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .divider {
+            width: 50%;
+            margin: auto;
+            border: 1px solid red; /* Línea muy fina */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Aplicando la clase al título y al divisor
+    st.markdown('<div class="centered-title">Prendas recomendadas</div>', unsafe_allow_html=True)
+    st.markdown('<hr class="divider">', unsafe_allow_html=True)
+
 
     presupuesto_superior = st.session_state.presupuesto_superior
     presupuesto_inferior = st.session_state.presupuesto_inferior
