@@ -199,33 +199,39 @@ st.markdown(
 # with col2:
 #     st.image("./src/Logo Estylizer 2.png", width=150)
 
-# Ruta del logo (asegúrate de que la imagen está en la carpeta correcta)
-logo_path = "./src/Logo Estylizer 2.png"
-
-# CSS para fijar el logo en la pantalla sin moverse
+# CSS para fijar el logo y centrarlo sin moverse
 st.markdown(
     """
     <style>
         .fixed-logo-container {
             position: fixed;
-            top: 10px;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 1000;
             width: 100%;
-            display: flex;
-            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.0); /* Fondo transparente */
+            text-align: center;
+            padding: 10px 0;
+            z-index: 1000; /* Se mantiene sobre otros elementos */
+        }
+        .fixed-logo-container img {
+            width: 150px;
+            height: auto;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Contenedor HTML para el logo (mantiene el diseño y usa st.image)
-st.markdown('<div class="fixed-logo-container">', unsafe_allow_html=True)
-st.image(logo_path, width=150)
-st.markdown('</div>', unsafe_allow_html=True)
-
+# HTML con la imagen del logo
+st.markdown(
+    """
+    <div class="fixed-logo-container">
+        <img src='./src/Logo Estylizer 2.png' alt="Estylizer Logo">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # Página 1: Selección de modelo_tags
