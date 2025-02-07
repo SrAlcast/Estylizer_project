@@ -575,9 +575,6 @@ elif st.session_state.page == 4:
 if st.session_state.page == 5:
     # Mostrar el título centrado
     st.markdown('<div class="centered-title">Prendas recomendadas</div>', unsafe_allow_html=True)
-    st.write("Presupuesto superior:",                 st.session_state.presupuesto_superior[0],                 st.session_state.presupuesto_superior[1])
-    st.write("Presupuesto inferior:",                 st.session_state.presupuesto_inferior[0],                 st.session_state.presupuesto_inferior[1])
-
     # Recalcular recomendaciones SIEMPRE antes de mostrarlas
     tags_aceptados_usuario_general = list(tag for sublist in st.session_state.aceptados_general for tag in sublist)
     tags_aceptados_usuario_superior = list(tag for sublist in st.session_state.aceptados_superior for tag in sublist)
