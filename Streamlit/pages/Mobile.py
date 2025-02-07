@@ -199,7 +199,10 @@ st.markdown(
 # with col2:
 #     st.image("./src/Logo Estylizer 2.png", width=150)
 
-# CSS para fijar el logo y centrarlo sin moverse
+# Ruta del logo
+logo_path = "./src/Logo_Estylizer_2.png"
+
+# CSS para fijar el logo en la parte superior y centrarlo
 st.markdown(
     """
     <style>
@@ -212,26 +215,18 @@ st.markdown(
             background-color: rgba(0, 0, 0, 0.0); /* Fondo transparente */
             text-align: center;
             padding: 10px 0;
-            z-index: 1000; /* Se mantiene sobre otros elementos */
-        }
-        .fixed-logo-container img {
-            width: 150px;
-            height: auto;
+            z-index: 1000;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# HTML con la imagen del logo
-st.markdown(
-    """
-    <div class="fixed-logo-container">
-        <img src='./src/Logo Estylizer 2.png' alt="Estylizer Logo">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# Columna centralizada con Streamlit para evitar problemas de renderizado
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image(logo_path, width=150)
+
 
 
 # Página 1: Selección de modelo_tags
