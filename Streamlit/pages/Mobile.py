@@ -610,13 +610,11 @@ if st.session_state.page == 5:
                     </div>
                 """, unsafe_allow_html=True)
                 st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>{inferior['product_name']} - {inferior['current_price']}€</p>", unsafe_allow_html=True)
-                st.markdown(f"<p style='text-align: center; font-size: 14px; font-weight: bold;'>Match: {inferior['similaridad'] * 100:.2f}%</p>", unsafe_allow_html=True)
+                st.markdown(f"<p style='text-align: center; font-size: 14px; margin-top: -10px;font-weight: bold;'>Match: {inferior['similaridad'] * 100:.2f}%</p>", unsafe_allow_html=True)
                 # Botón similar a los de Streamlit
-                st.markdown(f"""
-                    <a href="{inferior['url']}" target="_blank" style="display: block; width: 100%;margin-bottom: 20px; text-align: center; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">
-                        Ver producto
-                    </a>
-                """, unsafe_allow_html=True)
+                if st.button("Ver producto"):
+                    st.markdown(f'<meta http-equiv="refresh" content="0;url={inferior["url"]}">', unsafe_allow_html=True)
+
 
 
                 nav1, nav2 = st.columns([1, 1])
