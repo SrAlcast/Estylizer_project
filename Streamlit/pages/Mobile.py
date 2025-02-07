@@ -430,6 +430,20 @@ if st.session_state.page == 3:
 
 # Página 4: Selección de presupuesto
 elif st.session_state.page == 4:
+
+# Función para actualizar los valores en session_state y forzar la actualización
+    def actualizar_presupuesto_sup():
+        st.session_state.min_presupuesto_superior = st.session_state.nuevo_min_sup
+        st.session_state.max_presupuesto_superior = st.session_state.nuevo_max_sup
+        if 'superiores' in st.session_state:
+            del st.session_state.superiores  # Elimina recomendaciones para forzar recalculo
+
+    def actualizar_presupuesto_inf():
+        st.session_state.min_presupuesto_inferior = st.session_state.nuevo_min_inf
+        st.session_state.max_presupuesto_inferior = st.session_state.nuevo_max_inf
+        if 'inferiores' in st.session_state:
+            del st.session_state.inferiores  # Elimina recomendaciones para forzar recalculo
+
     # Obtener rangos dinámicos para los presupuestos
     max_price_superior = int(productos_tageados[
         (productos_tageados['Categoria'].str.contains('|'.join(st.session_state.tipos_superior), case=False)) &
