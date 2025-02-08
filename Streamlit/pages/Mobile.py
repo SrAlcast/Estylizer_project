@@ -7,8 +7,7 @@ import sys
 # Añadimos la carpeta que contiene nuestro .py al path de Python
 sys.path.append("./src/")
 import support_mongo as sm
-import locale
-locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
+
 
 
 st.set_page_config(page_title="Estylizer - Recomendador de ropa", layout="centered", page_icon="https://raw.githubusercontent.com/SrAlcast/Estylizer_project/refs/heads/main/src/icon.png")

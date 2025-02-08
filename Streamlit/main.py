@@ -1,6 +1,5 @@
 import streamlit as st
-import locale
-locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
+
 
 
 st.set_page_config(page_title="Selector de versión", layout="centered")
