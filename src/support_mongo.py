@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import os
 import certifi
 
-load_dotenv()
+load_dotenv("\\Users\\alexc\\Desktop\\GIT\\ProyectoFinal-HACKIO\\src\\.env")
 
 mongo_uri = os.getenv("MONGO_URI")
 if not mongo_uri:
